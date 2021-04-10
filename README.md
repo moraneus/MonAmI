@@ -42,7 +42,7 @@ Event Type    | `"begin"` or `"end"` only
 Interval ID   | `int`, `str`
 Data          | `null`, `int`, or `str`
 
-## Execution output in debug mode: ##
+## BDD implementation execution output in debug mode: ##
 * The output will match the `JSON` example above.
 * In debug mode, after each event, the program will print out to console the updated BDDs.
 * It also prints out other information like bitstring expansion.
