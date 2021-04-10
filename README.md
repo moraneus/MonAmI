@@ -24,7 +24,8 @@ For installation, please run the command `python -m pip install -r requierments.
 ## Execution Configuration: ##
 1. Setting any execution for monitoring can be done by edit the 'input.json' file.
 2. Each event is from the type `[Event type, Interval ID, Data]` for `begin` event and `[Event type, Interval ID]` for an 'end' event.
-3. Example of `input.json` file:
+3. You can create a random `input.json` file with the script `interval_generator.py` which was added into the tool (`input` folder).
+4. Example of `input.json` file:
 ```json
 {
   "TITLE" :
