@@ -25,7 +25,7 @@ class BitstringTable:
 
         # Update occur when it reached to bitstring length limit.
         # The new size is the old size with 2 more bits
-        if i_event_type == 'begin' and len(self.__m_bitstring_table.keys()) > self.__max_items_allowed:
+        if i_event_type == 'begin' and len(self.__m_bitstring_table.keys()) >= self.__max_items_allowed:
             self.__length_update(self._m_bit_string_length + self.__m_number_of_growth)
 
         # Set the value of the bitstring to be equal to the number of new keys have been watched until now
