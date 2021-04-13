@@ -1,0 +1,542 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> formula
+Rule 1     formula -> formula AND formula
+Rule 2     formula -> formula OR formula
+Rule 3     formula -> formula IMPLIES formula
+Rule 4     formula -> NOT formula
+Rule 5     formula -> NAME BEFORE NAME
+Rule 6     formula -> NAME OVERLAPS NAME
+Rule 7     formula -> NAME INCLUDES NAME
+Rule 8     formula -> NAME LPAREN data RPAREN
+Rule 9     formula -> SAME LPAREN NAME COMMA NAME RPAREN
+Rule 10    formula -> EXIST names DOT formula
+Rule 11    formula -> LPAREN formula RPAREN
+Rule 12    data -> NUMBER
+Rule 13    data -> STRING
+Rule 14    names -> NAME
+Rule 15    names -> names COMMA NAME
+
+Terminals, with rules where they appear
+
+AND                  : 1
+BEFORE               : 5
+COMMA                : 9 15
+DOT                  : 10
+EXIST                : 10
+IMPLIES              : 3
+INCLUDES             : 7
+LPAREN               : 8 9 11
+NAME                 : 5 5 6 6 7 7 8 9 9 14 15
+NOT                  : 4
+NUMBER               : 12
+OR                   : 2
+OVERLAPS             : 6
+RPAREN               : 8 9 11
+SAME                 : 9
+STRING               : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+data                 : 8
+formula              : 1 1 2 2 3 3 4 10 11 0
+names                : 10 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . formula
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 1
+
+state 1
+
+    (0) S' -> formula .
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+    AND             shift and go to state 7
+    OR              shift and go to state 8
+    IMPLIES         shift and go to state 9
+
+
+state 2
+
+    (4) formula -> NOT . formula
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 10
+
+state 3
+
+    (5) formula -> NAME . BEFORE NAME
+    (6) formula -> NAME . OVERLAPS NAME
+    (7) formula -> NAME . INCLUDES NAME
+    (8) formula -> NAME . LPAREN data RPAREN
+
+    BEFORE          shift and go to state 11
+    OVERLAPS        shift and go to state 12
+    INCLUDES        shift and go to state 13
+    LPAREN          shift and go to state 14
+
+
+state 4
+
+    (11) formula -> LPAREN . formula RPAREN
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 15
+
+state 5
+
+    (9) formula -> SAME . LPAREN NAME COMMA NAME RPAREN
+
+    LPAREN          shift and go to state 16
+
+
+state 6
+
+    (10) formula -> EXIST . names DOT formula
+    (14) names -> . NAME
+    (15) names -> . names COMMA NAME
+
+    NAME            shift and go to state 18
+
+    names                          shift and go to state 17
+
+state 7
+
+    (1) formula -> formula AND . formula
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 19
+
+state 8
+
+    (2) formula -> formula OR . formula
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 20
+
+state 9
+
+    (3) formula -> formula IMPLIES . formula
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 21
+
+state 10
+
+    (4) formula -> NOT formula .
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+    AND             reduce using rule 4 (formula -> NOT formula .)
+    OR              reduce using rule 4 (formula -> NOT formula .)
+    IMPLIES         reduce using rule 4 (formula -> NOT formula .)
+    $end            reduce using rule 4 (formula -> NOT formula .)
+    RPAREN          reduce using rule 4 (formula -> NOT formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! IMPLIES         [ shift and go to state 9 ]
+
+
+state 11
+
+    (5) formula -> NAME BEFORE . NAME
+
+    NAME            shift and go to state 22
+
+
+state 12
+
+    (6) formula -> NAME OVERLAPS . NAME
+
+    NAME            shift and go to state 23
+
+
+state 13
+
+    (7) formula -> NAME INCLUDES . NAME
+
+    NAME            shift and go to state 24
+
+
+state 14
+
+    (8) formula -> NAME LPAREN . data RPAREN
+    (12) data -> . NUMBER
+    (13) data -> . STRING
+
+    NUMBER          shift and go to state 26
+    STRING          shift and go to state 27
+
+    data                           shift and go to state 25
+
+state 15
+
+    (11) formula -> LPAREN formula . RPAREN
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+    RPAREN          shift and go to state 28
+    AND             shift and go to state 7
+    OR              shift and go to state 8
+    IMPLIES         shift and go to state 9
+
+
+state 16
+
+    (9) formula -> SAME LPAREN . NAME COMMA NAME RPAREN
+
+    NAME            shift and go to state 29
+
+
+state 17
+
+    (10) formula -> EXIST names . DOT formula
+    (15) names -> names . COMMA NAME
+
+    DOT             shift and go to state 30
+    COMMA           shift and go to state 31
+
+
+state 18
+
+    (14) names -> NAME .
+
+    DOT             reduce using rule 14 (names -> NAME .)
+    COMMA           reduce using rule 14 (names -> NAME .)
+
+
+state 19
+
+    (1) formula -> formula AND formula .
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+    AND             reduce using rule 1 (formula -> formula AND formula .)
+    OR              reduce using rule 1 (formula -> formula AND formula .)
+    IMPLIES         reduce using rule 1 (formula -> formula AND formula .)
+    $end            reduce using rule 1 (formula -> formula AND formula .)
+    RPAREN          reduce using rule 1 (formula -> formula AND formula .)
+
+  ! AND             [ shift and go to state 7 ]
+  ! OR              [ shift and go to state 8 ]
+  ! IMPLIES         [ shift and go to state 9 ]
+
+
+state 20
+
+    (2) formula -> formula OR formula .
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+    OR              reduce using rule 2 (formula -> formula OR formula .)
+    IMPLIES         reduce using rule 2 (formula -> formula OR formula .)
+    $end            reduce using rule 2 (formula -> formula OR formula .)
+    RPAREN          reduce using rule 2 (formula -> formula OR formula .)
+    AND             shift and go to state 7
+
+  ! AND             [ reduce using rule 2 (formula -> formula OR formula .) ]
+  ! OR              [ shift and go to state 8 ]
+  ! IMPLIES         [ shift and go to state 9 ]
+
+
+state 21
+
+    (3) formula -> formula IMPLIES formula .
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+    OR              reduce using rule 3 (formula -> formula IMPLIES formula .)
+    IMPLIES         reduce using rule 3 (formula -> formula IMPLIES formula .)
+    $end            reduce using rule 3 (formula -> formula IMPLIES formula .)
+    RPAREN          reduce using rule 3 (formula -> formula IMPLIES formula .)
+    AND             shift and go to state 7
+
+  ! AND             [ reduce using rule 3 (formula -> formula IMPLIES formula .) ]
+  ! OR              [ shift and go to state 8 ]
+  ! IMPLIES         [ shift and go to state 9 ]
+
+
+state 22
+
+    (5) formula -> NAME BEFORE NAME .
+
+    AND             reduce using rule 5 (formula -> NAME BEFORE NAME .)
+    OR              reduce using rule 5 (formula -> NAME BEFORE NAME .)
+    IMPLIES         reduce using rule 5 (formula -> NAME BEFORE NAME .)
+    $end            reduce using rule 5 (formula -> NAME BEFORE NAME .)
+    RPAREN          reduce using rule 5 (formula -> NAME BEFORE NAME .)
+
+
+state 23
+
+    (6) formula -> NAME OVERLAPS NAME .
+
+    AND             reduce using rule 6 (formula -> NAME OVERLAPS NAME .)
+    OR              reduce using rule 6 (formula -> NAME OVERLAPS NAME .)
+    IMPLIES         reduce using rule 6 (formula -> NAME OVERLAPS NAME .)
+    $end            reduce using rule 6 (formula -> NAME OVERLAPS NAME .)
+    RPAREN          reduce using rule 6 (formula -> NAME OVERLAPS NAME .)
+
+
+state 24
+
+    (7) formula -> NAME INCLUDES NAME .
+
+    AND             reduce using rule 7 (formula -> NAME INCLUDES NAME .)
+    OR              reduce using rule 7 (formula -> NAME INCLUDES NAME .)
+    IMPLIES         reduce using rule 7 (formula -> NAME INCLUDES NAME .)
+    $end            reduce using rule 7 (formula -> NAME INCLUDES NAME .)
+    RPAREN          reduce using rule 7 (formula -> NAME INCLUDES NAME .)
+
+
+state 25
+
+    (8) formula -> NAME LPAREN data . RPAREN
+
+    RPAREN          shift and go to state 32
+
+
+state 26
+
+    (12) data -> NUMBER .
+
+    RPAREN          reduce using rule 12 (data -> NUMBER .)
+
+
+state 27
+
+    (13) data -> STRING .
+
+    RPAREN          reduce using rule 13 (data -> STRING .)
+
+
+state 28
+
+    (11) formula -> LPAREN formula RPAREN .
+
+    AND             reduce using rule 11 (formula -> LPAREN formula RPAREN .)
+    OR              reduce using rule 11 (formula -> LPAREN formula RPAREN .)
+    IMPLIES         reduce using rule 11 (formula -> LPAREN formula RPAREN .)
+    $end            reduce using rule 11 (formula -> LPAREN formula RPAREN .)
+    RPAREN          reduce using rule 11 (formula -> LPAREN formula RPAREN .)
+
+
+state 29
+
+    (9) formula -> SAME LPAREN NAME . COMMA NAME RPAREN
+
+    COMMA           shift and go to state 33
+
+
+state 30
+
+    (10) formula -> EXIST names DOT . formula
+    (1) formula -> . formula AND formula
+    (2) formula -> . formula OR formula
+    (3) formula -> . formula IMPLIES formula
+    (4) formula -> . NOT formula
+    (5) formula -> . NAME BEFORE NAME
+    (6) formula -> . NAME OVERLAPS NAME
+    (7) formula -> . NAME INCLUDES NAME
+    (8) formula -> . NAME LPAREN data RPAREN
+    (9) formula -> . SAME LPAREN NAME COMMA NAME RPAREN
+    (10) formula -> . EXIST names DOT formula
+    (11) formula -> . LPAREN formula RPAREN
+
+    NOT             shift and go to state 2
+    NAME            shift and go to state 3
+    SAME            shift and go to state 5
+    EXIST           shift and go to state 6
+    LPAREN          shift and go to state 4
+
+    formula                        shift and go to state 34
+
+state 31
+
+    (15) names -> names COMMA . NAME
+
+    NAME            shift and go to state 35
+
+
+state 32
+
+    (8) formula -> NAME LPAREN data RPAREN .
+
+    AND             reduce using rule 8 (formula -> NAME LPAREN data RPAREN .)
+    OR              reduce using rule 8 (formula -> NAME LPAREN data RPAREN .)
+    IMPLIES         reduce using rule 8 (formula -> NAME LPAREN data RPAREN .)
+    $end            reduce using rule 8 (formula -> NAME LPAREN data RPAREN .)
+    RPAREN          reduce using rule 8 (formula -> NAME LPAREN data RPAREN .)
+
+
+state 33
+
+    (9) formula -> SAME LPAREN NAME COMMA . NAME RPAREN
+
+    NAME            shift and go to state 36
+
+
+state 34
+
+    (10) formula -> EXIST names DOT formula .
+    (1) formula -> formula . AND formula
+    (2) formula -> formula . OR formula
+    (3) formula -> formula . IMPLIES formula
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for IMPLIES resolved as shift
+    $end            reduce using rule 10 (formula -> EXIST names DOT formula .)
+    RPAREN          reduce using rule 10 (formula -> EXIST names DOT formula .)
+    AND             shift and go to state 7
+    OR              shift and go to state 8
+    IMPLIES         shift and go to state 9
+
+  ! AND             [ reduce using rule 10 (formula -> EXIST names DOT formula .) ]
+  ! OR              [ reduce using rule 10 (formula -> EXIST names DOT formula .) ]
+  ! IMPLIES         [ reduce using rule 10 (formula -> EXIST names DOT formula .) ]
+
+
+state 35
+
+    (15) names -> names COMMA NAME .
+
+    DOT             reduce using rule 15 (names -> names COMMA NAME .)
+    COMMA           reduce using rule 15 (names -> names COMMA NAME .)
+
+
+state 36
+
+    (9) formula -> SAME LPAREN NAME COMMA NAME . RPAREN
+
+    RPAREN          shift and go to state 37
+
+
+state 37
+
+    (9) formula -> SAME LPAREN NAME COMMA NAME RPAREN .
+
+    AND             reduce using rule 9 (formula -> SAME LPAREN NAME COMMA NAME RPAREN .)
+    OR              reduce using rule 9 (formula -> SAME LPAREN NAME COMMA NAME RPAREN .)
+    IMPLIES         reduce using rule 9 (formula -> SAME LPAREN NAME COMMA NAME RPAREN .)
+    $end            reduce using rule 9 (formula -> SAME LPAREN NAME COMMA NAME RPAREN .)
+    RPAREN          reduce using rule 9 (formula -> SAME LPAREN NAME COMMA NAME RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 34 resolved as shift
+WARNING: shift/reduce conflict for OR in state 34 resolved as shift
+WARNING: shift/reduce conflict for IMPLIES in state 34 resolved as shift

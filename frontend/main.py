@@ -5,6 +5,8 @@
 # Main program creating and parsing a formula
 # -------------------------------------------
 
+print("hello")
+
 from parser import parser
 
 # The input formula, formula on page 3 bottom in paper:

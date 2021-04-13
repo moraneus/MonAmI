@@ -1,8 +1,8 @@
 
 # ----------------------------------------------
-# parser.py
+# frontend.py
 #
-# PLY parser for the MonAmi specification logic
+# PLY frontend for the MonAmi specification logic
 # ---------------------------------------------
 
 import ply.lex as lex
