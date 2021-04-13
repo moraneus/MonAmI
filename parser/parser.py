@@ -189,26 +189,6 @@ def p_error(p):
     else:
         print("Syntax error at EOF")
 
+
 parser = yacc.yacc()
 
-form = """
-exist X, Y .
-         X < Y 
-         & 
-         same(X,Y)
-         &
-         X o Y
-         &
-         ! X i Y
-         &
-         X(4)
-         &
-         !Y("abc")
-"""
-
-print(form)
-
-tree = parser.parse(form)
-
-print(tree)
-print(repr(tree))
