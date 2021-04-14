@@ -192,3 +192,18 @@ def p_error(p):
 
 parser = yacc.yacc()
 
+
+def parse(formula: str) -> Formula:
+    global __errors__
+    __errors__ = False
+    tree = parser.parse(formula)
+    if __errors__:
+        error(f'syntax error!')
+        return None
+    else:
+        if tree.is_well_formed():
+            return tree
+        else:
+            error(f'formula parses but is not well formed!')
+            return None
+

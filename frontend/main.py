@@ -1,38 +1,51 @@
 
-# -------------------------------------------
+# ------------------------------------------
 # main.py
 #
-# Main program creating and parsing a formula
-# -------------------------------------------
+# Main program creating and parsing formulas
+# ------------------------------------------
 
-print("hello")
+from parser import parse
 
-from parser import parser
+# parse is a function with the type:
+#
+#   parse(formula: str) -> Formula
+#
+# which returns a formula (AST node) if the formula parses
+# and is well formed. If not, parse returns None.
 
-# The input formula, formula on page 3 bottom in paper:
+# Now we create a list of formulas and run parse on them
+# in a for loop.
 
-formula = """
-exist A, B, C .
+# The boot spec from page 3 of the paper:
+
+boot_formula = """exist A, B, C .
   A("load") &
   B("boot") &
   C("boot") &
   A i B &
   A i C &
-  B < C
-"""
+  B < C"""
 
-# print the formula as typed:
+# A list of formulas for testing, one per line:
 
-print(formula)
+specs = [
+  boot_formula,
+  'A < B & B i C & C o D',
+  'exist A, B . A < B & B i C & exist D . C o D',
+  'A > B & C && D',
+  'exist A, B, C, D, E, F, G, H . A < B & C < D | ! E < F & G < H'
+]
 
-# parse the formula and store AST in tree:
+# Looping though specs and processing them:
 
-tree = parser.parse(formula)
+for spec in specs:
+    print()
+    print('=========================')
+    print(spec)
+    print('-------------------------')
+    tree = parse(spec)
+    if tree is not None:
+        print(f'{tree}')
+        print(f'{repr(tree)}')
 
-# print back the tree:
-
-print(tree)
-
-# print the tree as an AST so one can see the internal structure:
-
-print(repr(tree))
