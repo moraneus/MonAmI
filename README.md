@@ -7,6 +7,7 @@
 
 ## Types of Allen's interval algebra: ##
 ![Image of Inervals](https://www.researchgate.net/profile/Ioannis_Tsamardinos/publication/230561978/figure/fig2/AS:646067146223617@1531045819115/1-The-13-relations-between-intervals-in-Allens-algebra-Interval-A-is-always-either-at.png)
+
     * __NOTE: The only relations used by the algorithm for now are: `before`, `overlaps`, and `includes`.__
 ## General characterization of MonAmI: ## 
 1. A trace is a sequence of `begin(i, d)` or `end(i)` events where `i` is denoted for an interval ID and `d` denotes data.
