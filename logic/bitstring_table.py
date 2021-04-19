@@ -1,91 +1,134 @@
-import numpy as np
+import itertools
+from execptions.execptions import *
+from graphics.colors import Colors
+from graphics.io import IO
 
 
-class BitstringTable:
-    def __init__(self, i_bitstring_length=3, i_expansion_length=2):
-        self.__m_bitstring_table = {}
-        self._m_bitstring_length = i_bitstring_length
-        self.__m_number_of_growth = i_expansion_length
-        self.__max_items_allowed = 2 ** i_bitstring_length
+class ListAtl:
+    def __init__(self, i_debug=True):
+        self._m_events_state = {item: set() for item in ('X', 'XX', 'XY', 'XYY', 'XYYX',
+                                                         'XYX', 'XYXY', 'XXY', 'XXYY', 'XD')}
+        self.__m_events_functions = {'begin': [self.__xxy, self.__xy, self.__x],
+                                     'end': [self.__xxyy, self.__xxy, self.__xyxy,
+                                             self.__xyx, self.__xyyx, self.__xyy,
+                                             self.__xy, self.__xx, self.__x],
+                                     'data': self.__xd}
+        self.__m_debug = i_debug
 
-    def lookup(self, i_event_type: str, i_key)->str:
-        """
-        Lookup on the bitstring table. If the key already appear it returns it's value,
-        otherwise it create new entry and return the value.
+    def __str__(self):
+        set_state = []
+        for set_name, set_data in self._m_events_state.items():
+            set_state.append(f'{Colors.PURPLE}[{set_name}]: {set_data}')
+        return '\n'.join(set_state)
 
-        Parameters
-        ----------
-        i_event_type : The type of the event ("begin", "end" or "data").
-        i_key : The key variable before it converted into bitstring.
+    def interval_final_state(self):
+        return f"{Colors.PURPLE}{Colors.BOLD}[FINAL]: " \
+               f"XYXY: {self._m_events_state['XYXY']}, " \
+               f"XYYX: {self._m_events_state['XYYX']}, " \
+               f"XXYY: {self._m_events_state['XXYY']}{Colors.DEFAULT}".replace('set()', '{}')
 
-        Returns
-        -------
-        The representation of the key in bitstring.
+    def event_update(self, i_type, i_interval, i_data=None):
 
-        """
+        if self.__m_debug:
+            IO.seperator(f'[EVENT]: {i_type}->{i_interval}')
 
-        # Update occur when it reached to bitstring length limit.
-        # The new size is the old size with 2 more bits
-        if i_event_type == 'begin' and len(self.__m_bitstring_table.keys()) >= self.__max_items_allowed:
-            self.__length_update(self._m_bitstring_length + self.__m_number_of_growth)
+        if self.__event_validation_check(i_type, i_interval):
+            for event_function in self.__m_events_functions[i_type]:
+                if event_function in [self.__x, self.__xy, self.__xxy]:
+                    event_function(i_type, i_interval)
+                else:
+                    event_function(i_interval)
 
-        # Set the value of the bitstring to be equal to the number of new keys have been watched until now
-        # The counting start from 0.
-        if i_key not in self.__m_bitstring_table.keys():
-            self.__m_bitstring_table[i_key] = np.binary_repr(len(self.__m_bitstring_table.keys()),
-                                                             width=self._m_bitstring_length)
-        return self.__m_bitstring_table[i_key]
-
-    def lookup_no_update(self, i_key):
-        """
-        Lookup on the bitstring table without updating.
-        Just query the dictionary.
-
-        Parameters
-        ----------
-        i_key : The key variable before it converted into bitstring.
-
-        Returns
-        -------
-        The representation of the key in bitstring if key exist, other wise False.
-
-        """
-
-        if i_key not in self.__m_bitstring_table.keys():
-            return False
-        return self.__m_bitstring_table[i_key]
+            if i_data is not None:
+                self.__m_events_functions['data'] (i_interval, i_data)
 
 
-    def __length_update(self, i_new_length: int):
-        """
-        Update bitstring length when a larger bitstring length is needed.
+    def __event_validation_check(self, i_type, i_interval):
 
-        Parameters
-        ----------
-        i_new_length : The size of the new bitstring length.
+        if i_type == "begin":
+            if i_interval in (self._m_events_state['X'].union(self._m_events_state['XX'])):
+                raise MultipleBeginError(i_interval)
+        elif i_type == "end":
+            if i_interval in self._m_events_state['XX']:
+                raise MultipleEndError(i_interval)
+            elif i_interval not in self._m_events_state['X']:
+                raise EndsBeforeBeginError(i_interval)
+        else:
+            raise BadEventValueError(i_type)
 
-        Returns
-        -------
-        None
+        return True
 
-        """
+    def __x(self, i_type, i_interval):
+        if i_type == 'begin':
+            self._m_events_state['X'] = self._m_events_state['X'].union([i_interval])
+        else:
+            self._m_events_state['X'].remove(i_interval)
 
-        # Create 0's prefix padding in a szie of the defined growth.
-        prefix = '0' * (i_new_length - self._m_bitstring_length)
-        self._m_bitstring_length = i_new_length
+        if self.__m_debug:
+            IO.bdd_state('X', f"{self._m_events_state['X']}".replace('set()', '{}'))
 
-        # Update all values seen with the prefix.
-        for key, bitstring in self.__m_bitstring_table.items():
-            self.__m_bitstring_table[key] = f'{prefix}{bitstring}'
-        self.__max_items_allowed_update()
+    def __xx(self, i_interval):
+        self._m_events_state['XX'] = self._m_events_state['XX'].union([i_interval])
+        if self.__m_debug:
+            IO.bdd_state('XX', f"{self._m_events_state['XX']}".replace('set()', '{}'))
 
-    def __max_items_allowed_update(self):
-        """
-        Update the maximal items allowed before the bitstring length should be updated.
+    def __xy(self, i_type, i_interval):
+        if i_type == 'begin':
+            self._m_events_state['XY'] = self._m_events_state['XY'].union(
+                itertools.product(self._m_events_state['X'], [i_interval]))
+        else:
+            self._m_events_state['XY'] = {x for x in self._m_events_state['XY'] if i_interval not in x}
 
-        Returns
-        -------
-        None
+        if self.__m_debug:
+            IO.bdd_state('XY', f"{self._m_events_state['XY']}".replace('set()', '{}'))
 
-        """
-        self.__max_items_allowed = self._m_bitstring_length ** 2 - 1
+    def __xyy(self, i_interval):
+        self._m_events_state['XYY'] = (self._m_events_state['XYY'] - self._m_events_state['XYYX']).union(
+            {x for x in self._m_events_state['XY'] if i_interval == x[-1]})
+
+        if self.__m_debug:
+            IO.bdd_state('XYY', f"{self._m_events_state['XYY']}".replace('set()', '{}'))
+
+    def __xyyx(self, i_interval):
+        self._m_events_state['XYYX'] = self._m_events_state['XYYX'].union(
+            {x for x in self._m_events_state['XYY'] if i_interval == x[0]})
+
+        if self.__m_debug:
+            IO.bdd_state('XYYX', f"{self._m_events_state['XYYX']}".replace('set()', '{}'))
+
+    def __xyx(self, i_interval):
+        self._m_events_state['XYX'] = (self._m_events_state['XYX'] - self._m_events_state['XYXY']).union(
+            {x for x in self._m_events_state['XY'] if i_interval == x[0]})
+
+        if self.__m_debug:
+            IO.bdd_state('XYX', f"{self._m_events_state['XYX']}".replace('set()', '{}'))
+
+    def __xyxy(self, i_interval):
+        self._m_events_state['XYXY'] = self._m_events_state['XYX'].union(
+            {x for x in self._m_events_state['XYX'] if i_interval == x[-1]})
+
+        if self.__m_debug:
+            IO.bdd_state('XYXY', f"{self._m_events_state['XYXY']}".replace('set()', '{}'))
+
+    def __xxy(self, i_type, i_interval):
+        if i_type == 'begin':
+            self._m_events_state['XXY'] = self._m_events_state['XXY'].union(
+                itertools.product(self._m_events_state['XX'], [i_interval]))
+        else:
+            self._m_events_state['XXY'] = {x for x in self._m_events_state['XXY'] if i_interval != x[-1]}
+
+        if self.__m_debug:
+            IO.bdd_state('XXY', f"{self._m_events_state['XXY']}".replace('set()', '{}'))
+
+    def __xxyy(self, i_interval):
+        self._m_events_state['XXYY'] = self._m_events_state['XXYY'].union(
+            {x for x in self._m_events_state['XXY'] if i_interval == x[-1]})
+
+        if self.__m_debug:
+            IO.bdd_state('XXYY', f"{self._m_events_state['XXYY']}".replace('set()', '{}'))
+
+    def __xd(self, i_interval, i_data):
+        self._m_events_state['XD'].add((i_interval, i_data))
+
+        if self.__m_debug:
+            IO.bdd_state('XD', f"{self._m_events_state['XD']}".replace('set()', '{}'))
