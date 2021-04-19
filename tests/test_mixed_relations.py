@@ -13,7 +13,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYYX': [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True}]
         }
 
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -30,7 +30,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYYX': [{'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': False}]
         }
 
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -63,7 +63,7 @@ class TestBeforeRelation(unittest.TestCase):
                      {'X0': True, 'X1': False, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': True}] # Five Contains 7
         }
 
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
