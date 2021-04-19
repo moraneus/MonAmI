@@ -11,7 +11,7 @@ class TestDuringRelation(unittest.TestCase):
             'XYYX': [{'X0': False, 'Y0': True}]
         }
 
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -27,7 +27,7 @@ class TestDuringRelation(unittest.TestCase):
                      {'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': False}]
         }
 
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -47,7 +47,7 @@ class TestDuringRelation(unittest.TestCase):
                      {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}]
         }
 
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
