@@ -26,3 +26,10 @@ class EndsBeforeBeginError(Exception):
     def __init__(self, i_interval):
         self.__m_message = f"Interval ends before it begins (Caused by interval {i_interval})"
         super().__init__(self.__m_message)
+
+
+class BadPropertyVariables(Exception):
+    def __init__(self, i_variable):
+        self.__m_message = f"Forbidden variable in property (Caused by variable {i_variable})"
+        super().__init__(self.__m_message)
+
