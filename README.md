@@ -95,10 +95,9 @@ The code contains several parts and classes which any one of them had a specific
 
 
 
-## BDD implementation execution output in debug mode: ##
-* The output will match the `JSON` example above.
+## Execution output in debug mode: ##
 * In debug mode, after each event, the program will print out to console the updated BDDs.
-* It also prints out other information like bitstring expansion.
+* It also prints out other information which is relevant to the execution.
 * The final state will be print at the end of the execution.
 ```python
 
