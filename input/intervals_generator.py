@@ -13,15 +13,20 @@ def create_file(size=30):
         intervals.append([name, 'begin', start])
         intervals.append([name, 'end', random.randint(start, 500000)])
     intervals.sort(key=lambda x: x[2])
-    json_dict = {"GENERATOR": {"run": []}}
+    execution = []
 
     for interval in intervals:
         if interval[1] == 'begin':
-            json_dict["GENERATOR"]["run"].append([interval[1], interval[0], f"data_{interval[2]}"])
+            execution.append([interval[1], interval[0], f"data_{interval[2]}"])
         else:
-            json_dict["GENERATOR"]["run"].append([interval[1], interval[0]])
+            execution.append([interval[1], interval[0]])
 
-    with open('input.json', 'w') as file:
-        json.dump(json_dict, file)
+    with open('input', 'r') as file:
+        data = json.load(file)
+
+    data["execution"] = execution
+
+    with open('input', 'w') as file:
+        json.dump(data, file)
 
 create_file()
