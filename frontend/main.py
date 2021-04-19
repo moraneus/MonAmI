@@ -5,7 +5,7 @@
 # Main program creating and parsing formulas
 # ------------------------------------------
 
-from parser import parse
+from frontend.parser import parse
 
 # parse is a function with the type:
 #
