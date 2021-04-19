@@ -1,0 +1,6 @@
+{
+    "DEBUG": true,
+    "INTERVAL_SIZE": 1,
+    "DATA_SIZE": 1,
+    "EXPANSION_LENGTH": 1
+}
