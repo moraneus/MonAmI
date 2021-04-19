@@ -8,7 +8,7 @@
 import ply.lex as lex
 import ply.yacc as yacc
 
-from ast import *
+from frontend.ast import *
 
 __errors__ = False
 
