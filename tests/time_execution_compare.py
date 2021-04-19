@@ -8,7 +8,7 @@ def set_method():
                  f'from os import sep\n' \
                  f'import json\n'
 
-    TEST_CODE = '''with open(f'..{sep}input{sep}input.json') as json_file:
+    TEST_CODE = '''with open(f'..{sep}input{sep}input') as json_file:
         data = json.load(json_file)
         for key, value in data.items():
             b = ListAtl(i_debug=False)
@@ -43,7 +43,7 @@ def bdd_method():
                  f'from os import sep\n' \
                  f'import json\n'
 
-    TEST_CODE = '''with open(f'..{sep}input{sep}input.json') as json_file:
+    TEST_CODE = '''with open(f'..{sep}input{sep}input') as json_file:
         data = json.load(json_file)
         for key, value in data.items():
             a = BddAtl(i_num_of_variables=1, i_debug=False)
