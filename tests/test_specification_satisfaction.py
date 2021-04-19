@@ -174,5 +174,51 @@ class TestSpecificationSatisfaction():
 
         assert expected_result == current_result
 
+    def test_specification_satisfaction_12_pass(self):
+        specification = parse("""exist A, B . A("Data1") & A < B | A("Data6") & A < B""")
+        expected_result = True
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
 
+    def test_specification_satisfaction_12_fail(self):
+        specification = parse("""exist A, B . A("Data5") & A < B | A("Data6") & A < B""")
+        expected_result = False
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
 
+    def test_specification_satisfaction_13_pass(self):
+        specification = parse("""exist A, B . !(A("Data6") & A < B)""")
+        expected_result = True
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
+
+    def test_specification_satisfaction_14_pass(self):
+        specification = parse("""exist A, B . A("Data6") & !A < B""")
+        expected_result = True
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
+
+    def test_specification_satisfaction_14_fail(self):
+        specification = parse("""exist A, B . (A("Data6") & !!A < B)""")
+        expected_result = False
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
+
+    def test_specification_satisfaction_15_pass(self):
+        specification = parse("""exist A, B, C . !(A o B & B o C)""")
+        expected_result = True
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
+
+    def test_specification_satisfaction_15_fail(self):
+        specification = parse("""exist A, B, C . A o B & B o C""")
+        expected_result = False
+        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
+                                                        i_num_of_variables=1)
+        assert expected_result == current_result
