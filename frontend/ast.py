@@ -111,11 +111,10 @@ class Not(Formula):
         return self.formula.free_vars()
 
     def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = ~self.formula.eval(bdd_manager, data_hashtable)
+        result = ~self.formula.eval(bdd_manager, data_hashtable, debug)
 
         if debug:
-            if debug:
-                IO.subformula(f"~({self.formula}))", list(bdd_manager.bdd_manager.pick_iter(result)))
+            IO.subformula(f"~({self.formula}))", list(bdd_manager.bdd_manager.pick_iter(result)))
 
         return result
 
@@ -285,6 +284,6 @@ class Paren(Formula):
         result = self.formula.eval(bdd_manager, data_hashtable, debug)
 
         if debug:
-            IO.subformula(f"PAREN {repr(self.formula)}")
+            IO.subformula(f"({repr(self.formula)})", (self.formula))
 
         return result
