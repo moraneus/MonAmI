@@ -10,7 +10,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYXY': [],
             'XYYX': []
         }
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -26,7 +26,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYXY': [],
             'XYYX': []
         }
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -44,7 +44,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYXY': [],
             'XYYX': []
         }
-        bdds = update_bdds(sequence, i_num_of_variables=1)
+        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
