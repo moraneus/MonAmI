@@ -110,9 +110,9 @@ The code contains several parts and classes which any one of them had a specific
                                                     
 
 ############################################################################## (START) ##############################################################################
-[EXECUTION]: [['begin', 1, 'Data 1'], ['end', 1], ['begin', 2, 'Data 2'], ['end', 2], ['begin', 3, 'Data 3'], ['end', 3], ['begin', 4, 'Data 4'], ['begin', 5, 'Data 5'], ['end', 5], ['end', 4]]
+[EXECUTION]: [['begin', 1, 'Data1'], ['end', 1], ['begin', 2, 'Data2'], ['end', 2], ['begin', 3, 'Data3'], ['end', 3], ['begin', 4, 'Data4'], ['begin', 5, 'Data5'], ['end', 5], ['end', 4]]
 
-[PROPERTY]: exist ['A', 'B', 'C'] . A < B & B < C & A(Data 1) & B(Data 2) & C(Data 3)
+[PROPERTY]: exist ['A', 'B', 'C', 'E', 'F'] . A < B & B < C & A(Data1) & B(Data2) & C(Data3) & E i F
 
 |-- [EVENT]: begin->1
     |-- [XXY]: []
@@ -123,13 +123,15 @@ The code contains several parts and classes which any one of them had a specific
         |-- [A < B]: []
         |-- [B < C]: []
         |-- [(A < B) & (B < C))]: []
-        |-- [A(Data 1)]: [{'A0': False}]
-        |-- [(A < B & B < C) & (A(Data 1)))]: []
-        |-- [B(Data 2)]: []
-        |-- [(A < B & B < C & A(Data 1)) & (B(Data 2)))]: []
-        |-- [C(Data 3)]: []
-        |-- [(A < B & B < C & A(Data 1) & B(Data 2)) & (C(Data 3)))]: []
-        |-- [exist ['A', 'B', 'C'] . And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data 1)),Data(B,Data 2)),Data(C,Data 3))]: []
+        |-- [A(Data1)]: [{'A0': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: []
+        |-- [B(Data2)]: []
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: []
+        |-- [C(Data3)]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: []
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
 
 [INFO]: Specification result is False
 
@@ -147,13 +149,15 @@ The code contains several parts and classes which any one of them had a specific
         |-- [A < B]: []
         |-- [B < C]: []
         |-- [(A < B) & (B < C))]: []
-        |-- [A(Data 1)]: [{'A0': False}]
-        |-- [(A < B & B < C) & (A(Data 1)))]: []
-        |-- [B(Data 2)]: []
-        |-- [(A < B & B < C & A(Data 1)) & (B(Data 2)))]: []
-        |-- [C(Data 3)]: []
-        |-- [(A < B & B < C & A(Data 1) & B(Data 2)) & (C(Data 3)))]: []
-        |-- [exist ['A', 'B', 'C'] . And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data 1)),Data(B,Data 2)),Data(C,Data 3))]: []
+        |-- [A(Data1)]: [{'A0': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: []
+        |-- [B(Data2)]: []
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: []
+        |-- [C(Data3)]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: []
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
 
 [INFO]: Specification result is False
 
@@ -166,13 +170,15 @@ The code contains several parts and classes which any one of them had a specific
         |-- [A < B]: []
         |-- [B < C]: []
         |-- [(A < B) & (B < C))]: []
-        |-- [A(Data 1)]: [{'A0': False}]
-        |-- [(A < B & B < C) & (A(Data 1)))]: []
-        |-- [B(Data 2)]: [{'B0': True}]
-        |-- [(A < B & B < C & A(Data 1)) & (B(Data 2)))]: []
-        |-- [C(Data 3)]: []
-        |-- [(A < B & B < C & A(Data 1) & B(Data 2)) & (C(Data 3)))]: []
-        |-- [exist ['A', 'B', 'C'] . And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data 1)),Data(B,Data 2)),Data(C,Data 3))]: []
+        |-- [A(Data1)]: [{'A0': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: []
+        |-- [B(Data2)]: [{'B0': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: []
+        |-- [C(Data3)]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: []
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
 
 [INFO]: Specification result is False
 
@@ -190,13 +196,15 @@ The code contains several parts and classes which any one of them had a specific
         |-- [A < B]: [{'A0': False, 'B0': True}]
         |-- [B < C]: [{'B0': False, 'C0': True}]
         |-- [(A < B) & (B < C))]: []
-        |-- [A(Data 1)]: [{'A0': False}]
-        |-- [(A < B & B < C) & (A(Data 1)))]: []
-        |-- [B(Data 2)]: [{'B0': True}]
-        |-- [(A < B & B < C & A(Data 1)) & (B(Data 2)))]: []
-        |-- [C(Data 3)]: []
-        |-- [(A < B & B < C & A(Data 1) & B(Data 2)) & (C(Data 3)))]: []
-        |-- [exist ['A', 'B', 'C'] . And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data 1)),Data(B,Data 2)),Data(C,Data 3))]: []
+        |-- [A(Data1)]: [{'A0': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: []
+        |-- [B(Data2)]: [{'B0': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: []
+        |-- [C(Data3)]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: []
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
 
 [INFO]: Specification result is False
 
@@ -217,13 +225,15 @@ The code contains several parts and classes which any one of them had a specific
         |-- [A < B]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True}]
         |-- [B < C]: [{'B0': False, 'B1': False, 'C0': False, 'C1': True}]
         |-- [(A < B) & (B < C))]: []
-        |-- [A(Data 1)]: [{'A0': False, 'A1': False}]
-        |-- [(A < B & B < C) & (A(Data 1)))]: []
-        |-- [B(Data 2)]: [{'B0': False, 'B1': True}]
-        |-- [(A < B & B < C & A(Data 1)) & (B(Data 2)))]: []
-        |-- [C(Data 3)]: [{'C0': True, 'C1': False}]
-        |-- [(A < B & B < C & A(Data 1) & B(Data 2)) & (C(Data 3)))]: []
-        |-- [exist ['A', 'B', 'C'] . And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data 1)),Data(B,Data 2)),Data(C,Data 3))]: []
+        |-- [A(Data1)]: [{'A0': False, 'A1': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: []
+        |-- [B(Data2)]: [{'B0': False, 'B1': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: []
+        |-- [C(Data3)]: [{'C0': True, 'C1': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: []
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
 
 [INFO]: Specification result is False
 
@@ -241,34 +251,136 @@ The code contains several parts and classes which any one of them had a specific
         |-- [A < B]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True}, {'A0': False, 'A1': False, 'B0': True, 'B1': False}, {'A0': False, 'A1': True, 'B0': True, 'B1': False}]
         |-- [B < C]: [{'B0': False, 'B1': False, 'C0': False, 'C1': True}, {'B0': False, 'B1': False, 'C0': True, 'C1': False}, {'B0': False, 'B1': True, 'C0': True, 'C1': False}]
         |-- [(A < B) & (B < C))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
-        |-- [A(Data 1)]: [{'A0': False, 'A1': False}]
-        |-- [(A < B & B < C) & (A(Data 1)))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
-        |-- [B(Data 2)]: [{'B0': False, 'B1': True}]
-        |-- [(A < B & B < C & A(Data 1)) & (B(Data 2)))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
-        |-- [C(Data 3)]: [{'C0': True, 'C1': False}]
-        |-- [(A < B & B < C & A(Data 1) & B(Data 2)) & (C(Data 3)))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
-        |-- [exist ['A', 'B', 'C'] . And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data 1)),Data(B,Data 2)),Data(C,Data 3))]: [{}]
+        |-- [A(Data1)]: [{'A0': False, 'A1': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
+        |-- [B(Data2)]: [{'B0': False, 'B1': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
+        |-- [C(Data3)]: [{'C0': True, 'C1': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: [{'A0': False, 'A1': False, 'B0': False, 'B1': True, 'C0': True, 'C1': False}]
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
+
+[INFO]: Specification result is False
+
+############################################################################## (INFO) ##############################################################################
+
+[INFO]: BDD variables Interval growth (2 -> 3)
+
+############################################################################## (INFO) ##############################################################################
+
+[INFO]: BDD variables Data growth (2 -> 3)
+
+|-- [EVENT]: begin->4
+    |-- [XXY]: [{'X2': False, 'X0': False, 'X1': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X2': True, 'X0': False, 'X1': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}]
+    |-- [XY]: []
+    |-- [X]: [{'X0': False, 'X1': True, 'X2': True}]
+    |-- [XD]: [{'D0': False, 'D1': False, 'D2': False, 'X0': False, 'X1': False, 'X2': False}, {'D0': False, 'D1': False, 'D2': True, 'X0': False, 'X1': False, 'X2': True}, {'D0': False, 'D1': True, 'D2': False, 'X0': False, 'X1': True, 'X2': False}, {'D0': False, 'D1': True, 'D2': True, 'X0': False, 'X1': True, 'X2': True}]
+    |-- [AST]: begin -> 4
+        |-- [A < B]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False}, {'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True, 'B2': False}]
+        |-- [B < C]: [{'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': False, 'C2': True}, {'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': True, 'C2': False}, {'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [(A < B) & (B < C))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [A(Data1)]: [{'A0': False, 'A1': False, 'A2': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [B(Data2)]: [{'B0': False, 'B1': False, 'B2': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [C(Data3)]: [{'C0': False, 'C1': True, 'C2': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
+
+[INFO]: Specification result is False
+
+|-- [EVENT]: begin->5
+    |-- [XXY]: [{'X2': False, 'X0': False, 'X1': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X2': True, 'X0': False, 'X1': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X2': False, 'X0': False, 'X1': False, 'Y0': True, 'Y1': False, 'Y2': False}, {'X2': True, 'X0': False, 'X1': False, 'Y0': True, 'Y1': False, 'Y2': False}, {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X0': False, 'X1': True, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [XY]: [{'X0': False, 'X1': True, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [X]: [{'X0': False, 'X1': True, 'X2': True}, {'X0': True, 'X1': False, 'X2': False}]
+    |-- [XD]: [{'D0': False, 'D1': False, 'D2': False, 'X0': False, 'X1': False, 'X2': False}, {'D0': False, 'D1': False, 'D2': True, 'X0': False, 'X1': False, 'X2': True}, {'D0': False, 'D1': True, 'D2': False, 'X0': False, 'X1': True, 'X2': False}, {'D0': False, 'D1': True, 'D2': True, 'X0': False, 'X1': True, 'X2': True}, {'D0': True, 'D1': False, 'D2': False, 'X0': True, 'X1': False, 'X2': False}]
+    |-- [AST]: begin -> 5
+        |-- [A < B]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False}, {'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True, 'B2': False}]
+        |-- [B < C]: [{'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': False, 'C2': True}, {'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': True, 'C2': False}, {'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [(A < B) & (B < C))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [A(Data1)]: [{'A0': False, 'A1': False, 'A2': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [B(Data2)]: [{'B0': False, 'B1': False, 'B2': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [C(Data3)]: [{'C0': False, 'C1': True, 'C2': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
+
+[INFO]: Specification result is False
+
+|-- [EVENT]: end->5
+    |-- [XXYY]: [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True}, {'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': False}, {'X0': False, 'X1': False, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}, {'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': False}, {'X0': False, 'X1': False, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}, {'X0': False, 'X1': True, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [XXY]: [{'X2': False, 'X0': False, 'X1': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X2': True, 'X0': False, 'X1': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}]
+    |-- [XYXY]: []
+    |-- [XYX]: []
+    |-- [XYYX]: []
+    |-- [XYY]: [{'X0': False, 'X1': True, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [XY]: []
+    |-- [XX]: [{'X2': False, 'X0': False, 'X1': False}, {'X2': True, 'X0': False, 'X1': False}, {'X0': False, 'X1': True, 'X2': False}, {'X0': True, 'X1': False, 'X2': False}]
+    |-- [X]: [{'X0': False, 'X1': True, 'X2': True}]
+    |-- [AST]: end -> 5
+        |-- [A < B]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': True, 'B1': False, 'B2': False}, {'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True, 'B2': False}, {'A0': False, 'A1': False, 'A2': True, 'B0': True, 'B1': False, 'B2': False}, {'A0': False, 'A1': True, 'A2': False, 'B0': True, 'B1': False, 'B2': False}]
+        |-- [B < C]: [{'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': False, 'C2': True}, {'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': True, 'C2': False}, {'B0': False, 'B1': False, 'B2': False, 'C0': True, 'C1': False, 'C2': False}, {'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}, {'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}, {'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [(A < B) & (B < C))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}, {'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [A(Data1)]: [{'A0': False, 'A1': False, 'A2': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [B(Data2)]: [{'B0': False, 'B1': False, 'B2': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [C(Data3)]: [{'C0': False, 'C1': True, 'C2': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [E i F]: []
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: []
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: []
+
+[INFO]: Specification result is False
+
+|-- [EVENT]: end->4
+    |-- [XXYY]: [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True}, {'Y2': False, 'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True}, {'Y2': True, 'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True}, {'X0': False, 'X1': False, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}, {'Y2': False, 'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True}, {'Y2': True, 'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True}, {'X0': False, 'X1': False, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}, {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X0': False, 'X1': True, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [XXY]: []
+    |-- [XYXY]: []
+    |-- [XYX]: []
+    |-- [XYYX]: [{'X0': False, 'X1': True, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [XYY]: []
+    |-- [XY]: []
+    |-- [XX]: [{'X2': False, 'X1': False, 'X0': False}, {'X2': False, 'X1': True, 'X0': False}, {'X2': True, 'X1': False, 'X0': False}, {'X2': True, 'X1': True, 'X0': False}, {'X0': True, 'X1': False, 'X2': False}]
+    |-- [X]: []
+    |-- [AST]: end -> 4
+        |-- [A < B]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True}, {'B2': False, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True}, {'B2': True, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': True, 'B1': False, 'B2': False}, {'B2': False, 'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True}, {'B2': True, 'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True}, {'A0': False, 'A1': False, 'A2': True, 'B0': True, 'B1': False, 'B2': False}, {'A0': False, 'A1': True, 'A2': False, 'B0': False, 'B1': True, 'B2': True}, {'A0': False, 'A1': True, 'A2': False, 'B0': True, 'B1': False, 'B2': False}]
+        |-- [B < C]: [{'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': False, 'C2': True}, {'C2': False, 'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': True}, {'C2': True, 'B0': False, 'B1': False, 'B2': False, 'C0': False, 'C1': True}, {'B0': False, 'B1': False, 'B2': False, 'C0': True, 'C1': False, 'C2': False}, {'C2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'C2': True, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}, {'B0': False, 'B1': True, 'B2': False, 'C0': False, 'C1': True, 'C2': True}, {'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [(A < B) & (B < C))]: [{'C2': False, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'C2': True, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False, 'C0': False, 'C1': True, 'C2': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}, {'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True, 'B2': False, 'C0': False, 'C1': True, 'C2': True}, {'A0': False, 'A1': False, 'A2': True, 'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [A(Data1)]: [{'A0': False, 'A1': False, 'A2': False}]
+        |-- [(A < B & B < C) & (A(Data1)))]: [{'C2': False, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'C2': True, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False, 'C0': False, 'C1': True, 'C2': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': True, 'B2': False, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [B(Data2)]: [{'B0': False, 'B1': False, 'B2': True}]
+        |-- [(A < B & B < C & A(Data1)) & (B(Data2)))]: [{'C2': False, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'C2': True, 'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True}, {'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': True, 'C1': False, 'C2': False}]
+        |-- [C(Data3)]: [{'C0': False, 'C1': True, 'C2': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2)) & (C(Data3)))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False}]
+        |-- [E i F]: [{'E0': False, 'E1': True, 'E2': True, 'F0': True, 'F1': False, 'F2': False}]
+        |-- [(A < B & B < C & A(Data1) & B(Data2) & C(Data3)) & (E i F))]: [{'A0': False, 'A1': False, 'A2': False, 'B0': False, 'B1': False, 'B2': True, 'C0': False, 'C1': True, 'C2': False, 'E0': False, 'E1': True, 'E2': True, 'F0': True, 'F1': False, 'F2': False}]
+        |-- [exist ['A', 'B', 'C', 'E', 'F'] . And(And(And(And(And(Before(A,B),Before(B,C)),Data(A,Data1)),Data(B,Data2)),Data(C,Data3)),Includes(E,F))]: [{}]
 
 [INFO]: Specification result is True
 
 ########################################################################### (FINAL STATE) ###########################################################################
-[EXECUTION]: [['begin', 1, 'Data 1'], ['end', 1], ['begin', 2, 'Data 2'], ['end', 2], ['begin', 3, 'Data 3'], ['end', 3], ['begin', 4, 'Data 4'], ['begin', 5, 'Data 5'], ['end', 5], ['end', 4]]
+[EXECUTION]: [['begin', 1, 'Data1'], ['end', 1], ['begin', 2, 'Data2'], ['end', 2], ['begin', 3, 'Data3'], ['end', 3], ['begin', 4, 'Data4'], ['begin', 5, 'Data5'], ['end', 5], ['end', 4]]
 
-[PROPERTY]: exist ['A', 'B', 'C'] . A < B & B < C & A(Data 1) & B(Data 2) & C(Data 3)
+[PROPERTY]: exist ['A', 'B', 'C', 'E', 'F'] . A < B & B < C & A(Data1) & B(Data2) & C(Data3) & E i F
 
     |-- [X]: []
-    |-- [XX]: [{'X1': False, 'X0': False}, {'X1': True, 'X0': False}, {'X0': True, 'X1': False}]
+    |-- [XX]: [{'X2': False, 'X1': False, 'X0': False}, {'X2': False, 'X1': True, 'X0': False}, {'X2': True, 'X1': False, 'X0': False}, {'X2': True, 'X1': True, 'X0': False}, {'X0': True, 'X1': False, 'X2': False}]
     |-- [XY]: []
     |-- [XYY]: []
-    |-- [XYYX]: []
+    |-- [XYYX]: [{'X0': False, 'X1': True, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}]
     |-- [XYX]: []
     |-- [XYXY]: []
     |-- [XXY]: []
-    |-- [XXYY]: [{'X0': False, 'X1': False, 'Y0': False, 'Y1': True}, {'X0': False, 'X1': False, 'Y0': True, 'Y1': False}, {'X0': False, 'X1': True, 'Y0': True, 'Y1': False}]
-    |-- [XD]: [{'D0': False, 'D1': False, 'X0': False, 'X1': False}, {'D0': False, 'D1': True, 'X0': False, 'X1': True}, {'D0': True, 'D1': False, 'X0': True, 'X1': False}]
+    |-- [XXYY]: [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True}, {'Y2': False, 'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True}, {'Y2': True, 'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True}, {'X0': False, 'X1': False, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}, {'Y2': False, 'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True}, {'Y2': True, 'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True}, {'X0': False, 'X1': False, 'X2': True, 'Y0': True, 'Y1': False, 'Y2': False}, {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}, {'X0': False, 'X1': True, 'X2': False, 'Y0': True, 'Y1': False, 'Y2': False}]
+    |-- [XD]: [{'D0': False, 'D1': False, 'D2': False, 'X0': False, 'X1': False, 'X2': False}, {'D0': False, 'D1': False, 'D2': True, 'X0': False, 'X1': False, 'X2': True}, {'D0': False, 'D1': True, 'D2': False, 'X0': False, 'X1': True, 'X2': False}, {'D0': False, 'D1': True, 'D2': True, 'X0': False, 'X1': True, 'X2': True}, {'D0': True, 'D1': False, 'D2': False, 'X0': True, 'X1': False, 'X2': False}]
 
 [INFO]: Specification result is True
-
-############################################################################# (THE END) #############################################################################
 ```
 
