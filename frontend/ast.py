@@ -284,6 +284,6 @@ class Paren(Formula):
         result = self.formula.eval(bdd_manager, data_hashtable, debug)
 
         if debug:
-            IO.subformula(f"({repr(self.formula)})", (self.formula))
+            IO.subformula(f"({repr(self.formula)})", list(bdd_manager.bdd_manager.pick_iter(result)))
 
         return result
