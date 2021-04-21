@@ -1,4 +1,4 @@
-# MonAmI - Monitoring Allen logic - made in Israel
+# MonAmI -  Monitoring Allen Logic with Metric Intervals
 
 ## General Details: ##
 * This tool was fully written in python using 'dd' package (Repository of 'dd' is at https://github.com/tulip-control/dd).
@@ -19,7 +19,7 @@ __NOTE: The only relations used by the algorithm for now are: `before`, `overlap
 ## Installation: ##
 1. Before execution, it needs to install python 3.6 and above.
 2. In the file `requierments.txt`, there are all the packages that should be installed. \
-For installation, please run the command `python -m pip install -r requierments.txt` (from CMD in windows or Terminal in Linux).
+For installation, please run the command `python -m pip install -r requierments.txt` (from CMD in windows or Terminal in Unix).
 3. Running the program is made by running the command `python main.py` from the program root directory.
 
 ## Configuration: ##
