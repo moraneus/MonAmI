@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class BitstringTable:
     def __init__(self, i_bitstring_length=3, i_expansion_length=2):
         self.__m_bitstring_table = {}

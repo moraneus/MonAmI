@@ -34,7 +34,8 @@ specs = [
   'A < B & B i C & C o D',
   'exist A, B . A < B & B i C & exist D . C o D',
   'A > B & C && D',
-  'exist A, B, C, D, E, F, G, H . A < B & C < D | ! E < F & G < H'
+  'exist A, B, C, D, E, F, G, H . A < B & C < D | ! E < F & G < H',
+  'exist A . exist B, C . A < B & B < C -> A < C'
 ]
 
 # Looping though specs and processing them:
