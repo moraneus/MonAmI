@@ -82,14 +82,14 @@ class BddAtl():
         """
 
         # Creating the algorithm variables should be declare on the BDD manager
-        x_variables = [f'X{i}' for i in range(i_num_of_variables)]
-        y_variables = [f'Y{i}' for i in range(i_num_of_variables)]
-        d_variables = [f'D{i}' for i in range(i_num_of_variables)]
+        x_variables = [f'_X{i}' for i in range(i_num_of_variables)]
+        y_variables = [f'_Y{i}' for i in range(i_num_of_variables)]
+        d_variables = [f'_D{i}' for i in range(i_num_of_variables)]
 
         # Creating the property variables should be declare on the BDD manager
         property_variables = []
         for variable in i_variables:
-            if variable in ['X', 'Y', 'D']:
+            if variable in ['_X', '_Y', '_D']:
                 raise BadPropertyVariables(variable)
             property_variables += [f'{variable}{i}' for i in range(i_num_of_variables)]
 
@@ -132,7 +132,7 @@ class BddAtl():
     # We can see here also function which responsible to the BDDs updating.
     ###################################################################################################################
 
-    def event_update(self, i_type: str, i_interval, i_interval_bitstring: str, i_data_bitstring=None):
+    def event_update(self, i_type: str, i_interval, i_interval_bitstring: str, i_data=None, i_data_bitstring=None):
         """
         Primary update function that executes in every event.
 
@@ -159,11 +159,12 @@ class BddAtl():
                 self.__bdd_manager_variable_expansion_update('Data', len(i_interval_bitstring))
 
         if self.__m_debug:
-            IO.event_header(f'{i_type}->{i_interval}')
+            event_details = f'{i_type}({i_interval}, {i_data})' if i_data is not None else f'{i_type}({i_interval})'
+            IO.event_header(event_details)
 
         # Converts the bitstring into an assignment.
-        self.__assignment_update(i_interval_bitstring, 'X')
-        self.__assignment_update(i_interval_bitstring, 'Y')
+        self.__assignment_update(i_interval_bitstring, '_X')
+        self.__assignment_update(i_interval_bitstring, '_Y')
 
         # Validates if the event is valid.
         # It could be few types of errors during the validation.
@@ -181,15 +182,19 @@ class BddAtl():
             if i_data_bitstring is not None:
 
                 # Converts the bitstring into an assignment.
-                self.__assignment_update(i_data_bitstring, 'D')
+                self.__assignment_update(i_data_bitstring, '_D')
 
                 # Call to self.__xd function
-                self.__m_events_functions['data'](self.__m_bitstrings[i_interval_bitstring]['X'],
-                                                  self.__m_bitstrings[i_data_bitstring]['D'])
+                self.__m_events_functions['data'](self.__m_bitstrings[i_interval_bitstring]['_X'],
+                                                  self.__m_bitstrings[i_data_bitstring]['_D'])
 
             # Deletes the expression from the data structure when the interval comes to an 'end' event.
             if i_type == 'end':
                 del self.__m_bitstrings[i_interval_bitstring]
+
+            if self.__m_debug:
+                for bdd_name in self._m_bdds.keys():
+                    IO.bdd_state(bdd_name, self._sorted_bdd_assignments(bdd_name))
 
 
     def __event_validator(self, i_type: str, i_assignment: dict, i_interval: int)->bool:
@@ -208,7 +213,7 @@ class BddAtl():
 
         """
         # Create BDD helper for intersection operation.
-        bdd_helper = self._m_bdd_manager.cube(i_assignment['X'])
+        bdd_helper = self._m_bdd_manager.cube(i_assignment['_X'])
 
         if i_type == "begin":
             # if {z} ∩ (BDD[X] ∪ BDD[XX]) != {}; then “Multiple begin”.
@@ -290,15 +295,15 @@ class BddAtl():
 
         # BDD[X] = BDD[X] ∪ {z}
         if i_type == 'begin':
-            self._m_bdds['X'] |= self._m_bdd_manager.cube(i_assignment['X'])
+            self._m_bdds['X'] |= self._m_bdd_manager.cube(i_assignment['_X'])
 
         # BDD[X] = BDD[X] ∩ ~{z}
         else:
-            bdd_helper_x = self._m_bdd_manager.cube(i_assignment['X'])
+            bdd_helper_x = self._m_bdd_manager.cube(i_assignment['_X'])
             self._m_bdds['X'] &= ~bdd_helper_x
 
-        if self.__m_debug:
-            IO.bdd_state('X', self._sorted_bdd_assignments('X'))
+        # if self.__m_debug:
+        #     IO.bdd_state('X', self._sorted_bdd_assignments('X'))
 
     def __xx(self, i_assignment: dict):
         """
@@ -315,10 +320,10 @@ class BddAtl():
         """
 
         # BDD[XX] = BDD[XX] ∪ {z}
-        self._m_bdds['XX'] |= self._m_bdd_manager.cube(i_assignment['X'])
+        self._m_bdds['XX'] |= self._m_bdd_manager.cube(i_assignment['_X'])
 
-        if self.__m_debug:
-            IO.bdd_state('XX', self._sorted_bdd_assignments('XX'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XX', self._sorted_bdd_assignments('XX'))
 
     def __xy(self, i_type, i_assignment):
         """
@@ -335,8 +340,8 @@ class BddAtl():
 
         """
 
-        bdd_helper_x = self._m_bdd_manager.cube(i_assignment['X'])
-        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['Y'])
+        bdd_helper_x = self._m_bdd_manager.cube(i_assignment['_X'])
+        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['_Y'])
 
         # BDD[XY] = BDD[XY] ∪ ((BDD[X] × {z}))
         if i_type == 'begin':
@@ -347,8 +352,8 @@ class BddAtl():
             self._m_bdds['XY'] &= ((self._m_bdd_manager.true & ~bdd_helper_x) &
                                    (self._m_bdd_manager.true & ~bdd_helper_y))
 
-        if self.__m_debug:
-            IO.bdd_state('XY', self._sorted_bdd_assignments('XY'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XY', self._sorted_bdd_assignments('XY'))
 
     def __xyy(self, i_assignment):
         """
@@ -364,7 +369,7 @@ class BddAtl():
 
         """
 
-        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['Y'])
+        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['_Y'])
 
         # # BDD[XYY] = BDD[XYY] ∪ (BDD[XY] ∩ (BDD[U] × {z}))
         # self._m_bdds['XYY'] |= (self._m_bdds['XY'] & (self._m_bdd_manager.true & bdd_helper_y))
@@ -373,8 +378,8 @@ class BddAtl():
         self._m_bdds['XYY'] = (self._m_bdds['XYY'] & ~self._m_bdds['XYYX']) | \
                               (self._m_bdds['XY'] & (self._m_bdd_manager.true & bdd_helper_y))
 
-        if self.__m_debug:
-            IO.bdd_state('XYY', self._sorted_bdd_assignments('XYY'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XYY', self._sorted_bdd_assignments('XYY'))
 
     def __xyyx(self, i_assignment):
         """
@@ -390,13 +395,13 @@ class BddAtl():
 
         """
 
-        bdd_helper_x = self._m_bdd_manager.cube(i_assignment['X'])
+        bdd_helper_x = self._m_bdd_manager.cube(i_assignment['_X'])
 
         # BDD[XYYX] = BDD[XYYX] ∪ (BDD[XYY] ∩ ({z} × BDD[U]))
         self._m_bdds['XYYX'] |= (self._m_bdds['XYY'] & (self._m_bdd_manager.true & bdd_helper_x))
 
-        if self.__m_debug:
-            IO.bdd_state('XYYX', self._sorted_bdd_assignments('XYYX'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XYYX', self._sorted_bdd_assignments('XYYX'))
 
     def __xyx(self, i_assignment):
         """
@@ -412,7 +417,7 @@ class BddAtl():
 
         """
 
-        bdd_helper_x = self._m_bdd_manager.cube(i_assignment['X'])
+        bdd_helper_x = self._m_bdd_manager.cube(i_assignment['_X'])
 
         # # BDD[XYX] = BDD[XYX] ∪ (BDD[XY] ∩ ({z} × BDD[U])
         # self._m_bdds['XYX'] |= (self._m_bdds['XY'] & (self._m_bdd_manager.true & bdd_helper_x))
@@ -421,8 +426,8 @@ class BddAtl():
         self._m_bdds['XYX'] = (self._m_bdds['XYX'] & ~self._m_bdds['XYXY']) | \
                               (self._m_bdds['XY'] & (self._m_bdd_manager.true & bdd_helper_x))
 
-        if self.__m_debug:
-            IO.bdd_state('XYX', self._sorted_bdd_assignments('XYX'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XYX', self._sorted_bdd_assignments('XYX'))
 
     def __xyxy(self, i_assignment):
         """
@@ -438,13 +443,13 @@ class BddAtl():
 
         """
 
-        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['Y'])
+        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['_Y'])
 
         # BDD[XYXY] = BDD[XYXY] ∪ (BDD[XYX] ∩ (BDD[U] × {z}))
         self._m_bdds['XYXY'] |= (self._m_bdds['XYX'] & (self._m_bdd_manager.true & bdd_helper_y))
 
-        if self.__m_debug:
-            IO.bdd_state('XYXY', self._sorted_bdd_assignments('XYXY'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XYXY', self._sorted_bdd_assignments('XYXY'))
 
     def __xxy(self, i_type, i_assignment):
         """
@@ -460,7 +465,7 @@ class BddAtl():
         None
 
         """
-        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['Y'])
+        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['_Y'])
 
         # BDD[XXY] = BDD[XXY] ∪ (BDD[XX] × {z})
         if i_type == 'begin':
@@ -470,8 +475,8 @@ class BddAtl():
         else:
             self._m_bdds['XXY'] &= (self._m_bdd_manager.true & ~bdd_helper_y)
 
-        if self.__m_debug:
-            IO.bdd_state('XXY', self._sorted_bdd_assignments('XXY'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XXY', self._sorted_bdd_assignments('XXY'))
 
     def __xxyy(self, i_assignment):
         """
@@ -487,13 +492,13 @@ class BddAtl():
 
         """
 
-        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['Y'])
+        bdd_helper_y = self._m_bdd_manager.cube(i_assignment['_Y'])
 
         # BDD[XXYY] = BDD[XXYY] ∪ (BDD[XXY] ∩ (BDD[U] × {z}))
         self._m_bdds['XXYY'] |= (self._m_bdds['XXY'] & (bdd_helper_y & self._m_bdd_manager.true))
 
-        if self.__m_debug:
-            IO.bdd_state('XXYY', self._sorted_bdd_assignments('XXYY'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XXYY', self._sorted_bdd_assignments('XXYY'))
 
     def __xd(self, i_assignment_x: str, i_assignmet_d: str):
         """
@@ -514,8 +519,8 @@ class BddAtl():
         # BDD[XD] = BDD[XD] ∪ {z, d}
         self._m_bdds['XD'] |= (bdd_helper_x & bdd_helper_d)
 
-        if self.__m_debug:
-            IO.bdd_state('XD', self._sorted_bdd_assignments('XD'))
+        # if self.__m_debug:
+        #     IO.bdd_state('XD', self._sorted_bdd_assignments('XD'))
 
     def _sorted_bdd_assignments(self, i_bdd: str)->list:
         """
@@ -532,7 +537,7 @@ class BddAtl():
 
         """
 
-        key_order = ['D', 'X', 'Y']
+        key_order = ['_D', '_X', '_Y']
         bdd_assignments = list(self._m_bdd_manager.pick_iter(self._m_bdds[i_bdd]))
         return [dict(sorted(assignment.items(), key=lambda x: key_order)) for assignment in bdd_assignments]
 
@@ -557,7 +562,7 @@ class BddAtl():
 
         """
 
-        old_variables = ['X', 'Y']
+        old_variables = ['_X', '_Y']
         values = {}
         for i, new_var in enumerate(new_vars):
             values.update(self.__variables_rename(old_variables[i], new_var, 0, self._m_interval_size))
@@ -582,8 +587,8 @@ class BddAtl():
         """
 
         bdd_renamed = self.rename("XD", i_variable)
-        bdd_helper = self._m_bdd_manager.cube(self.__convert_bitstring_to_assignment(i_data, 'D'))
-        return self._m_bdd_manager.exist([f'D{i}' for i in range(self._m_data_size)], bdd_renamed & bdd_helper)
+        bdd_helper = self._m_bdd_manager.cube(self.__convert_bitstring_to_assignment(i_data, '_D'))
+        return self._m_bdd_manager.exist([f'_D{i}' for i in range(self._m_data_size)], bdd_renamed & bdd_helper)
 
     def exist(self, i_variables: list, i_bdd: str):
         """
@@ -630,8 +635,8 @@ class BddAtl():
             length_diff = i_new_num_of_variables - self._m_interval_size
 
             # Updating the algorithm variables should be declare on the BDD manager
-            x_variables = self.__define_new_variables('X', self._m_interval_size, i_new_num_of_variables)
-            y_variables = self.__define_new_variables('Y', self._m_interval_size, i_new_num_of_variables)
+            x_variables = self.__define_new_variables('_X', self._m_interval_size, i_new_num_of_variables)
+            y_variables = self.__define_new_variables('_Y', self._m_interval_size, i_new_num_of_variables)
 
             # Updating the property variables should be declare on the BDD manager
             property_variables = []
@@ -647,7 +652,7 @@ class BddAtl():
         # In a case of the bitstring data reach to his max size.
         else:
             length_diff = i_new_num_of_variables - self._m_data_size
-            d_variables = self.__define_new_variables('D', self._m_data_size, i_new_num_of_variables)
+            d_variables = self.__define_new_variables('_D', self._m_data_size, i_new_num_of_variables)
             old_length = self._m_data_size
             self._m_data_size = i_new_num_of_variables
             new_vars = d_variables
@@ -718,13 +723,13 @@ class BddAtl():
 
         # In a case of the bitstring interval reach to his max size.
         if i_variable == 'Interval':
-            variables_rename = {**self.__variables_rename('X', 'X', i_length_diff, self._m_interval_size),
-                                **self.__variables_rename('Y', 'Y', i_length_diff, self._m_interval_size)}
+            variables_rename = {**self.__variables_rename('_X', '_X', i_length_diff, self._m_interval_size),
+                                **self.__variables_rename('_Y', '_Y', i_length_diff, self._m_interval_size)}
             bdds = self._m_bdds.keys()
 
         # In a case of the bitstring data reach to his max size.
         else:
-            variables_rename = self.__variables_rename('D', 'D', i_length_diff, self._m_data_size)
+            variables_rename = self.__variables_rename('_D', '_D', i_length_diff, self._m_data_size)
             bdds = ['XD']
 
         # Variables substitution
@@ -774,16 +779,16 @@ class BddAtl():
 
         # In a case of the bitstring interval reach to his max size.
         if i_type == "Interval":
-            x_assignment_helper = {f'X{i}': False for i in range(i_length_diff)}
-            y_assignment_helper = {f'Y{i}': False for i in range(i_length_diff)}
-            assignment_helper = {'XY': {**x_assignment_helper, **y_assignment_helper}, 'X': x_assignment_helper}
+            x_assignment_helper = {f'_X{i}': False for i in range(i_length_diff)}
+            y_assignment_helper = {f'_Y{i}': False for i in range(i_length_diff)}
+            assignment_helper = {'XY': {**x_assignment_helper, **y_assignment_helper}, '_X': x_assignment_helper}
             bdds = self._m_bdds.keys()
 
         # In a case of the bitstring data reach to his max size.
         else:
-            # The key 'X' is denote for 'D'.
+            # The key '_X' is denote for 'D'.
 
-            assignment_helper = {'X': {f'D{i}': False for i in range(i_length_diff)}}
+            assignment_helper = {'_X': {f'_D{i}': False for i in range(i_length_diff)}}
             bdds = ['XD']
 
         for bdd_name in bdds:
@@ -793,7 +798,7 @@ class BddAtl():
             # Run through all BDD assignments and update them.
             for assignment in self._m_bdd_manager.pick_iter(self._m_bdds[bdd_name]):
                 if bdd_name in ['X', 'XX', 'XD']:
-                    updated_bdd |= self._m_bdd_manager.cube({**assignment_helper['X'], **assignment})
+                    updated_bdd |= self._m_bdd_manager.cube({**assignment_helper['_X'], **assignment})
                 else:
                     updated_bdd |= self._m_bdd_manager.cube({**assignment_helper['XY'], **assignment})
 
