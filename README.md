@@ -10,8 +10,8 @@
 
     * __NOTE: The only relations used by the algorithm for now are: `before`, `overlaps`, and `includes`.__
 ## General characterization of MonAmI: ## 
-1. A trace is a sequence of `begin(i, d)` or `end(i)` events where `i` is denoted for an interval ID and `d` denotes data.
-    * __NOTE: For `end` event, data is not mandatory since the data is set on the `begin` event.__
+1. A trace is a sequence of `begin(i, d)` or `end(i)` events where `i` is denoted for an interval ID and `d` denotes data. / 
+* __NOTE: For `end` event, data is not mandatory since the data is set on the `begin` event.__
 3. For each event:
     1. All possible Allen intervals are created, as these sets (`X`, `XX`, `XY`, `XYY`, `XYYX`, `XXY`, `XXYY`, `XYX`, `XYXY`, `XD`), represented as BDDs.
     2. The temporal logic formula is evaluated on these intervals.
