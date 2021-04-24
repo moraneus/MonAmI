@@ -35,7 +35,7 @@ Interval ID   | `int`, `str`
 Data          | `null`, `int`, or `str`
 
 3. You can create a random execution in the `trace` file using the script `trace_generator.py`, which is locate in the`input` folder.
-4, Example of `trace` file:
+4. Example of `trace` file:
 ```json
 {
     "execution": [["begin", 1, "Data1"], ["end", 1], ["begin", 2, "Data2"], ["end", 2], ["begin", 3, "Data3"], ["end", 3],
