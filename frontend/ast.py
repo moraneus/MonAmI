@@ -39,12 +39,13 @@ class And(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula1.free_vars() | self.formula2.free_vars()
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = self.formula1.eval(bdd_manager, data_hashtable, debug) & \
-                 self.formula2.eval(bdd_manager, data_hashtable, debug)
+    def eval(self, **kwargs):
+        result = self.formula1.eval(**kwargs) & \
+                 self.formula2.eval(**kwargs)
 
-        if debug:
-            IO.subformula(f"({self.formula1}) & ({self.formula2}))", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"({self.formula1}) & ({self.formula2}))",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -63,12 +64,13 @@ class Or(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula1.free_vars() | self.formula2.free_vars()
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = self.formula1.eval(bdd_manager, data_hashtable, debug) | \
-                 self.formula2.eval(bdd_manager, data_hashtable, debug)
+    def eval(self, **kwargs):
+        result = self.formula1.eval(**kwargs) | \
+                 self.formula2.eval(**kwargs)
 
-        if debug:
-            IO.subformula(f"({self.formula1}) | ({self.formula2}))", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"({self.formula1}) | ({self.formula2}))",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -87,12 +89,18 @@ class Implies(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula1.free_vars() | self.formula2.free_vars()
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = ~self.formula1.eval(bdd_manager, data_hashtable, debug) | \
-                 self.formula2.eval(bdd_manager, data_hashtable, debug)
+    def eval(self, **kwargs):
+        left = kwargs["bdd_manager"].bdd_manager.true if \
+            self.formula1.eval(**kwargs) !=  kwargs["bdd_manager"].bdd_manager.false else \
+            kwargs["bdd_manager"].bdd_manager.false
+        right = self.formula2.eval(**kwargs)
 
-        if debug:
-            IO.subformula(f"({self.formula1}) -> ({self.formula2}))", list(bdd_manager.bdd_manager.pick_iter(result)))
+        result = ~left | right
+
+
+        if kwargs["bdd_manager"]:
+            IO.subformula(f"({self.formula1}) -> ({self.formula2}))",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -110,11 +118,11 @@ class Not(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars()
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = ~self.formula.eval(bdd_manager, data_hashtable, debug)
+    def eval(self, **kwargs):
+        result = ~self.formula.eval(**kwargs)
 
-        if debug:
-            IO.subformula(f"~({self.formula}))", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"~({self.formula}))", list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -133,12 +141,12 @@ class Before(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = bdd_manager.rename('XXYY', self.interval1, self.interval2)
+    def eval(self, **kwargs):
+        result = kwargs["bdd_manager"].rename('XXYY', self.interval1, self.interval2)
 
-        if debug:
-            if debug:
-                IO.subformula(f"{self.interval1} < {self.interval2}", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"{self.interval1} < {self.interval2}",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -157,12 +165,12 @@ class Overlaps(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = bdd_manager.rename('XYXY', self.interval1, self.interval2)
+    def eval(self, **kwargs):
+        result = kwargs["bdd_manager"].rename('XYXY', self.interval1, self.interval2)
 
-        if debug:
-            if debug:
-                IO.subformula(f"{self.interval1} o {self.interval2}", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"{self.interval1} o {self.interval2}",
+                              list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -181,11 +189,12 @@ class Includes(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = bdd_manager.rename('XYYX', self.interval1, self.interval2)
+    def eval(self, **kwargs):
+        result = kwargs["bdd_manager"].rename('XYYX', self.interval1, self.interval2)
 
-        if debug:
-            IO.subformula(f"{self.interval1} i {self.interval2}", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"{self.interval1} i {self.interval2}",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -204,15 +213,15 @@ class Data(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval}
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        data_bitstring = data_hashtable.lookup_no_update(self.data)
+    def eval(self, **kwargs):
+        data_bitstring = kwargs["data_manager"].lookup_no_update(self.data)
         if not(data_bitstring):
-            result = bdd_manager.bdd_manager.false
+            result = kwargs["bdd_manager"].bdd_manager.false
         else:
-            result = bdd_manager.restrict(data_bitstring, self.interval)
+            result = kwargs["bdd_manager"].restrict(data_bitstring, self.interval)
 
-        if debug:
-            IO.subformula(f"{self.interval}({self.data})", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"{self.interval}({self.data})", list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -231,14 +240,15 @@ class Same(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        bdd1 = bdd_manager.rename('XD', self.interval1)
-        bdd2 = bdd_manager.rename('XD', self.interval2)
+    def eval(self, **kwargs):
+        bdd1 = kwargs["bdd_manager"].rename('XD', self.interval1)
+        bdd2 = kwargs["bdd_manager"].rename('XD', self.interval2)
 
-        result = bdd_manager.exist(['D'], bdd1 & bdd2)
+        result = kwargs["bdd_manager"].exist(['_D'], bdd1 & bdd2)
 
-        if debug:
-            IO.subformula(f"same({self.interval1}, {self.interval2})", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"same({self.interval1}, {self.interval2})",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
 
@@ -257,14 +267,14 @@ class Exist(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars() - set(self.intervals)
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = bdd_manager.exist(self.intervals, self.formula.eval(bdd_manager, data_hashtable, debug))
+    def eval(self, **kwargs):
+        result = kwargs["bdd_manager"].exist(self.intervals, self.formula.eval(**kwargs))
 
-        if debug:
-            IO.subformula(f"exist {self.intervals} . {repr(self.formula)}", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"exist {self.intervals} . {self.formula}",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
-
 
 
 class Paren(Formula):
@@ -280,10 +290,10 @@ class Paren(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars()
 
-    def eval(self, bdd_manager, data_hashtable, debug=True):
-        result = self.formula.eval(bdd_manager, data_hashtable, debug)
+    def eval(self, **kwargs):
+        result = self.formula.eval(**kwargs)
 
-        if debug:
-            IO.subformula(f"({repr(self.formula)})", list(bdd_manager.bdd_manager.pick_iter(result)))
+        if kwargs["debug_mode"]:
+            IO.subformula(f"({self.formula})", list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
