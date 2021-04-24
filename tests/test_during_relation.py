@@ -8,7 +8,7 @@ class TestDuringRelation(unittest.TestCase):
         results = {
             'XXYY': [],
             'XYXY': [],
-            'XYYX': [{'X0': False, 'Y0': True}]
+            'XYYX': [{'_X0': False, '_Y0': True}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -22,9 +22,9 @@ class TestDuringRelation(unittest.TestCase):
         results = {
             'XXYY': [],
             'XYXY': [],
-            'XYYX': [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True},
-                     {'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': False},
-                     {'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': False}]
+            'XYYX': [{'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': False, '_Y2': True},
+                     {'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': True, '_Y2': False},
+                     {'_X0': False, '_X1': False, '_X2': True, '_Y0': False, '_Y1': True, '_Y2': False}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -39,12 +39,12 @@ class TestDuringRelation(unittest.TestCase):
         results = {
             'XXYY': [],
             'XYXY': [],
-            'XYYX': [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True},
-                     {'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': False},
-                     {'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True},
-                     {'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': False},
-                     {'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': True},
-                     {'X0': False, 'X1': True, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': True}]
+            'XYYX': [{'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': False, '_Y2': True},
+                     {'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': True, '_Y2': False},
+                     {'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': True, '_Y2': True},
+                     {'_X0': False, '_X1': False, '_X2': True, '_Y0': False, '_Y1': True, '_Y2': False},
+                     {'_X0': False, '_X1': False, '_X2': True, '_Y0': False, '_Y1': True, '_Y2': True},
+                     {'_X0': False, '_X1': True, '_X2': False, '_Y0': False, '_Y1': True, '_Y2': True}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
