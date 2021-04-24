@@ -6,7 +6,7 @@
 * BDDs are used to represent Boolean functions. On a more abstract level, BDDs can be considered as a compressed representation of sets or relations (Wikipedia:  https://en.wikipedia.org/wiki/Binary_decision_diagram).
 
 ## Types of Allen's interval algebra: ##
-![Image of Inervals](https://www.researchgate.net/profile/Ioannis_Tsamardinos/publication/230561978/figure/fig2/AS:646067146223617@1531045819115/1-The-13-relations-between-intervals-in-Allens-algebra-Interval-A-is-always-either-at.png) /
+![Image of Inervals](https://www.researchgate.net/profile/Ioannis_Tsamardinos/publication/230561978/figure/fig2/AS:646067146223617@1531045819115/1-The-13-relations-between-intervals-in-Allens-algebra-Interval-A-is-always-either-at.png)
 * __NOTE: The only relations used by the algorithm for now are: `before`, `overlaps`, and `includes`.__
 
 
