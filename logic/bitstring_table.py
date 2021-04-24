@@ -1,11 +1,14 @@
 import numpy as np
+from graphics.io import IO
+
 
 class BitstringTable:
-    def __init__(self, i_bitstring_length=3, i_expansion_length=2):
+    def __init__(self, i_bitstring_length=3, i_expansion_length=2, i_debug=True):
         self.__m_bitstring_table = {}
         self._m_bitstring_length = i_bitstring_length
         self.__m_number_of_growth = i_expansion_length
         self.__max_items_allowed = 2 ** i_bitstring_length
+        self.__m_debug = i_debug
 
     def lookup(self, i_event_type: str, i_key)->str:
         """
@@ -33,6 +36,11 @@ class BitstringTable:
         if i_key not in self.__m_bitstring_table.keys():
             self.__m_bitstring_table[i_key] = np.binary_repr(len(self.__m_bitstring_table.keys()),
                                                              width=self._m_bitstring_length)
+
+        if self.__m_debug:
+            IO.enumeration(i_key, self.__m_bitstring_table[i_key])
+
+
         return self.__m_bitstring_table[i_key]
 
     def lookup_no_update(self, i_key):
