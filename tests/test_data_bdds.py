@@ -6,7 +6,7 @@ class TestDataBdds(unittest.TestCase):
     def test_data_1_all_data_is_the_same_interval_and_data_not_extended(self):
         sequence = [["begin", 'Boo', 'Data1'], ["end", 'Boo'], ["begin", 3, 'Data1'], ["end", 3]]
         results = {
-            'XD': [{'D0': False}]
+            'XD': [{'_D0': False}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -18,9 +18,9 @@ class TestDataBdds(unittest.TestCase):
         sequence = [["begin", 1, 'Data1'], ["end", 1], ["begin", 2, 'Data1'], ["end", 2],
                     ["begin", 3, 'Data1'], ["end", 3]]
         results = {
-            'XD': [{'X0': False, 'X1':False, 'X2': False, 'D0': False},
-                   {'X0': False, 'X1': False, 'X2': True, 'D0': False},
-                   {'X0': False, 'X1': True, 'X2': False, 'D0': False}]
+            'XD': [{'_X0': False, '_X1':False, '_X2': False, '_D0': False},
+                   {'_X0': False, '_X1': False, '_X2': True, '_D0': False},
+                   {'_X0': False, '_X1': True, '_X2': False, '_D0': False}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -32,7 +32,7 @@ class TestDataBdds(unittest.TestCase):
         sequence = [["begin", 'Boo', 'Data1'], ["end", 'Boo'], ["begin", 3, 'Data1'], ["end", 3],
                     ["begin", 2, "Data1"], ["end", 2], ["begin", 4, "Data1"], ["end", 4]]
         results = {
-            'XD': [{'X0': False, 'D0': False}]
+            'XD': [{'_X0': False, '_D0': False}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -44,8 +44,8 @@ class TestDataBdds(unittest.TestCase):
     def test_data_4_all_data_is_not_the_same_interval_and_data_is_not_extended(self):
         sequence = [["begin", 1, 'Data1'], ["end", 1], ["begin", 2, 'Data2'], ["end", 2]]
         results = {
-            'XD': [{'X0': False, 'D0': False},
-                   {'X0': True, 'D0': True}]
+            'XD': [{'_X0': False, '_D0': False},
+                   {'_X0': True, '_D0': True}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -57,9 +57,9 @@ class TestDataBdds(unittest.TestCase):
         sequence = [["begin", 1, 'Data1'], ["end", 1], ["begin", 2, 'Data2'], ["end", 2],
                     ["begin", 3, "Data3"], ["end", 3]]
         results = {
-            'XD': [{'X0': False, 'X1': False, 'X2': False, 'D0': False, 'D1': False, 'D2': False},
-                   {'X0': False, 'X1': False, 'X2': True,'D0': False, 'D1': False, 'D2': True},
-                   {'X0': False, 'X1': True, 'X2': False, 'D0': False, 'D1': True, 'D2': False}]
+            'XD': [{'_X0': False, '_X1': False, '_X2': False, '_D0': False, '_D1': False, '_D2': False},
+                   {'_X0': False, '_X1': False, '_X2': True,'_D0': False, '_D1': False, '_D2': True},
+                   {'_X0': False, '_X1': True, '_X2': False, '_D0': False, '_D1': True, '_D2': False}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -71,9 +71,9 @@ class TestDataBdds(unittest.TestCase):
         sequence = [["begin", 1, 'Data1'], ["end", 1], ["begin", 2, 'Data2'], ["end", 2],
                     ["begin", 3, "Data3"], ["end", 3]]
         results = {
-            'XD': [{'X0': False, 'X1': False, 'X2': False, 'D0': False, 'D1': False, 'D2': False},
-                   {'X0': False, 'X1': False, 'X2': True,'D0': False, 'D1': False, 'D2': True},
-                   {'X0': False, 'X1': True, 'X2': False, 'D0': False, 'D1': True, 'D2': False}]
+            'XD': [{'_X0': False, '_X1': False, '_X2': False, '_D0': False, '_D1': False, '_D2': False},
+                   {'_X0': False, '_X1': False, '_X2': True,'_D0': False, '_D1': False, '_D2': True},
+                   {'_X0': False, '_X1': True, '_X2': False, '_D0': False, '_D1': True, '_D2': False}]
         }
 
         bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
@@ -88,26 +88,26 @@ class TestDataBdds(unittest.TestCase):
                     ["begin", 7, "Data7"], ["end", 7], ["begin", 8, "Data8"], ["end", 8],
                     ["begin", 9, "Data9"], ["end", 9], ["begin", 10, "Data10"], ["end", 10]]
         results = {
-            'XD': [{'X0': False, 'X1': False, 'X2': False, 'X3': False, 'X4': False,
-                    'D0': False, 'D1': False, 'D2': False, 'D3': False, 'D4': False},
-                   {'X0': False, 'X1': False, 'X2': False, 'X3': False, 'X4': True,
-                    'D0': False, 'D1': False, 'D2': False, 'D3': False, 'D4': True},
-                   {'X0': False, 'X1': False, 'X2': False, 'X3': True, 'X4': False,
-                    'D0': False, 'D1': False, 'D2': False, 'D3': True, 'D4': False},
-                   {'X0': False, 'X1': False, 'X2': False, 'X3': True, 'X4': True,
-                    'D0': False, 'D1': False, 'D2': False, 'D3': True, 'D4': True},
-                   {'X0': False, 'X1': False, 'X2': True, 'X3': False, 'X4': False,
-                    'D0': False, 'D1': False, 'D2': True, 'D3': False, 'D4': False},
-                   {'X0': False, 'X1': False, 'X2': True, 'X3': False, 'X4': True,
-                    'D0': False, 'D1': False, 'D2': True, 'D3': False, 'D4': True},
-                   {'X0': False, 'X1': False, 'X2': True, 'X3': True, 'X4': False,
-                    'D0': False, 'D1': False, 'D2': True, 'D3': True, 'D4': False},
-                   {'X0': False, 'X1': False, 'X2': True, 'X3': True, 'X4': True,
-                    'D0': False, 'D1': False, 'D2': True, 'D3': True, 'D4': True},
-                   {'X0': False, 'X1': True, 'X2': False, 'X3': False, 'X4': False,
-                    'D0': False, 'D1': True, 'D2': False, 'D3': False, 'D4': False},
-                   {'X0': False, 'X1': True, 'X2': False, 'X3': False, 'X4': True,
-                    'D0': False, 'D1': True, 'D2': False, 'D3': False, 'D4': True}
+            'XD': [{'_X0': False, '_X1': False, '_X2': False, '_X3': False, '_X4': False,
+                    '_D0': False, '_D1': False, '_D2': False, '_D3': False, '_D4': False},
+                   {'_X0': False, '_X1': False, '_X2': False, '_X3': False, '_X4': True,
+                    '_D0': False, '_D1': False, '_D2': False, '_D3': False, '_D4': True},
+                   {'_X0': False, '_X1': False, '_X2': False, '_X3': True, '_X4': False,
+                    '_D0': False, '_D1': False, '_D2': False, '_D3': True, '_D4': False},
+                   {'_X0': False, '_X1': False, '_X2': False, '_X3': True, '_X4': True,
+                    '_D0': False, '_D1': False, '_D2': False, '_D3': True, '_D4': True},
+                   {'_X0': False, '_X1': False, '_X2': True, '_X3': False, '_X4': False,
+                    '_D0': False, '_D1': False, '_D2': True, '_D3': False, '_D4': False},
+                   {'_X0': False, '_X1': False, '_X2': True, '_X3': False, '_X4': True,
+                    '_D0': False, '_D1': False, '_D2': True, '_D3': False, '_D4': True},
+                   {'_X0': False, '_X1': False, '_X2': True, '_X3': True, '_X4': False,
+                    '_D0': False, '_D1': False, '_D2': True, '_D3': True, '_D4': False},
+                   {'_X0': False, '_X1': False, '_X2': True, '_X3': True, '_X4': True,
+                    '_D0': False, '_D1': False, '_D2': True, '_D3': True, '_D4': True},
+                   {'_X0': False, '_X1': True, '_X2': False, '_X3': False, '_X4': False,
+                    '_D0': False, '_D1': True, '_D2': False, '_D3': False, '_D4': False},
+                   {'_X0': False, '_X1': True, '_X2': False, '_X3': False, '_X4': True,
+                    '_D0': False, '_D1': True, '_D2': False, '_D3': False, '_D4': True}
                    ]
         }
 
