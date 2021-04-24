@@ -20,7 +20,7 @@
 ## Installation: ##
 1. Before execution, it needs to install python 3.6 and above.
 2. In the file `requierments.txt`, there are all the packages that should be installed. \
-For installation, please run the command `python -m pip install -r requierments.txt` (from CMD in windows or Terminal in Linux).
+For installation, please run the command `python -m pip install -r requierments.txt` (from CMD in windows or Terminal in Unix).
 3. Running the program is made by running the command `python main.py` from the program root directory.
 
 ## Configuration: ##
