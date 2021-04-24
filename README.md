@@ -148,7 +148,7 @@ The code contains several parts and classes which any one of them had a specific
 * In debug mode, after each event, the program will print out to console the updated BDDs.
 * It also prints out other information like bitstring expansion.
 * The final state will be print at the end of the execution.
-```json
+```python
 
                                                        ███╗   ███╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ███╗██╗
                                                        ████╗ ████║██╔═══██╗████╗  ██║██╔══██╗████╗ ████║██║
