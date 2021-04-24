@@ -1,6 +1,6 @@
 {
     "DEBUG": true,
-    "INTERVAL_SIZE": 1,
-    "DATA_SIZE": 1,
-    "EXPANSION_LENGTH": 1
+    "INTERVAL_SIZE": 3,
+    "DATA_SIZE": 3,
+    "EXPANSION_LENGTH": 2
 }
