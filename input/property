@@ -1,0 +1,3 @@
+{
+    "property": "exist A, B, C, D, E . (A < B & B < C) & A('Data1') & B('Data2') & C('Data3') & D i E"
+}
