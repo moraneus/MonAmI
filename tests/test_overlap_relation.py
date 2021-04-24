@@ -7,7 +7,7 @@ class TestBeforeRelation(unittest.TestCase):
         sequence = [["begin", 1, "Data1"], ["begin", 3, "Data1"], ["end", 1], ["end", 3]]
         results = {
             'XXYY': [],
-            'XYXY': [{'X0': False, 'Y0': True}],
+            'XYXY': [{'_X0': False, '_Y0': True}],
             'XYYX': []
         }
 
@@ -20,9 +20,9 @@ class TestBeforeRelation(unittest.TestCase):
         sequence =  [["begin", 1, "Data1"], ["begin", 2, "Data1"], ["begin", 3, "Data2"], ["end", 1], ["end", 2], ["end", 3]]
         results = {
             'XXYY': [],
-            'XYXY': [{'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': True, 'Y2': False},
-                     {'X0': False, 'X1': False, 'X2': False, 'Y0': False, 'Y1': False, 'Y2': True},
-                     {'X0': False, 'X1': False, 'X2': True, 'Y0': False, 'Y1': True, 'Y2': False}],
+            'XYXY': [{'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': True, '_Y2': False},
+                     {'_X0': False, '_X1': False, '_X2': False, '_Y0': False, '_Y1': False, '_Y2': True},
+                     {'_X0': False, '_X1': False, '_X2': True, '_Y0': False, '_Y1': True, '_Y2': False}],
             'XYYX': []
         }
 
