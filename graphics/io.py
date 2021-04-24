@@ -25,8 +25,13 @@ class IO:
         print(f'{Colors.BOLD}|-- [EVENT]: {i_event}{Colors.DEFAULT}')
 
     @staticmethod
-    def ast_header(i_event):
-        print(f'{Colors.BOLD}    |-- [AST]: {i_event}{Colors.DEFAULT}')
+    def enumeration(i_interval, i_bitstring):
+        print(f'{Colors.BOLD}{Colors.PURPLE}|-- [ENUMERATION]: {i_interval} -> "{i_bitstring}" '
+              f'({[True if bit == "1" else False for bit in i_bitstring]}){Colors.DEFAULT}')
+
+    @staticmethod
+    def ast_header():
+        print(f'{Colors.BOLD}    |-- [AST]:{Colors.DEFAULT}')
 
     @staticmethod
     def execution(i_details):
