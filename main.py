@@ -15,43 +15,55 @@ def read_json(i_json_file):
 
 def main():
     IO.banner()
-    config = read_json(f"input{sep}configuration")
-    input_data = read_json(f"input{sep}input")
-    execution = input_data["execution"]
-    specification = parse(input_data["specification"].replace("'", '"'))
+    configuration = read_json(f"input{sep}configuration")
+    execution = read_json(f"input{sep}trace")["execution"]
+    property = parse(read_json(f"input{sep}property")["property"].replace("'", '"'))
 
-    if config["DEBUG"]:
+
+    if configuration["DEBUG"]:
         IO.seperator("START")
         IO.execution(execution)
-        IO.property(specification)
+        IO.property(property)
 
-    bdd_atl = BddAtl(specification.intervals, i_interval_size=config["INTERVAL_SIZE"], i_debug=config["DEBUG"])
-    interval_hash_table = BitstringTable(config["INTERVAL_SIZE"], config["EXPANSION_LENGTH"])
-    data_hash_table = BitstringTable(config["DATA_SIZE"], config["EXPANSION_LENGTH"])
+    # BDD constructor object
+    bdd_atl = BddAtl(property.intervals,
+                     i_interval_size=configuration["INTERVAL_SIZE"],
+                     i_debug=configuration["DEBUG"])
+    # Interval bitstring DB object
+    interval_hash_table = BitstringTable(configuration["INTERVAL_SIZE"],
+                                         configuration["EXPANSION_LENGTH"],
+                                         i_debug=configuration["DEBUG"])
+    # Data bitstring DB object
+    data_hash_table = BitstringTable(configuration["DATA_SIZE"],
+                                     configuration["EXPANSION_LENGTH"],
+                                     i_debug=configuration["DEBUG"])
 
     for event in execution:
         try:
             event_type = event[0]
-            interval_id = event[1]
-            interval_bitstring = interval_hash_table.lookup(event_type, interval_id)
+            interval = event[1]
+            interval_bitstring = interval_hash_table.lookup(event_type, interval)
+
             if event_type == "begin":
                 # In a case when "begin" event doesn't contain a data.
                 try:
                     data = event[2]
                 except IndexError:
-                    raise IntervalDataError(interval_id)
+                    raise IntervalDataError(interval)
 
                 data_bitstring = data_hash_table.lookup(event_type, data)
-                bdd_atl.event_update(event_type, interval_id, interval_bitstring, data_bitstring)
+                bdd_atl.event_update(event_type, interval, interval_bitstring, data, data_bitstring)
             else:
-                bdd_atl.event_update(event_type, interval_id, interval_bitstring)
+                bdd_atl.event_update(event_type, interval, interval_bitstring)
 
-            if config["DEBUG"]:
-                IO.ast_header(f'{event_type} -> {interval_id}')
+            if configuration["DEBUG"]:
+                IO.ast_header()
 
-            result = specification.eval(bdd_atl, data_hash_table, config["DEBUG"]) == bdd_atl.bdd_manager.true
+            result = property.eval(bdd_manager = bdd_atl,
+                                   data_manager = data_hash_table,
+                                   debug_mode = configuration["DEBUG"]) == bdd_atl.bdd_manager.true
 
-            if config["DEBUG"]:
+            if configuration["DEBUG"]:
                 if result:
                     IO.true()
                 else:
@@ -60,7 +72,7 @@ def main():
             if result:
                 IO.seperator('FINAL STATE')
                 IO.execution(execution)
-                IO.property(specification)
+                IO.property(property)
                 for bdd_name, bdd_data in bdd_atl.bdds.items():
                     IO.bdd_state(bdd_name, bdd_data)
                 IO.true()
