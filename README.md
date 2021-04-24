@@ -94,6 +94,15 @@ Parameter         | Details
 `INTERVAL_SIZE`   | `int`
 `DATA_SIZE`       | `int`
 `EXPANSION_LENGTH`| `int`
+2. Example of 'configuration` file:
+```json
+{
+    "DEBUG": true,
+    "INTERVAL_SIZE": 3,
+    "DATA_SIZE": 3,
+    "EXPANSION_LENGTH": 2
+}
+```
 
 
 
