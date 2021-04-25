@@ -132,7 +132,7 @@ class BddAtl():
     # We can see here also function which responsible to the BDDs updating.
     ###################################################################################################################
 
-    def event_update(self, i_type: str, i_interval, i_interval_bitstring: str, i_data=None, i_data_bitstring=None):
+    def event_update(self, i_type: str, i_interval, i_interval_bitstring: str, i_interval_data_mapping: dict):
         """
         Primary update function that executes in every event.
 
@@ -141,7 +141,7 @@ class BddAtl():
         i_type : 'begin'/'end' event.
         i_interval : The interval variable before it converted into bitstring.
         i_interval_bitstring : The representation of the interval in bitstring.
-        i_data_bitstring : The representation of the interval data in bitstring (default set to None).
+        i_interval_data_mapping : Mapping between intervals to related data.
 
         Returns
         -------
@@ -149,17 +149,18 @@ class BddAtl():
 
         """
 
-        # In a case when the BDDs need to update upon growth ot the interval bitstrings.
+        # In a case when the BDDs need to update upon growth of the interval bitstrings.
         if len(i_interval_bitstring) > self._m_interval_size:
             self.__bdd_manager_variable_expansion_update('Interval', len(i_interval_bitstring))
 
-        # In a case when BDD[XD] need to update upon growth ot the data bitstrings.
-        if i_data_bitstring is not None:
-            if len(i_data_bitstring) > self._m_data_size:
-                self.__bdd_manager_variable_expansion_update('Data', len(i_interval_bitstring))
+        # In a case when BDD[XD] need to update upon growth of the data bitstrings.
+        if len(i_interval_data_mapping["data_bitstring"]) > self._m_data_size:
+            self.__bdd_manager_variable_expansion_update('Data', len(i_interval_bitstring))
 
+        # Print the current event
         if self.__m_debug:
-            event_details = f'{i_type}({i_interval}, {i_data})' if i_data is not None else f'{i_type}({i_interval})'
+            event_details = f'{i_type}({i_interval}, {i_interval_data_mapping["data"]})' \
+                if i_interval_data_mapping["data"] is not None else f'{i_type}({i_interval})'
             IO.event_header(event_details)
 
         # Converts the bitstring into an assignment.
@@ -172,26 +173,27 @@ class BddAtl():
 
             # Executes the relevant update function in the sequence determined.
             for event_function in self.__m_events_functions[i_type]:
-                self._m_bdd_manager.collect_garbage()  # Optional
+                # self._m_bdd_manager.collect_garbage()  # Optional
                 if event_function in [self.__x, self.__xy, self.__xxy]:
                     event_function(i_type, self.__m_bitstrings[i_interval_bitstring])
                 else:
                     event_function(self.__m_bitstrings[i_interval_bitstring])
 
-            # Create BDD[XD] when it relevant.
-            if i_data_bitstring is not None:
+            # Update BDD[XD] at 'end' event.
+            if i_type == 'end':
 
                 # Converts the bitstring into an assignment.
-                self.__assignment_update(i_data_bitstring, '_D')
+                self.__assignment_update(i_interval_data_mapping["data_bitstring"], '_D')
 
                 # Call to self.__xd function
                 self.__m_events_functions['data'](self.__m_bitstrings[i_interval_bitstring]['_X'],
-                                                  self.__m_bitstrings[i_data_bitstring]['_D'])
+                                                  self.__m_bitstrings[i_interval_data_mapping["data_bitstring"]]['_D'])
 
             # Deletes the expression from the data structure when the interval comes to an 'end' event.
             if i_type == 'end':
                 del self.__m_bitstrings[i_interval_bitstring]
 
+            # Print a summerize of the BDDs current state.
             if self.__m_debug:
                 for bdd_name in self._m_bdds.keys():
                     IO.bdd_state(bdd_name, self._sorted_bdd_assignments(bdd_name))
@@ -302,9 +304,6 @@ class BddAtl():
             bdd_helper_x = self._m_bdd_manager.cube(i_assignment['_X'])
             self._m_bdds['X'] &= ~bdd_helper_x
 
-        # if self.__m_debug:
-        #     IO.bdd_state('X', self._sorted_bdd_assignments('X'))
-
     def __xx(self, i_assignment: dict):
         """
         Update BDD[XX] according algorithm.
@@ -321,9 +320,6 @@ class BddAtl():
 
         # BDD[XX] = BDD[XX] ∪ {z}
         self._m_bdds['XX'] |= self._m_bdd_manager.cube(i_assignment['_X'])
-
-        # if self.__m_debug:
-        #     IO.bdd_state('XX', self._sorted_bdd_assignments('XX'))
 
     def __xy(self, i_type, i_assignment):
         """
@@ -352,9 +348,6 @@ class BddAtl():
             self._m_bdds['XY'] &= ((self._m_bdd_manager.true & ~bdd_helper_x) &
                                    (self._m_bdd_manager.true & ~bdd_helper_y))
 
-        # if self.__m_debug:
-        #     IO.bdd_state('XY', self._sorted_bdd_assignments('XY'))
-
     def __xyy(self, i_assignment):
         """
         Update BDD[XYY] according algorithm.
@@ -378,9 +371,6 @@ class BddAtl():
         self._m_bdds['XYY'] = (self._m_bdds['XYY'] & ~self._m_bdds['XYYX']) | \
                               (self._m_bdds['XY'] & (self._m_bdd_manager.true & bdd_helper_y))
 
-        # if self.__m_debug:
-        #     IO.bdd_state('XYY', self._sorted_bdd_assignments('XYY'))
-
     def __xyyx(self, i_assignment):
         """
         Update BDD[XYYX] according algorithm.
@@ -399,9 +389,6 @@ class BddAtl():
 
         # BDD[XYYX] = BDD[XYYX] ∪ (BDD[XYY] ∩ ({z} × BDD[U]))
         self._m_bdds['XYYX'] |= (self._m_bdds['XYY'] & (self._m_bdd_manager.true & bdd_helper_x))
-
-        # if self.__m_debug:
-        #     IO.bdd_state('XYYX', self._sorted_bdd_assignments('XYYX'))
 
     def __xyx(self, i_assignment):
         """
@@ -426,9 +413,6 @@ class BddAtl():
         self._m_bdds['XYX'] = (self._m_bdds['XYX'] & ~self._m_bdds['XYXY']) | \
                               (self._m_bdds['XY'] & (self._m_bdd_manager.true & bdd_helper_x))
 
-        # if self.__m_debug:
-        #     IO.bdd_state('XYX', self._sorted_bdd_assignments('XYX'))
-
     def __xyxy(self, i_assignment):
         """
         Update BDD[XYXY] according algorithm.
@@ -447,9 +431,6 @@ class BddAtl():
 
         # BDD[XYXY] = BDD[XYXY] ∪ (BDD[XYX] ∩ (BDD[U] × {z}))
         self._m_bdds['XYXY'] |= (self._m_bdds['XYX'] & (self._m_bdd_manager.true & bdd_helper_y))
-
-        # if self.__m_debug:
-        #     IO.bdd_state('XYXY', self._sorted_bdd_assignments('XYXY'))
 
     def __xxy(self, i_type, i_assignment):
         """
@@ -475,9 +456,6 @@ class BddAtl():
         else:
             self._m_bdds['XXY'] &= (self._m_bdd_manager.true & ~bdd_helper_y)
 
-        # if self.__m_debug:
-        #     IO.bdd_state('XXY', self._sorted_bdd_assignments('XXY'))
-
     def __xxyy(self, i_assignment):
         """
         Update BDD[XXYY] according algorithm.
@@ -497,9 +475,6 @@ class BddAtl():
         # BDD[XXYY] = BDD[XXYY] ∪ (BDD[XXY] ∩ (BDD[U] × {z}))
         self._m_bdds['XXYY'] |= (self._m_bdds['XXY'] & (bdd_helper_y & self._m_bdd_manager.true))
 
-        # if self.__m_debug:
-        #     IO.bdd_state('XXYY', self._sorted_bdd_assignments('XXYY'))
-
     def __xd(self, i_assignment_x: str, i_assignmet_d: str):
         """
         Update BDD[XD] according algorithm.
@@ -518,9 +493,6 @@ class BddAtl():
 
         # BDD[XD] = BDD[XD] ∪ {z, d}
         self._m_bdds['XD'] |= (bdd_helper_x & bdd_helper_d)
-
-        # if self.__m_debug:
-        #     IO.bdd_state('XD', self._sorted_bdd_assignments('XD'))
 
     def _sorted_bdd_assignments(self, i_bdd: str)->list:
         """
@@ -606,7 +578,8 @@ class BddAtl():
         """
 
         return self._m_bdd_manager.exist([f'{variable}{i}' for variable in i_variables
-                                          for i in range(self._m_interval_size)], i_bdd)
+                                          for i in range(self._m_data_size if variable == '_D'
+                                                         else self._m_interval_size)], i_bdd)
 
     ###################################################################################################################
     # This part of code is executed when the bitstring size (Interval or Data) reaches to their max size limit.
