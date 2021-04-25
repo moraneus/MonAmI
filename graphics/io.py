@@ -65,4 +65,14 @@ class IO:
     def true():
         IO.info(f'{Colors.GREEN}{Colors.BOLD}Specification result is True')
 
+    @staticmethod
+    def final(i_execution, i_property, i_bdds):
+        IO.seperator('FINAL STATE')
+        IO.execution(i_execution)
+        IO.property(i_property)
+        for bdd_name, bdd_data in i_bdds:
+            IO.bdd_state(bdd_name, bdd_data)
+        IO.true()
+        IO.seperator('THE END')
+
 
