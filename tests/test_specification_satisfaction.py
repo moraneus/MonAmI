@@ -238,11 +238,3 @@ class TestSpecificationSatisfaction():
          current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
                                                          i_num_of_variables=1)
          assert expected_result == current_result
-
-    def test_specification_satisfaction_30_fail(self):
-        specification = parse("""exist A, B, C . (A("Data1") -> (C i B & C("Data18")))""")
-
-        expected_result = False
-        current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
-                                             i_num_of_variables=1)
-        assert expected_result == current_result
