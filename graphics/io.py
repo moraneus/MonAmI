@@ -1,11 +1,12 @@
-from graphics.colors import Colors
+from colorama import Fore, init, Style
 
 
 class IO:
+    init(convert=True)
 
     @staticmethod
     def banner():
-        print(f'''{Colors.RED}
+        print(f'''{Fore.RED}
 {" " * 55}███╗   ███╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ███╗██╗
 {" " * 55}████╗ ████║██╔═══██╗████╗  ██║██╔══██╗████╗ ████║██║
 {" " * 55}██╔████╔██║██║   ██║██╔██╗ ██║███████║██╔████╔██║██║
@@ -13,57 +14,57 @@ class IO:
 {" " * 55}██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║  ██║██║ ╚═╝ ██║██║
 {" " * 55}╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
                                                     
-{Colors.DEFAULT}''')
+{Style.RESET_ALL}''')
 
     @staticmethod
     def seperator(i_title):
         num_of_chars = 80 - (len(i_title) // 2)
-        print(f'{Colors.BLUE}{"#" * num_of_chars} ({i_title}) {"#" * num_of_chars}{Colors.DEFAULT}')
+        print(f'{Fore.LIGHTCYAN_EX}{"#" * num_of_chars} ({i_title}) {"#" * num_of_chars}{Style.RESET_ALL}')
 
     @staticmethod
     def event_header(i_event):
-        print(f'{Colors.BOLD}|-- [EVENT]: {i_event}{Colors.DEFAULT}')
+        print(f'{Style.BRIGHT}|-- [EVENT]: {i_event}{Style.RESET_ALL}')
 
     @staticmethod
     def enumeration(i_interval, i_bitstring):
-        print(f'{Colors.BOLD}{Colors.PURPLE}|-- [ENUMERATION]: {i_interval} -> "{i_bitstring}" '
-              f'({[True if bit == "1" else False for bit in i_bitstring]}){Colors.DEFAULT}')
+        print(f'{Style.BRIGHT}{Fore.MAGENTA}|-- [ENUMERATION]: {i_interval} -> "{i_bitstring}" '
+              f'({[True if bit == "1" else False for bit in i_bitstring]}){Style.RESET_ALL}')
 
     @staticmethod
     def ast_header():
-        print(f'{Colors.BOLD}    |-- [AST]:{Colors.DEFAULT}')
+        print(f'{Style.BRIGHT}    |-- [AST]:{Style.RESET_ALL}')
 
     @staticmethod
     def execution(i_details):
-        print(f'{Colors.BOLD}[EXECUTION]: {i_details}{Colors.DEFAULT}\n')
+        print(f'{Style.BRIGHT}[EXECUTION]: {i_details}{Style.RESET_ALL}\n')
 
     @staticmethod
     def property(i_details):
-        print(f'{Colors.BOLD}[PROPERTY]: {i_details}{Colors.DEFAULT}\n')
+        print(f'{Style.BRIGHT}[PROPERTY]: {i_details}{Style.RESET_ALL}\n')
 
     @staticmethod
     def error(i_error):
-        print(f'{Colors.RED}[ERROR]: {i_error}{Colors.DEFAULT}')
+        print(f'{Fore.RED}[ERROR]: {i_error}{Style.RESET_ALL}')
 
     @staticmethod
     def info(i_message):
-        print(f'\n{Colors.BOLD}[INFO]:{Colors.DEFAULT} {i_message}\n')
+        print(f'\n{Style.BRIGHT}[INFO]:{Style.RESET_ALL} {i_message}\n')
 
     @staticmethod
     def subformula(i_op, i_message):
-        print(f'{Colors.BLUE}        |-- [{i_op}]:{Colors.DEFAULT} {i_message}')
+        print(f'{Fore.LIGHTCYAN_EX}        |-- [{i_op}]:{Style.RESET_ALL} {i_message}')
 
     @staticmethod
     def bdd_state(i_bdd_name, i_bdd_assignments):
-        print(f'{Colors.BLUE}    |-- [{i_bdd_name}]:{Colors.DEFAULT} {i_bdd_assignments}')
+        print(f'{Fore.LIGHTCYAN_EX}    |-- [{i_bdd_name}]:{Style.RESET_ALL} {i_bdd_assignments}')
 
     @staticmethod
     def false():
-        IO.info(f'{Colors.RED}{Colors.BOLD}Specification result is False')
+        IO.info(f'{Fore.RED}{Style.BRIGHT}Specification result is False')
 
     @staticmethod
     def true():
-        IO.info(f'{Colors.GREEN}{Colors.BOLD}Specification result is True')
+        IO.info(f'{Fore.GREEN}{Style.BRIGHT}Specification result is True')
 
     @staticmethod
     def final(i_execution, i_property, i_bdds):
