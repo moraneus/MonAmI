@@ -1,5 +1,5 @@
 import itertools
-from execptions.interval_execptions import *
+from execptions.execptions import *
 from graphics.colors import Colors
 from graphics.io import IO
 
@@ -27,7 +27,7 @@ class ListAtl:
                f"XYYX: {self._m_events_state['XYYX']}, " \
                f"XXYY: {self._m_events_state['XXYY']}{Colors.DEFAULT}".replace('set()', '{}')
 
-    def event_update(self, i_type, i_interval, i_data=None):
+    def event_update(self, i_type, i_interval, i_interval_data_dict=None):
 
         if self.__m_debug:
             IO.seperator(f'[EVENT]: {i_type}->{i_interval}')
@@ -39,9 +39,8 @@ class ListAtl:
                 else:
                     event_function(i_interval)
 
-            if i_data is not None:
-                self.__m_events_functions['data'] (i_interval, i_data)
-
+            if i_type == "end":
+                self.__m_events_functions['data'] (i_interval, i_interval_data_dict["data"])
 
     def __event_validation_check(self, i_type, i_interval):
 
