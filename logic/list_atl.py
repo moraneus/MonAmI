@@ -1,6 +1,5 @@
 import itertools
 from execptions.execptions import *
-from graphics.colors import Colors
 from graphics.io import IO
 
 
@@ -18,14 +17,14 @@ class ListAtl:
     def __str__(self):
         set_state = []
         for set_name, set_data in self._m_events_state.items():
-            set_state.append(f'{Colors.PURPLE}[{set_name}]: {set_data}')
+            set_state.append(f'[{set_name}]: {set_data}')
         return '\n'.join(set_state)
 
     def interval_final_state(self):
-        return f"{Colors.PURPLE}{Colors.BOLD}[FINAL]: " \
+        return f"[FINAL]: " \
                f"XYXY: {self._m_events_state['XYXY']}, " \
                f"XYYX: {self._m_events_state['XYYX']}, " \
-               f"XXYY: {self._m_events_state['XXYY']}{Colors.DEFAULT}".replace('set()', '{}')
+               f"XXYY: {self._m_events_state['XXYY']}".replace('set()', '{}')
 
     def event_update(self, i_type, i_interval, i_interval_data_dict=None):
 
