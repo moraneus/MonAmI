@@ -27,8 +27,9 @@ class BitstringTable:
         """
 
         # Update occur when it reached to bitstring length limit.
-        # The new size is the old size with 2 more bits
-        if i_event_type == 'begin' and len(self.__m_bitstring_table.keys()) >= self.__max_items_allowed:
+        # The new size is the old size with several more bits according to configuration file.
+        if len(self.__m_bitstring_table.keys()) >= self.__max_items_allowed and \
+                i_key not in self.__m_bitstring_table.keys():
             self.__length_update(self._m_bitstring_length + self.__m_number_of_growth)
 
         # Set the value of the bitstring to be equal to the number of new keys have been watched until now
@@ -39,7 +40,6 @@ class BitstringTable:
 
         if self.__m_debug:
             IO.enumeration(i_key, self.__m_bitstring_table[i_key])
-
 
         return self.__m_bitstring_table[i_key]
 
@@ -61,7 +61,6 @@ class BitstringTable:
         if i_key not in self.__m_bitstring_table.keys():
             return False
         return self.__m_bitstring_table[i_key]
-
 
     def __length_update(self, i_new_length: int):
         """
