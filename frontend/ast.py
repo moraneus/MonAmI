@@ -90,13 +90,8 @@ class Implies(Formula):
         return self.formula1.free_vars() | self.formula2.free_vars()
 
     def eval(self, **kwargs):
-        left = kwargs["bdd_manager"].bdd_manager.true if \
-            self.formula1.eval(**kwargs) !=  kwargs["bdd_manager"].bdd_manager.false else \
-            kwargs["bdd_manager"].bdd_manager.false
-        right = self.formula2.eval(**kwargs)
-
-        result = ~left | right
-
+        result = ~self.formula1.eval(**kwargs) | \
+                 self.formula2.eval(**kwargs)
 
         if kwargs["bdd_manager"]:
             IO.subformula(f"({self.formula1}) -> ({self.formula2}))",
