@@ -25,6 +25,7 @@ tokens = (
     'OVERLAPS',
     'INCLUDES',
     'EXIST',
+    'FORALL',
     'COMMA',
     'DOT',
     'SAME',
@@ -39,6 +40,7 @@ RESERVED = {
     "o": 'OVERLAPS',
     "i": 'INCLUDES',
     "exist": 'EXIST',
+    "forall": 'FORALL',
     "same": 'SAME'
 }
 
@@ -102,6 +104,7 @@ lex.lex()
 ### Parser ###
 ##############
 
+
 def p_formula_1(p):
     "formula : formula AND formula"
     p[0] = And(p[1], p[3])
@@ -115,6 +118,7 @@ def p_formula_2(p):
 def p_formula_3(p):
     "formula : formula IMPLIES formula"
     p[0] = Implies(p[1], p[3])
+
 
 def p_formula_4(p):
     "formula : NOT formula"
@@ -135,6 +139,7 @@ def p_formula_7(p):
     "formula : NAME INCLUDES NAME"
     p[0] = Includes(p[1], p[3])
 
+
 def p_formula_8(p):
     "formula : NAME LPAREN data RPAREN"
     p[0] = Data(p[1], p[3])
@@ -151,6 +156,11 @@ def p_formula_10(p):
 
 
 def p_formula_11(p):
+    "formula : FORALL names DOT formula"
+    p[0] = Not(Exist(p[2], Not(p[4])))
+
+
+def p_formula_12(p):
     "formula : LPAREN formula RPAREN"
     p[0] = Paren(p[2])
 
