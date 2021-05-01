@@ -581,6 +581,27 @@ class BddAtl():
                                           for i in range(self._m_data_size if variable == '_D'
                                                          else self._m_interval_size)], i_bdd)
 
+    def forall(self, i_variables: list, i_bdd: str):
+        """
+        Execute an "forall" quantification over a BDD.
+
+        Parameters
+        ----------
+        i_variables : List of variables.
+        i_bdd : The relevant BDD.
+
+        Returns
+        -------
+        BDD after execution the "forall" operation.
+
+        """
+
+        return self._m_bdd_manager.forall([f'{variable}{i}' for variable in i_variables
+                                          for i in range(self._m_data_size if variable == '_D'
+                                                         else self._m_interval_size)], i_bdd)
+
+
+
     ###################################################################################################################
     # This part of code is executed when the bitstring size (Interval or Data) reaches to their max size limit.
     # In this case a few update should happen to keep the order and the BDDs already created.
@@ -777,7 +798,4 @@ class BddAtl():
 
             # Save the new updated BDD
             self._m_bdds[bdd_name] = updated_bdd
-
-
-
 
