@@ -271,6 +271,29 @@ class Exist(Formula):
 
         return result
 
+class Forall(Formula):
+    def __init__(self, intervals, formula):
+        self.intervals = intervals
+        self.formula = formula
+
+    def __str__(self):
+        return f'forall {self.intervals} . {self.formula}'
+
+    def __repr__(self):
+        return f'Forall({self.intervals},{repr(self.formula)})'
+
+    def free_vars(self) -> Set[str]:
+        return self.formula.free_vars() - set(self.intervals)
+
+    def eval(self, **kwargs):
+        result = kwargs["bdd_manager"].forall(self.intervals, self.formula.eval(**kwargs))
+
+        if kwargs["debug_mode"]:
+            IO.subformula(f"forall {self.intervals} . {self.formula}",
+                          list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
+
+        return result
+
 
 class Paren(Formula):
     def __init__(self, formula):
