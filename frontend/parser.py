@@ -157,7 +157,7 @@ def p_formula_10(p):
 
 def p_formula_11(p):
     "formula : FORALL names DOT formula"
-    p[0] = Not(Exist(p[2], Not(p[4])))
+    p[0] = Forall(p[2], p[4])
 
 
 def p_formula_12(p):
