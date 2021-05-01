@@ -1,6 +1,7 @@
 from logic.bdd_atl import BddAtl
 from logic.bitstring_table import BitstringTable
-from execptions.execptions import IntervalDataError, EndsBeforeBeginError, BadEventValueError
+from execptions.execptions import IntervalDataError
+from frontend.ast import Forall
 
 
 def update_bdds_without_specification(i_sequence_of_events, i_num_of_variables, i_expansion_length):
@@ -23,11 +24,10 @@ def update_bdds_without_specification(i_sequence_of_events, i_num_of_variables, 
             except IndexError:
                 raise IntervalDataError(interval_id)
 
-        if interval_id not in interval_data_dict.keys():
-            if event_type == 'end':
-                raise EndsBeforeBeginError(interval_id)
-            else:
-                raise BadEventValueError(interval_id)
+        else:
+            if interval_id not in interval_data_dict.keys():
+                interval_data_dict[interval_id] = {"data": None, "data_bitstring": ""}
+
 
         bdd_atl.event_update(event_type, interval_id, interval_bitstring, interval_data_dict[interval_id])
 
@@ -54,13 +54,23 @@ def update_bdds_with_specification(i_sequence_of_events, i_specification, i_num_
             except IndexError:
                 raise IntervalDataError(interval_id)
 
+        else:
+            if interval_id not in interval_data_dict.keys():
+                interval_data_dict[interval_id] = {"data": None, "data_bitstring": ""}
+
         bdd_atl.event_update(event_type, interval_id, interval_bitstring, interval_data_dict[interval_id])
 
         result = i_specification.eval(bdd_manager=bdd_atl,
                                       data_manager=data_hash_table,
                                       debug_mode=True) == bdd_atl.bdd_manager.true
 
-        if result:
-            break
+        if isinstance(i_specification, Forall):
+            if not result:
+                break
+        else:
+            if result:
+                break
+
+
 
     return result
