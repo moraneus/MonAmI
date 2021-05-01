@@ -238,3 +238,15 @@ class TestSpecificationSatisfaction():
          current_result = update_bdds_with_specification(TestSpecificationSatisfaction.sequence, specification,
                                                          i_num_of_variables=1)
          assert expected_result == current_result
+
+    def test_specification_satisfaction_30_pass(self):
+        sequence = [["begin", 1, 'Data1'], ["end", 1], ["begin", 2, 'Data2'], ["end", 2]]
+
+        specification = parse("""forall A, B . A("Data1") & B("Data2") -> A < B""")
+        expected_result = True
+
+        current_result = update_bdds_with_specification(sequence, specification,
+                                                     i_num_of_variables=1)
+        assert expected_result == current_result
+
+
