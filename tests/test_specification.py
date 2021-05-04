@@ -15,4 +15,5 @@ class TestSpecification(unittest.TestCase):
 
     def test1(self):
         specification = parse("""exist A, B . A("Data1") & B("Data2")""")
-        assert monitor(TestSpecification.sequence, specification)
+        result = monitor(TestSpecification.sequence, specification)
+        assert result

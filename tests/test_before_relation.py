@@ -49,3 +49,7 @@ class TestBeforeRelation(unittest.TestCase):
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
 
+
+a = TestBeforeRelation()
+a.test_before_1_pass()
+print("dsfsdfsdf")
