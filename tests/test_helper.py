@@ -1,7 +1,7 @@
 from logic.bdd_atl import BddAtl
 from logic.bitstring_table import BitstringTable
 from execptions.execptions import IntervalDataError
-from frontend.ast import Forall
+from frontend.ast import Forall, Not
 
 
 def update_bdds_without_specification(i_sequence_of_events, i_num_of_variables, i_expansion_length):
@@ -35,7 +35,7 @@ def update_bdds_without_specification(i_sequence_of_events, i_num_of_variables, 
 
 
 def update_bdds_with_specification(i_sequence_of_events, i_specification, i_num_of_variables):
-    bdd_atl = BddAtl(i_specification.intervals, i_interval_size=i_num_of_variables, i_debug=False)
+    bdd_atl = BddAtl(i_specification.get_intervals(), i_interval_size=i_num_of_variables, i_debug=False)
     interval_hash_table = BitstringTable(i_num_of_variables, i_debug=False)
     data_hash_table = BitstringTable(i_num_of_variables, i_debug=False)
     interval_data_dict = {}
@@ -64,7 +64,7 @@ def update_bdds_with_specification(i_sequence_of_events, i_specification, i_num_
                                       data_manager=data_hash_table,
                                       debug_mode=True) == bdd_atl.bdd_manager.true
 
-        if isinstance(i_specification, Forall):
+        if isinstance(property, Forall) or isinstance(property, Not):
             if not result:
                 break
         else:
