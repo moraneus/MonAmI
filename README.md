@@ -499,4 +499,5 @@ As part of the testing process of MonAmI, we performed several experiments that 
 To demonstrate some of the experiment results, we took the above 4 examples properties.
 It is important to say, that properties 1 and 3 are not violated, in contrast to properties 2 and 4 that are. It means that the traces for properties 1 and 3 are executed until the end while the traces during properties 2 and 4 are stopped immediately after the violation.
 
+![image](https://user-images.githubusercontent.com/48603901/117803681-949ebb80-b25f-11eb-804b-3551995cf072.png)
 
