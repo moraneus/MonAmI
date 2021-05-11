@@ -98,13 +98,12 @@ def main():
         except Exception as err:
             IO.error(err)
             break
-			
-	if result:
-		IO.true()
-	else:
-		IO.false()
-		
-	IO.final(execution, property, bdd_atl.bdds.items())
+
+    if result:
+        IO.true()
+    else:
+        IO.false()
+    IO.final(execution, property, bdd_atl.bdds.items())
 
 
 if __name__ == '__main__':
