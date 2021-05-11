@@ -3,8 +3,9 @@ from logic.bitstring_table import BitstringTable
 from logic.bdd_atl import BddAtl
 from graphics.io import IO
 from os import sep
-from execptions.execptions import IntervalDataError, BadEventValueError, EndsBeforeBeginError
+from execptions.execptions import IntervalDataError
 from frontend.parser import parse
+from frontend.ast import Forall, Not
 
 
 def read_json(i_json_file):
@@ -28,7 +29,7 @@ def main():
         IO.property(property)
 
     # BDD constructor object
-    bdd_atl = BddAtl(property.intervals,
+    bdd_atl = BddAtl(property.get_intervals(),
                      i_interval_size=configuration["INTERVAL_SIZE"],
                      i_debug=configuration["DEBUG"])
 
@@ -53,21 +54,19 @@ def main():
 
             # Add the interval: data into the interval_data_dict
             if event_type == "begin":
-                # In a case when "begin" event doesn't contain a data.
                 try:
                     data = event[2]
                     data_bitstring = data_hash_table.lookup(event_type, data)
                     interval_data_dict[interval_id] = {"data": data, "data_bitstring": data_bitstring}
 
+                # In a case when "begin" event doesn't contain a data.
                 except IndexError:
                     raise IntervalDataError(interval_id)
 
-            # because data at the 'end' event is not mandatory, several exceptions are catches here
-            if interval_id not in interval_data_dict.keys():
-                if event_type == 'end':
-                    raise EndsBeforeBeginError(interval_id)
-                else:
-                    raise BadEventValueError(interval_id)
+            # In a case when the event is not in type of 'begin'.
+            else:
+                if interval_id not in interval_data_dict.keys():
+                    interval_data_dict[interval_id] = {"data": None, "data_bitstring": ""}
 
             # Call the main BDD update function
             bdd_atl.event_update(event_type, interval_id, interval_bitstring, interval_data_dict[interval_id])
@@ -76,9 +75,9 @@ def main():
                 IO.ast_header()
 
             # Check if the property is satisfied
-            result = property.eval(bdd_manager = bdd_atl,
-                                   data_manager = data_hash_table,
-                                   debug_mode = configuration["DEBUG"]) == bdd_atl.bdd_manager.true
+            result = property.eval(bdd_manager=bdd_atl,
+                                   data_manager=data_hash_table,
+                                   debug_mode=configuration["DEBUG"]) == bdd_atl.bdd_manager.true
 
             # Print the result for the current event
             if configuration["DEBUG"]:
@@ -87,14 +86,24 @@ def main():
                 else:
                     IO.false()
 
-            # Print the final state of the BDDs when the property is satisfied.
-            if result:
-                IO.final(execution, property, bdd_atl.bdds.items())
-                break
+            # Print the final state of the BDDs when the property is satisfied or violated.
+            # It depends on the property type and the expected result.
+            if isinstance(property, Forall) or isinstance(property, Not):
+                if not result:
+                    break
+            else:
+                if result:
+                    break
 
         except Exception as err:
             IO.error(err)
             break
+
+    if result:
+        IO.true()
+    else:
+        IO.false()
+    IO.final(execution, property, bdd_atl.bdds.items())
 
 
 if __name__ == '__main__':

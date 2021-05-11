@@ -1,7 +1,8 @@
 # MonAmI - Monitoring Allen logic
 
 ## General Details: ##
-* This tool was fully written in python using 'dd' package (Repository of 'dd' is at https://github.com/tulip-control/dd).
+* We implemented a prototype monitoring tool for our logic foATL, called MonAmI. It is a Python-based tool for monitoring interval formed by events by checking them against a specification. 
+* The tool works with Python 3.6 and above. The tool uses the 'dd' package, which can generate and manipulate BDDs (Repository of 'dd' is at https://github.com/tulip-control/dd).
 * It implements a monitoring version of Allen's interval algebra using BDDs.
 * BDDs are used to represent Boolean functions. On a more abstract level, BDDs can be considered as a compressed representation of sets or relations (Wikipedia:  https://en.wikipedia.org/wiki/Binary_decision_diagram).
 
@@ -14,14 +15,16 @@
 1. A trace is a sequence of `begin(i, d)` or `end(i)` events where `i` is denoted for an interval ID and `d` denotes data. 
 * __NOTE: For `end` event, data is not mandatory since the data is set on the `begin` event.__
 3. For each event:
-    1. All possible Allen intervals are created, as these sets (`X`, `XX`, `XY`, `XYY`, `XYYX`, `XXY`, `XXYY`, `XYX`, `XYXY`, `XD`), represented as BDDs.
-    2. The temporal logic formula is evaluated on these intervals.
+    1. Interval id and data, if relevant, enumerate into 2^k size bit-string.
+    2. All the BDDs in {`X`, `XX`, `XY`, `XYY`, `XYYX`, `XXY`, `XXYY`, `XYX`, `XYXY`, `XD`}, represent what we have seen so far, are updated due to the new event.
+    3. The specification is evaluated at this event and th BDDs set current state.
 
 ## Installation: ##
 1. Before execution, it needs to install python 3.6 and above.
 2. In the file `requierments.txt`, there are all the packages that should be installed. \
 For installation, please run the command `python -m pip install -r requierments.txt` (from CMD in windows or Terminal in Unix).
 3. Running the program is made by running the command `python main.py` from the program root directory.
+4. In order to use dd.cudd (Cython binding to the CUDD C library) interface please look at the instruction at https://github.com/tulip-control/dd#installation.
 
 ## Configuration: ##
 ### Trace input: ###
@@ -108,7 +111,7 @@ Parameter         | Details
 
 
 ## The CODE Structure: ##
-The code contains several parts and classes which any one of them had a specific goal.
+The main ot the code contains several parts and classes which any one of them had a specific goal.
 
 |-- `exceptions` folder (contains the interval and specification exceptions). \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `exception.py` \
@@ -116,7 +119,6 @@ The code contains several parts and classes which any one of them had a specific
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `parser.py` \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `ast.py` \
 |-- `graphics` folder (UI, responsable to console prints). \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `colors.py` \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `io.py` \
  |-- `input` folder (As described above). \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `configuration` \
@@ -128,6 +130,7 @@ The code contains several parts and classes which any one of them had a specific
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `list_atl.py` (Version with sets instead of BDDs) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `bitstring_table.py` (Enumarate the bitstrings) \
  |-- `tests` folder (Contains several tests classes). \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `experiment.py` \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `test_before_relation.py` \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `test_data_bdds.py` \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- `test_during_relation.py` \
@@ -478,4 +481,23 @@ The code contains several parts and classes which any one of them had a specific
 
 ############################################################################# (THE END) #############################################################################
 ```
+
+
+## Some epxeriments results: ##
+As part of the testing process of MonAmI, we performed several experiments that tested the correctness of the tool and its performance - the time that it takes and the allocated memory during the execution. We created trace files in different sizes of events (1000, 2000, 4000, 8000, 16000). These files were created with a trace generator script which is a part of the tool.
+
+
+```json
+{
+    "1": "!exist A . exist B . A < B & same(A, B)",
+    "2": "!exist A . exist B, C . A i B & B i C",
+    "3": "forall A, B . (!exist C . A < C & C < B) -> !(A('2') & B('2'))",
+    "4": "forall A, B, C . (A o B & B o C) -> !(A o C)"
+}
+```
+
+To demonstrate some of the experiment results, we took the above 4 examples properties.
+It is important to say, that properties 1 and 3 are not violated, in contrast to properties 2 and 4 that are. It means that the traces for properties 1 and 3 are executed until the end while the traces during properties 2 and 4 are stopped immediately after the violation.
+
+![image](https://user-images.githubusercontent.com/48603901/117803681-949ebb80-b25f-11eb-804b-3551995cf072.png)
 
