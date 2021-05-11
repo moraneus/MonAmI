@@ -1,4 +1,7 @@
-from dd import autoref as _bdd
+try:
+    from dd import cudd as _bdd
+except ImportError:
+    from dd import autoref as _bdd
 from execptions.execptions import *
 from graphics.io import IO
 
@@ -533,7 +536,6 @@ class BddAtl():
         renamed BDD
 
         """
-
         old_variables = ['_X', '_Y']
         values = {}
         for i, new_var in enumerate(new_vars):
@@ -557,7 +559,6 @@ class BddAtl():
         Returns a BDD with bits X1,...,Xn that results from the BDD of the form 'XD'.
 
         """
-
         bdd_renamed = self.rename("XD", i_variable)
         bdd_helper = self._m_bdd_manager.cube(self.__convert_bitstring_to_assignment(i_data, '_D'))
         return self._m_bdd_manager.exist([f'_D{i}' for i in range(self._m_data_size)], bdd_renamed & bdd_helper)
@@ -576,7 +577,6 @@ class BddAtl():
         BDD after execution the "exist" operation.
 
         """
-
         return self._m_bdd_manager.exist([f'{variable}{i}' for variable in i_variables
                                           for i in range(self._m_data_size if variable == '_D'
                                                          else self._m_interval_size)], i_bdd)
@@ -599,8 +599,6 @@ class BddAtl():
         return self._m_bdd_manager.forall([f'{variable}{i}' for variable in i_variables
                                           for i in range(self._m_data_size if variable == '_D'
                                                          else self._m_interval_size)], i_bdd)
-
-
 
     ###################################################################################################################
     # This part of code is executed when the bitstring size (Interval or Data) reaches to their max size limit.
@@ -699,7 +697,11 @@ class BddAtl():
 
         """
 
-        sorted_variables = sorted(self._m_bdd_manager.vars.keys())
+        sorted_variables = sorted(self._m_bdd_manager.vars)
+
+        # This line instead of of the previous if work with autoref instead CUDD
+        # sorted_variables = sorted(self._m_bdd_manager.vars.keys())
+
         # while 'D' in sorted_variables[0]:
         #     sorted_variables.append(sorted_variables.pop(sorted_variables.index(sorted_variables[0])))
 
@@ -798,4 +800,7 @@ class BddAtl():
 
             # Save the new updated BDD
             self._m_bdds[bdd_name] = updated_bdd
+
+
+
 
