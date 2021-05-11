@@ -24,7 +24,7 @@
 2. In the file `requierments.txt`, there are all the packages that should be installed. \
 For installation, please run the command `python -m pip install -r requierments.txt` (from CMD in windows or Terminal in Unix).
 3. Running the program is made by running the command `python main.py` from the program root directory.
-4. In order to use dd.cudd (Cython binding to the CUDD C library) interface please look at the instruction at https://github.com/tulip-control/dd.
+4. In order to use dd.cudd (Cython binding to the CUDD C library) interface please look at the instruction at https://github.com/tulip-control/dd#installation.
 
 ## Configuration: ##
 ### Trace input: ###
