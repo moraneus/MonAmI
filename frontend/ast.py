@@ -24,6 +24,9 @@ class Formula:
             error(f'the formula has free variables: {free}')
             return False
 
+    def get_intervals(self):
+        pass
+
 
 class And(Formula):
     def __init__(self, formula1, formula2):
@@ -38,6 +41,9 @@ class And(Formula):
 
     def free_vars(self) -> Set[str]:
         return self.formula1.free_vars() | self.formula2.free_vars()
+
+    def get_intervals(self):
+        return self.formula1.get_intervals() | self.formula2.get_intervals()
 
     def eval(self, **kwargs):
         result = self.formula1.eval(**kwargs) & \
@@ -64,6 +70,9 @@ class Or(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula1.free_vars() | self.formula2.free_vars()
 
+    def get_intervals(self):
+        return self.formula1.get_intervals() | self.formula2.get_intervals()
+
     def eval(self, **kwargs):
         result = self.formula1.eval(**kwargs) | \
                  self.formula2.eval(**kwargs)
@@ -89,11 +98,14 @@ class Implies(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula1.free_vars() | self.formula2.free_vars()
 
+    def get_intervals(self):
+        return self.formula1.get_intervals() | self.formula2.get_intervals()
+
     def eval(self, **kwargs):
         result = ~self.formula1.eval(**kwargs) | \
                  self.formula2.eval(**kwargs)
 
-        if kwargs["bdd_manager"]:
+        if kwargs["debug_mode"]:
             IO.subformula(f"({self.formula1}) -> ({self.formula2}))",
                           list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
@@ -112,6 +124,9 @@ class Not(Formula):
 
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars()
+
+    def get_intervals(self):
+        return self.formula.get_intervals()
 
     def eval(self, **kwargs):
         result = ~self.formula.eval(**kwargs)
@@ -135,6 +150,9 @@ class Before(Formula):
 
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
+
+    def get_intervals(self):
+        return self.free_vars()
 
     def eval(self, **kwargs):
         result = kwargs["bdd_manager"].rename('XXYY', self.interval1, self.interval2)
@@ -160,6 +178,9 @@ class Overlaps(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
+    def get_intervals(self):
+        return self.free_vars()
+
     def eval(self, **kwargs):
         result = kwargs["bdd_manager"].rename('XYXY', self.interval1, self.interval2)
 
@@ -184,6 +205,9 @@ class Includes(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
+    def get_intervals(self):
+        return self.free_vars()
+
     def eval(self, **kwargs):
         result = kwargs["bdd_manager"].rename('XYYX', self.interval1, self.interval2)
 
@@ -207,6 +231,9 @@ class Data(Formula):
 
     def free_vars(self) -> Set[str]:
         return {self.interval}
+
+    def get_intervals(self):
+        return self.free_vars()
 
     def eval(self, **kwargs):
         data_bitstring = kwargs["data_manager"].lookup_no_update(self.data)
@@ -235,6 +262,9 @@ class Same(Formula):
     def free_vars(self) -> Set[str]:
         return {self.interval1, self.interval2}
 
+    def get_intervals(self):
+        return self.free_vars()
+
     def eval(self, **kwargs):
         bdd1 = kwargs["bdd_manager"].rename('XD', self.interval1)
         bdd2 = kwargs["bdd_manager"].rename('XD', self.interval2)
@@ -262,6 +292,9 @@ class Exist(Formula):
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars() - set(self.intervals)
 
+    def get_intervals(self):
+        return self.formula.get_intervals()
+
     def eval(self, **kwargs):
         result = kwargs["bdd_manager"].exist(self.intervals, self.formula.eval(**kwargs))
 
@@ -270,6 +303,7 @@ class Exist(Formula):
                           list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
+
 
 class Forall(Formula):
     def __init__(self, intervals, formula):
@@ -284,6 +318,9 @@ class Forall(Formula):
 
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars() - set(self.intervals)
+
+    def get_intervals(self):
+        return self.formula.get_intervals()
 
     def eval(self, **kwargs):
         result = kwargs["bdd_manager"].forall(self.intervals, self.formula.eval(**kwargs))
@@ -307,6 +344,9 @@ class Paren(Formula):
 
     def free_vars(self) -> Set[str]:
         return self.formula.free_vars()
+
+    def get_intervals(self):
+        return self.formula.get_intervals()
 
     def eval(self, **kwargs):
         result = self.formula.eval(**kwargs)
