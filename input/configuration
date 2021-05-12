@@ -1,6 +1,9 @@
 {
-    "DEBUG": true,
-    "INTERVAL_SIZE": 3,
-    "DATA_SIZE": 3,
-    "EXPANSION_LENGTH": 2
+    "DEBUG": false,
+    "INTERVAL_SIZE":13,
+    "DATA_SIZE": 13,
+    "EXPANSION_LENGTH": 1,
+    "MODE": "CONTINUE",
+    "TRACE": "/home/beth/PycharmProjects/test/input/trace",
+    "PROPERTY": "/home/beth/PycharmProjects/test/input/property"
 }
