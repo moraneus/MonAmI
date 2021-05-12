@@ -5,7 +5,6 @@ from graphics.io import IO
 from os import sep
 from execptions.execptions import IntervalDataError
 from frontend.parser import parse
-from frontend.ast import Forall, Not
 
 
 def read_json(i_json_file):
@@ -19,8 +18,8 @@ def main():
 
     # Read input files
     configuration = read_json(f"input{sep}configuration")
-    execution = read_json(f"input{sep}trace")["execution"]
-    property = parse(read_json(f"input{sep}property")["property"].replace("'", '"'))
+    execution = read_json(configuration["TRACE"])["execution"]
+    property = parse(read_json(configuration["PROPERTY"])["property"].replace("'", '"'))
 
     # Print input to console
     if configuration["DEBUG"]:
@@ -45,6 +44,9 @@ def main():
 
     # Define an empty dictionary which map interval into data
     interval_data_dict = {}
+
+    # Define the verdicts result list
+    verdicts = []
 
     for event in execution:
         try:
@@ -86,24 +88,30 @@ def main():
                 else:
                     IO.false()
 
-            # Print the final state of the BDDs when the property is satisfied or violated.
-            # It depends on the property type and the expected result.
-            if isinstance(property, Forall) or isinstance(property, Not):
+            verdicts.append(result)
+
+            # According to the MODE the tool will continue running or stopped.
+            # In a case of MODE == VIOLATION the tool stop when property eval results is False.
+            # In a case of MODE == SATISFACTION the tool stop when property eval results is True.
+            # Any other case the tool continue running until the end of the trace.
+            if configuration["MODE"] == "VIOLATION":
                 if not result:
                     break
-            else:
+            elif configuration["MODE"] == "SATISFACTION":
                 if result:
                     break
+
 
         except Exception as err:
             IO.error(err)
             break
 
-    if result:
-        IO.true()
-    else:
-        IO.false()
-    IO.final(execution, property, bdd_atl.bdds.items())
+    # Print the final BDDs state
+    if configuration["DEBUG"]:
+        IO.final(execution, property, bdd_atl.bdds.items())
+
+    # Print the verdicts at the end.
+    IO.verdicts(verdicts)
 
 
 if __name__ == '__main__':
