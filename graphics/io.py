@@ -73,7 +73,19 @@ class IO:
         IO.property(i_property)
         for bdd_name, bdd_data in i_bdds:
             IO.bdd_state(bdd_name, bdd_data)
-        IO.true()
         IO.seperator('THE END')
+
+    @staticmethod
+    def verdict(i_verdict):
+        if i_verdict:
+            return f'{Fore.BLUE}{i_verdict}{Style.RESET_ALL}'
+        else:
+            return f'{Fore.RED}{i_verdict}{Style.RESET_ALL}'
+
+    @staticmethod
+    def verdicts(i_verdicts):
+        IO.seperator('VERDICTS BY ITERATION')
+        for i, verdict in enumerate(i_verdicts):
+            print(f'[EVENT {i+1}]: {IO.verdict(verdict)}')
 
 

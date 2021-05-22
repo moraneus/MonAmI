@@ -28,8 +28,9 @@ For installation, please run the command `python -m pip install -r requierments.
 
 ## Configuration: ##
 ### Trace input: ###
-1. Setting any execution for monitoring can be done by edit the `trace` file under the `input` folder.
-2. Each event is from the type `[Event type, Interval ID, Data]` for `begin` event and `[Event type, Interval ID] for an 'end' event.
+1. Setting any execution for monitoring can be done by edit the `trace` file under the `input` folder or creating new file.
+2. Note: The path to the `trace` file should be updated into the configuration file as it will describe below.
+3. Each event is from the type `[Event type, Interval ID, Data]` for `begin` event and `[Event type, Interval ID] for an 'end' event.
 
 Parameter     | Details
 ------------- | -------------
@@ -47,8 +48,9 @@ Data          | `null`, `int`, or `str`
 ```
 
 ### Property Input: ###
-1. Creating your own property can be made by edit the `property` file under the `input folder`.
-2. Here are some examples of properties:
+1. Creating your own property can be made by edit the `property` file under the `input folder` or creating new file.
+2. Note: The path to the `property` file should be updated into the configuration file as it will describe below.
+3. Here are some examples of properties:
 ```json
 1. exist A, B, C .
    A("load") &
@@ -90,6 +92,9 @@ exist A, B . A < B & B i C & exist D . C o D
     2. `INTERVAL_SIZE` - Initial length of the enumeration of interval.
     3. `DATA_SIZE` - Initial length of the enumeration of data.
     4. `EXPANSION_LENGTH` - The expansion length when an enumeration needs to grow.
+    5. `MODE` - Define the mode of opertion of MonAmI, In which cases it will stop from running.
+    6. `TRACE` - Path to the `trace` file you have.
+    7. `PROPERTY` - Path to the `property` file you have.
     
 Parameter         | Details
 ----------------- | -------------
@@ -97,13 +102,19 @@ Parameter         | Details
 `INTERVAL_SIZE`   | `int`
 `DATA_SIZE`       | `int`
 `EXPANSION_LENGTH`| `int`
+`MODE`            | `VIOLATION`, `SATISFACTION` or `CONTINUE`
+`TRACE`           | `str`
+`PROPERTY`        | `str`
 2. Example of 'configuration` file:
 ```json
 {
-    "DEBUG": true,
-    "INTERVAL_SIZE": 3,
-    "DATA_SIZE": 3,
-    "EXPANSION_LENGTH": 2
+    "DEBUG": false,
+    "INTERVAL_SIZE":13,
+    "DATA_SIZE": 13,
+    "EXPANSION_LENGTH": 1,
+    "MODE": "CONTINUE",
+    "TRACE": "/home/john/Desktop/trace",
+    "PROPERTY": "/home/john/Desktop/property"
 }
 ```
 
