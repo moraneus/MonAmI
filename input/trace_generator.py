@@ -9,30 +9,36 @@ class TraceGenerator:
 
     RULES = [
         {
+            'REPEAT': 6,
             0: {'DATA': 'BOOT', 'B_PRIORITY': 0, 'E_PRIORITY': 2},
             1: {'DATA': 'DL_IMAGE', 'B_PRIORITY': 1, 'E_PRIORITY': 3},
             2: {'DATA': 'BOOT', 'B_PRIORITY': 4, 'E_PRIORITY': 5}
         },
         {
+            'REPEAT': 3,
             0: {'DATA': 'BOOT', 'B_PRIORITY': 0, 'E_PRIORITY': 3},
             1: {'DATA': 'DL_IMAGE', 'B_PRIORITY': 1, 'E_PRIORITY': 2},
             2: {'DATA': 'BOOT', 'B_PRIORITY': 4, 'E_PRIORITY': 5}
         },
         {
+            'REPEAT': 3,
             0: {'DATA': 'DL_MOBPRM', 'B_PRIORITY': 0, 'E_PRIORITY': 3},
             1: {'DATA': 'DL_FAIL', 'B_PRIORITY': 1, 'E_PRIORITY': 2}
         },
         {
+            'REPEAT': 3,
             0: {'DATA': 'DL_ARMPRM', 'B_PRIORITY': 0, 'E_PRIORITY': 3},
             1: {'DATA': 'DL_FAIL', 'B_PRIORITY': 1, 'E_PRIORITY': 2}
         },
         {
+            'REPEAT': 3,
             0: {'DATA': 'INS_ON', 'B_PRIORITY': 0, 'E_PRIORITY': 1},
             1: {'DATA': 'INS_FAIL', 'B_PRIORITY': 2, 'E_PRIORITY': 3},
             2: {'DATA': 'INS_RECOVER', 'B_PRIORITY': 6, 'E_PRIORITY': 7},
             3: {'DATA': 'INS_ON', 'B_PRIORITY': 4, 'E_PRIORITY': 5}
         },
         {
+            'REPEAT': 3,
             0: {'DATA': 'DL_IMAGE', 'B_PRIORITY': 0, 'E_PRIORITY': 5},
             1: {'DATA': 'GET_CAMDATA', 'B_PRIORITY': 1, 'E_PRIORITY': 4},
             2: {'DATA': 'STARVE', 'B_PRIORITY': 2, 'E_PRIORITY': 3}
@@ -48,46 +54,56 @@ class TraceGenerator:
         self.__num_of_rules = 0
 
     def start(self):
-        self.__initilaize_rules_intervals()
-        trace = self.__generate_random_trace()
-        print(TraceGenerator.RULES)
-        self.__save_to_file(trace)
+        managment_sequence = self.__initilaize_rules_intervals()
+        full_trace = self.__generate_random_trace(managment_sequence)
+        self.__save_to_file(full_trace)
 
     def __initilaize_rules_intervals(self):
+        sequence = []
         for rule in TraceGenerator.RULES:
-            priorities = {}
-            for i in range(len(rule.keys())):
-                rule[i]['ID'] = self.__interval_id_generator()
-                if i == 0:
-                    print(f"[{rule[i]['B_PRIORITY']}, {self.__m_trace_length -(len(rule.keys()) * 2) + rule[i]['B_PRIORITY']}]")
-                    rule[i]['B_INDEX'] = random.randint(rule[i]['B_PRIORITY'],
-                                                        self.__m_trace_length -
-                                                        (len(rule.keys()) * 2) + rule[i]['B_PRIORITY'])
-                    priorities[rule[i]['B_PRIORITY']] = rule[i]['B_INDEX']
-                    print(f"[{rule[i]['B_INDEX'] + rule[i]['E_PRIORITY'] - rule[i]['B_PRIORITY']}, {self.__m_trace_length - (len(rule.keys()) * 2) + rule[i]['E_PRIORITY']}]")
-                    rule[i]['E_INDEX'] = random.randint(rule[i]['B_INDEX'] +
-                                                        rule[i]['E_PRIORITY'] - rule[i]['B_PRIORITY'],
-                                                        self.__m_trace_length -
-                                                        (len(rule.keys()) * 2) + rule[i]['E_PRIORITY'])
-                    priorities[rule[i]['E_PRIORITY']] = rule[i]['E_INDEX']
-                else:
-                    rule[i]['B_INDEX'] = self.__find_range(rule[i]['B_PRIORITY'], priorities, rule)
-                    priorities[rule[i]['B_PRIORITY']] = rule[i]['B_INDEX']
-                    rule[i]['E_INDEX'] = self.__find_range(rule[i]['E_PRIORITY'], priorities, rule)
-                    priorities[rule[i]['E_PRIORITY']] = rule[i]['E_INDEX']
-                self.__num_of_rules += 1
-            print(priorities)
+            sequence_block_size = self.__m_trace_length // rule['REPEAT']
+            start_block_index = 0
+            end_block_index = sequence_block_size
+            for repeat in range(rule['REPEAT']):
+                sequence.append({})
+                priorities = {}
+                for i in range(len(rule.keys()) - 1):
+                    sequence[-1][i] = {}
+                    sequence[-1][i]['DATA'] = rule[i]['DATA']
+                    sequence[-1][i]['ID'] = self.__interval_id_generator()
+                    if i == 0:
+                        sequence[-1][i]['B_INDEX'] = random.randint(start_block_index + rule[i]['B_PRIORITY'],
+                                                                    end_block_index -
+                                                            (len(rule.keys()) * 2) + rule[i]['B_PRIORITY'])
+                        priorities[rule[i]['B_PRIORITY']] = sequence[-1][i]['B_INDEX']
+                        sequence[-1][i]['E_INDEX'] = random.randint(sequence[-1][i]['B_INDEX'] +
+                                                                    rule[i]['E_PRIORITY'] - rule[i]['B_PRIORITY'],
+                                                                    end_block_index -
+                                                            (len(rule.keys()) * 2) + rule[i]['E_PRIORITY'])
+                        priorities[rule[i]['E_PRIORITY']] = sequence[-1][i]['E_INDEX']
+                    else:
+                        sequence[-1][i]['B_INDEX'] = self.__find_range(rule[i]['B_PRIORITY'], priorities,
+                                                                       rule, end_block_index)
+                        priorities[rule[i]['B_PRIORITY']] = sequence[-1][i]['B_INDEX']
+                        sequence[-1][i]['E_INDEX'] = self.__find_range(rule[i]['E_PRIORITY'], priorities,
+                                                                       rule, end_block_index)
+                        priorities[rule[i]['E_PRIORITY']] = sequence[-1][i]['E_INDEX']
+                    self.__num_of_rules += 1
+                print(priorities)
+                start_block_index = end_block_index + 1
+                end_block_index += sequence_block_size
 
-    def __find_range(self, i_curr_priority, i_seen_priorities, rule):
+        return sequence
+
+    def __find_range(self, i_curr_priority, i_seen_priorities, i_rule, i_end_block_index):
         min_priority = min(i_seen_priorities.keys())
         max_priority = max(i_seen_priorities.keys())
         if i_curr_priority < min_priority:
             index = random.randint(i_curr_priority,
                                    i_seen_priorities[min_priority] - min_priority + i_curr_priority)
         elif i_curr_priority > max_priority:
-            print(f"[{i_seen_priorities[max_priority] + i_curr_priority - max_priority}, {self.__m_trace_length - (len(rule.keys()) * 2) + i_curr_priority}]")
             index = random.randint(i_seen_priorities[max_priority] + i_curr_priority - max_priority,
-                                   self.__m_trace_length - (len(rule.keys()) * 2) + i_curr_priority)
+                                   i_end_block_index - (len(i_rule.keys()) * 2) + i_curr_priority)
         else:
             higher_index = i_seen_priorities[max_priority]
             lower_index = i_seen_priorities[min_priority]
@@ -98,7 +114,6 @@ class TraceGenerator:
                 elif i_curr_priority > seen_priority and seen_priority > min_priority:
                     lower_index = i_seen_priorities[seen_priority]
                     min_priority = seen_priority
-            print(f"[{lower_index + i_curr_priority - min_priority}, {higher_index - max_priority + i_curr_priority}]")
             index = random.randint(lower_index + i_curr_priority - min_priority,
                                    higher_index - max_priority + i_curr_priority)
         return index
@@ -106,7 +121,7 @@ class TraceGenerator:
     def __interval_id_generator(self, size=10, chars=string.ascii_lowercase):
         return ''.join(random.choice(chars) for _ in range(size))
 
-    def __generate_random_trace(self):
+    def __generate_random_trace(self, i_managment_sequence):
         intervals = []
         for i in range(self.__m_num_of_intervals - self.__num_of_rules):
             name = self.__interval_id_generator()
@@ -123,10 +138,10 @@ class TraceGenerator:
             else:
                 trace.append([interval[1], interval[0]])
 
-        for rule in TraceGenerator.RULES:
-            for i in range(len(rule.keys())):
-                trace.insert(rule[i]['B_INDEX'], ['begin', rule[i]['ID'], rule[i]['DATA']])
-                trace.insert(rule[i]['E_INDEX'], ['end', rule[i]['ID']])
+        for sequence in i_managment_sequence:
+            for i in range(len(sequence.keys())):
+                trace.insert(sequence[i]['B_INDEX'], ['begin', sequence[i]['ID'], sequence[i]['DATA']])
+                trace.insert(sequence[i]['E_INDEX'], ['end', sequence[i]['ID']])
 
         return trace
 
