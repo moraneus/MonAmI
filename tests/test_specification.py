@@ -9,11 +9,22 @@ def monitor(sequence, specification):
 
 
 class TestSpecification(unittest.TestCase):
-    sequence = [["begin", 1, 'Data1'], ["end", 1], ["begin", 2, 'Data2'], ["end", 2],
-                ["begin", 3, 'Data3'], ["begin", 4, 'Data4'], ["end", 4], ["end", 3],
-                ["begin", 5, 'Data1'], ["begin", 6, 'Data6'], ["end", 5], ["end", 6]]
+    sequence = [["begin", 1, 'A'],
+                ["end", 1],
+                ["begin", 2, 'B'],
+                ["end", 2],
+                ["begin", 3, 'B'],
+                ["begin", 4, 'C'],
+                ["end", 4],
+                ["end", 3]]
 
     def test1(self):
-        specification = parse("""exist A, B . A("Data1") & B("Data2")""")
+        specification = parse(
+            """
+            exist A, B, C . 
+              A("A") & B("B") & C("C") &
+              A < B &
+              B i C
+            """)
         result = monitor(TestSpecification.sequence, specification)
         assert result

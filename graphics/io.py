@@ -2,7 +2,7 @@ from colorama import Fore, init, Style
 
 
 class IO:
-    init(convert=True)
+    # init(convert=True)
 
     @staticmethod
     def banner():
