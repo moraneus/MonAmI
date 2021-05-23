@@ -1,94 +1,75 @@
 import random
 import json
 import string
+import sys
 
+def read_json(i_json_file):
+    with open(i_json_file, "r") as json_file:
+        data = json.load(json_file)
+    return data
 
 class TraceGenerator:
-    DATA = ['BOOT', 'DL_IMAGE', 'DL_MOBPRM', 'DL_ARMPRM', 'DL_FAIL',
-            'INS_ON', 'INS_FAIL', 'INS_RECOVER', 'GET_CAMDATA', 'STARVE']
 
-    RULES = [
-        {
-            'REPEAT': 6,
-            0: {'DATA': 'BOOT', 'B_PRIORITY': 0, 'E_PRIORITY': 2},
-            1: {'DATA': 'DL_IMAGE', 'B_PRIORITY': 1, 'E_PRIORITY': 3},
-            2: {'DATA': 'BOOT', 'B_PRIORITY': 4, 'E_PRIORITY': 5}
-        },
-        {
-            'REPEAT': 3,
-            0: {'DATA': 'BOOT', 'B_PRIORITY': 0, 'E_PRIORITY': 3},
-            1: {'DATA': 'DL_IMAGE', 'B_PRIORITY': 1, 'E_PRIORITY': 2},
-            2: {'DATA': 'BOOT', 'B_PRIORITY': 4, 'E_PRIORITY': 5}
-        },
-        {
-            'REPEAT': 3,
-            0: {'DATA': 'DL_MOBPRM', 'B_PRIORITY': 0, 'E_PRIORITY': 3},
-            1: {'DATA': 'DL_FAIL', 'B_PRIORITY': 1, 'E_PRIORITY': 2}
-        },
-        {
-            'REPEAT': 3,
-            0: {'DATA': 'DL_ARMPRM', 'B_PRIORITY': 0, 'E_PRIORITY': 3},
-            1: {'DATA': 'DL_FAIL', 'B_PRIORITY': 1, 'E_PRIORITY': 2}
-        },
-        {
-            'REPEAT': 3,
-            0: {'DATA': 'INS_ON', 'B_PRIORITY': 0, 'E_PRIORITY': 1},
-            1: {'DATA': 'INS_FAIL', 'B_PRIORITY': 2, 'E_PRIORITY': 3},
-            2: {'DATA': 'INS_RECOVER', 'B_PRIORITY': 6, 'E_PRIORITY': 7},
-            3: {'DATA': 'INS_ON', 'B_PRIORITY': 4, 'E_PRIORITY': 5}
-        },
-        {
-            'REPEAT': 3,
-            0: {'DATA': 'DL_IMAGE', 'B_PRIORITY': 0, 'E_PRIORITY': 5},
-            1: {'DATA': 'GET_CAMDATA', 'B_PRIORITY': 1, 'E_PRIORITY': 4},
-            2: {'DATA': 'STARVE', 'B_PRIORITY': 2, 'E_PRIORITY': 3}
-        }
-    ]
-
-    def __init__(self, i_nums_of_interval, i_output):
+    def __init__(self, i_nums_of_interval, i_output, i_rules_percentage):
         self.__m_num_of_intervals = i_nums_of_interval
         self.__m_trace_length = i_nums_of_interval * 2
-        self.__m_data_length = len(TraceGenerator.DATA)
         self.__m_interval_ids = list(range(0, i_nums_of_interval))
         self.__m_output = i_output
+        self.__m_rules_percentage = i_rules_percentage
+        self.__m_rules = read_json('rules')
+        self.__m_data = read_json('data')
+        self.__m_data_length = len(self.__m_data)
         self.__num_of_rules = 0
+        self.__num_of_repeats = 0
+        self.__num_of_manage_events = 0
 
     def start(self):
-        managment_sequence = self.__initilaize_rules_intervals()
-        full_trace = self.__generate_random_trace(managment_sequence)
+        self.__rules_init()
+        management_sequence = self.__initilaize_rules_intervals()
+        full_trace = self.__generate_random_trace(management_sequence)
         self.__save_to_file(full_trace)
+
+    def __rules_init(self):
+        if self.__m_rules_percentage < 0 or self.__m_rules_percentage > 100:
+            print(f"[ERROR]: percentage must be between 0 to 100")
+            sys.exit()
+
+        for rule in self.__m_rules:
+            self.__num_of_rules += len(rule.keys())
+
+        self.__num_of_repeats = ((self.__m_num_of_intervals * self.__m_rules_percentage) // 100) // self.__num_of_rules
 
     def __initilaize_rules_intervals(self):
         sequence = []
-        for rule in TraceGenerator.RULES:
-            sequence_block_size = self.__m_trace_length // rule['REPEAT']
+        for rule in self.__m_rules:
+            sequence_block_size = self.__m_trace_length // self.__num_of_repeats
             start_block_index = 0
             end_block_index = sequence_block_size
-            for repeat in range(rule['REPEAT']):
+            for repeat in range(self.__num_of_repeats):
                 sequence.append({})
                 priorities = {}
-                for i in range(len(rule.keys()) - 1):
+                for i in range(len(rule.keys())):
                     sequence[-1][i] = {}
-                    sequence[-1][i]['DATA'] = rule[i]['DATA']
+                    sequence[-1][i]['DATA'] = rule[str(i)]['DATA']
                     sequence[-1][i]['ID'] = self.__interval_id_generator()
                     if i == 0:
-                        sequence[-1][i]['B_INDEX'] = random.randint(start_block_index + rule[i]['B_PRIORITY'],
+                        sequence[-1][i]['B_INDEX'] = random.randint(start_block_index + rule[str(i)]['B_PRIORITY'],
                                                                     end_block_index -
-                                                            (len(rule.keys()) * 2) + rule[i]['B_PRIORITY'])
-                        priorities[rule[i]['B_PRIORITY']] = sequence[-1][i]['B_INDEX']
+                                                            (len(rule.keys()) * 2) + rule[str(i)]['B_PRIORITY'])
+                        priorities[rule[str(i)]['B_PRIORITY']] = sequence[-1][i]['B_INDEX']
                         sequence[-1][i]['E_INDEX'] = random.randint(sequence[-1][i]['B_INDEX'] +
-                                                                    rule[i]['E_PRIORITY'] - rule[i]['B_PRIORITY'],
+                                                                    rule[str(i)]['E_PRIORITY'] - rule[str(i)]['B_PRIORITY'],
                                                                     end_block_index -
-                                                            (len(rule.keys()) * 2) + rule[i]['E_PRIORITY'])
-                        priorities[rule[i]['E_PRIORITY']] = sequence[-1][i]['E_INDEX']
+                                                            (len(rule.keys()) * 2) + rule[str(i)]['E_PRIORITY'])
+                        priorities[rule[str(i)]['E_PRIORITY']] = sequence[-1][i]['E_INDEX']
                     else:
-                        sequence[-1][i]['B_INDEX'] = self.__find_range(rule[i]['B_PRIORITY'], priorities,
+                        sequence[-1][i]['B_INDEX'] = self.__find_range(rule[str(i)]['B_PRIORITY'], priorities,
                                                                        rule, end_block_index)
-                        priorities[rule[i]['B_PRIORITY']] = sequence[-1][i]['B_INDEX']
-                        sequence[-1][i]['E_INDEX'] = self.__find_range(rule[i]['E_PRIORITY'], priorities,
+                        priorities[rule[str(i)]['B_PRIORITY']] = sequence[-1][i]['B_INDEX']
+                        sequence[-1][i]['E_INDEX'] = self.__find_range(rule[str(i)]['E_PRIORITY'], priorities,
                                                                        rule, end_block_index)
-                        priorities[rule[i]['E_PRIORITY']] = sequence[-1][i]['E_INDEX']
-                    self.__num_of_rules += 1
+                        priorities[rule[str(i)]['E_PRIORITY']] = sequence[-1][i]['E_INDEX']
+                    self.__num_of_manage_events += 1
                 print(priorities)
                 start_block_index = end_block_index + 1
                 end_block_index += sequence_block_size
@@ -121,9 +102,9 @@ class TraceGenerator:
     def __interval_id_generator(self, size=10, chars=string.ascii_lowercase):
         return ''.join(random.choice(chars) for _ in range(size))
 
-    def __generate_random_trace(self, i_managment_sequence):
+    def __generate_random_trace(self, i_management_sequence):
         intervals = []
-        for i in range(self.__m_num_of_intervals - self.__num_of_rules):
+        for i in range(self.__m_num_of_intervals - self.__num_of_manage_events):
             name = self.__interval_id_generator()
             start = random.randint(0, 5000000)
             intervals.append([name, 'begin', start])
@@ -133,12 +114,12 @@ class TraceGenerator:
 
         for interval in intervals:
             if interval[1] == 'begin':
-                data = TraceGenerator.DATA[interval[2] % self.__m_data_length]
+                data = self.__m_data[interval[2] % self.__m_data_length]
                 trace.append([interval[1], interval[0], data])
             else:
                 trace.append([interval[1], interval[0]])
 
-        for sequence in i_managment_sequence:
+        for sequence in i_management_sequence:
             for i in range(len(sequence.keys())):
                 trace.insert(sequence[i]['B_INDEX'], ['begin', sequence[i]['ID'], sequence[i]['DATA']])
                 trace.insert(sequence[i]['E_INDEX'], ['end', sequence[i]['ID']])
@@ -153,6 +134,6 @@ class TraceGenerator:
 
 
 
-a = TraceGenerator(500, 'test1.json')
+a = TraceGenerator(500, 'trace_16000.json', 50)
 a.start()
 
