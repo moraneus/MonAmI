@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# export PYTHONPATH=$PYTHONPATH:../`pwd`
+
+echo "=== RESULT ===" > result-monami
+
+echo "########### spec 5 ###########" >> result-monami
+echo "--------- 1000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec5.monami trace_1000.json) >> result-monami 2>&1
+echo "--------- 2000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec5.monami trace_2000.json) >> result-monami 2>&1
+echo "--------- 4000 ----------" >> result-monami
+(/usr/bin/time  python3.9 run_monami_experiments.py spec5.monami trace_4000.json) >> result-monami 2>&1
+echo "--------- 8000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec5.monami trace_8000.json) >> result-monami 2>&1
+echo "--------- 16000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec5.monami trace_16000.json) >> result-monami 2>&1
+
+
+echo "########### spec 6 ###########" >> result-monami
+echo "--------- 1000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec6.monami trace_1000.json) >> result-monami 2>&1
+echo "--------- 2000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec6.monami trace_2000.json) >> result-monami 2>&1
+echo "--------- 4000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec6.monami trace_4000.json) >> result-monami 2>&1
+echo "--------- 8000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec6.monami trace_8000.json) >> result-monami 2>&1
+echo "--------- 16000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec6.monami trace_16000.json) >> result-monami 2>&1
+
+echo "########### spec 7 ###########" >> result-monami
+echo "--------- 1000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec7.monami trace_1000.json) >> result-monami 2>&1
+echo "--------- 2000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec7.monami trace_2000.json) >> result-monami 2>&1
+echo "--------- 4000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec7.monami trace_4000.json) >> result-monami 2>&1
+echo "--------- 8000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec7.monami trace_8000.json) >> result-monami 2>&1
+echo "--------- 16000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec7.monami trace_16000.json) >> result-monami 2>&1
+
+echo "########### spec 8 ###########" >> result-monami
+echo "--------- 1000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec8.monami trace_1000.json) >> result-monami 2>&1
+echo "--------- 2000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec8.monami trace_2000.json) >> result-monami 2>&1
+echo "--------- 4000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec8.monami trace_4000.json) >> result-monami 2>&1
+echo "--------- 8000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec8.monami trace_8000.json) >> result-monami 2>&1
+echo "--------- 16000 ----------" >> result-monami
+(/usr/bin/time python3.9 run_monami_experiments.py spec8.monami trace_16000.json) >> result-monami 2>&1
+
+
+

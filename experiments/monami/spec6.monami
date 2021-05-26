@@ -1,0 +1,3 @@
+{
+    "property": "!exist D, F . (D('DL_MOBPRM') | D('DL_ARMPRM')) & F('DL_FAIL') & D i F"
+}
