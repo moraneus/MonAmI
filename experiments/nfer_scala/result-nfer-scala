@@ -1,0 +1,448 @@
+=== RESULT ===
+########## spec 1 ##########
+
+##### spec1.nfer applied to trace_1000.json with minimality = false #####
+
+Elapsed time: 224ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 60
+BOOT : 59
+IVAL : 500
+DBOOT : 1699
+FOUND : 1686
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_1000.json false false
+real 0.78s
+user 2.18s 
+sys 0.07s 
+memory:148456KB 
+cpu: 287%
+
+##### spec1.nfer applied to trace_2000.json with minimality = false #####
+
+Elapsed time: 776ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 120
+BOOT : 119
+IVAL : 1000
+DBOOT : 6992
+FOUND : 6966
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_2000.json false false
+real 1.38s
+user 3.30s 
+sys 0.16s 
+memory:399692KB 
+cpu: 250%
+
+##### spec1.nfer applied to trace_4000.json with minimality = false #####
+
+Elapsed time: 4282ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 240
+BOOT : 240
+IVAL : 2000
+DBOOT : 28617
+FOUND : 28560
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_4000.json false false
+real 5.26s
+user 9.30s 
+sys 0.34s 
+memory:2030908KB 
+cpu: 183%
+
+##### spec1.nfer applied to trace_8000.json with minimality = false #####
+
+Elapsed time: 30589ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 480
+BOOT : 480
+IVAL : 4000
+DBOOT : 114835
+FOUND : 114694
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_8000.json false false
+real 36.39s
+user 77.08s 
+sys 1.07s 
+memory:5619684KB 
+cpu: 214%
+
+##### spec1.nfer applied to trace_16000.json with minimality = false #####
+
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at scala.collection.immutable.BitmapIndexedSetNode.copyAndSetNode(HashSet.scala:767)
+	at scala.collection.immutable.BitmapIndexedSetNode.updated(HashSet.scala:489)
+	at scala.collection.immutable.BitmapIndexedSetNode.updated(HashSet.scala:406)
+	at scala.collection.immutable.BitmapIndexedSetNode.updated(HashSet.scala:485)
+	at scala.collection.immutable.BitmapIndexedSetNode.updated(HashSet.scala:406)
+	at scala.collection.immutable.BitmapIndexedSetNode.updated(HashSet.scala:485)
+	at scala.collection.immutable.HashSet.incl(HashSet.scala:83)
+	at scala.collection.immutable.HashSet.incl(HashSet.scala:34)
+	at scala.collection.immutable.SetOps.$plus(Set.scala:46)
+	at scala.collection.immutable.SetOps.$plus$(Set.scala:46)
+	at scala.collection.immutable.AbstractSet.$plus(Set.scala:348)
+	at nfer.repr.nodes.node4.Node.evaluateToken(Node.scala:163)
+	at nfer.repr.nodes.node4.Node.$anonfun$addToken$1(Node.scala:116)
+	at nfer.repr.nodes.node4.Node.$anonfun$addToken$1$adapted(Node.scala:116)
+	at nfer.repr.nodes.node4.Node$$Lambda$375/0x00000008401f5040.apply(Unknown Source)
+	at scala.collection.immutable.BitmapIndexedSetNode.foreach(HashSet.scala:937)
+	at scala.collection.immutable.BitmapIndexedSetNode.foreach(HashSet.scala:944)
+	at scala.collection.immutable.HashSet.foreach(HashSet.scala:944)
+	at nfer.repr.nodes.node4.Node.addToken(Node.scala:116)
+	at nfer.repr.nodes.node4.Node.addInterval(Node.scala:83)
+	at nfer.repr.RuleRepr.$anonfun$addInterval$1(Network.scala:309)
+	at nfer.repr.RuleRepr.$anonfun$addInterval$1$adapted(Network.scala:308)
+	at nfer.repr.RuleRepr$$Lambda$371/0x00000008401f3040.apply(Unknown Source)
+	at scala.collection.immutable.Set$Set1.foreach(Set.scala:168)
+	at nfer.repr.RuleRepr.addInterval(Network.scala:308)
+	at nfer.Agent.receive(Nfer.scala:23)
+	at nfer.Bus.$anonfun$publish$1(Nfer.scala:91)
+	at nfer.Bus.$anonfun$publish$1$adapted(Nfer.scala:90)
+	at nfer.Bus$$Lambda$370/0x00000008401f2040.apply(Unknown Source)
+	at scala.collection.immutable.Set$Set1.foreach(Set.scala:168)
+	at nfer.Bus.publish(Nfer.scala:90)
+	at nfer.Agent.$anonfun$new$1(Nfer.scala:12)
+Command exited with non-zero status 1
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_16000.json false false
+real 920.85s
+user 8097.03s 
+sys 5.10s 
+memory:12278376KB 
+cpu: 879%
+########## spec 2 ##########
+
+##### spec2.nfer applied to trace_1000.json with minimality = false #####
+
+Elapsed time: 179ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 500
+DL : 84
+FAIL : 48
+FOUND : 14
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_1000.json false false
+real 0.74s
+user 2.08s 
+sys 0.05s 
+memory:145628KB 
+cpu: 287%
+
+##### spec2.nfer applied to trace_2000.json with minimality = false #####
+
+Elapsed time: 435ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 1000
+DL : 167
+FAIL : 95
+FOUND : 41
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_2000.json false false
+real 0.98s
+user 2.51s 
+sys 0.05s 
+memory:164236KB 
+cpu: 261%
+
+##### spec2.nfer applied to trace_4000.json with minimality = false #####
+
+Elapsed time: 1393ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 2000
+DL : 330
+FAIL : 190
+FOUND : 65
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_4000.json false false
+real 1.96s
+user 3.88s 
+sys 0.11s 
+memory:343080KB 
+cpu: 203%
+
+##### spec2.nfer applied to trace_8000.json with minimality = false #####
+
+Elapsed time: 5572ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 4000
+DL : 660
+FAIL : 380
+FOUND : 191
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_8000.json false false
+real 6.17s
+user 11.35s 
+sys 0.18s 
+memory:373356KB 
+cpu: 186%
+
+##### spec2.nfer applied to trace_16000.json with minimality = false #####
+
+Elapsed time: 19597ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 8000
+DL : 1320
+FAIL : 760
+FOUND : 328
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_16000.json false false
+real 20.23s
+user 23.53s 
+sys 0.13s 
+memory:409252KB 
+cpu: 116%
+########## spec 3 ########## - minimality
+
+##### spec3.nfer applied to trace_1000.json with minimality = true #####
+
+Elapsed time: 252ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 29
+ON : 39
+IVAL : 318
+FOUND : 14
+RECOVER : 29
+FAIL : 32
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_1000.json true false
+real 0.89s
+user 2.28s 
+sys 0.08s 
+memory:151704KB 
+cpu: 263%
+
+##### spec3.nfer applied to trace_2000.json with minimality = true #####
+
+Elapsed time: 419ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 48
+ON : 69
+IVAL : 615
+FOUND : 25
+RECOVER : 53
+FAIL : 60
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_2000.json true false
+real 1.02s
+user 2.40s 
+sys 0.07s 
+memory:198344KB 
+cpu: 240%
+
+##### spec3.nfer applied to trace_4000.json with minimality = true #####
+
+Elapsed time: 1427ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 110
+ON : 133
+IVAL : 1219
+FOUND : 66
+RECOVER : 124
+FAIL : 126
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_4000.json true false
+real 2.00s
+user 3.99s 
+sys 0.11s 
+memory:355748KB 
+cpu: 205%
+
+##### spec3.nfer applied to trace_8000.json with minimality = true #####
+
+Elapsed time: 4877ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 221
+ON : 281
+IVAL : 2450
+FOUND : 133
+RECOVER : 224
+FAIL : 263
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_8000.json true false
+real 5.45s
+user 7.73s 
+sys 0.15s 
+memory:389400KB 
+cpu: 144%
+
+##### spec3.nfer applied to trace_16000.json with minimality = true #####
+
+Elapsed time: 22082ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 430
+ON : 585
+IVAL : 4865
+FOUND : 248
+RECOVER : 477
+FAIL : 502
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_16000.json true false
+real 22.73s
+user 25.42s 
+sys 0.12s 
+memory:337420KB 
+cpu: 112%
+########## spec 4 ##########
+
+##### spec4.nfer applied to trace_1000.json with minimality = false #####
+
+Elapsed time: 277ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 60
+IVAL : 500
+FOUND : 14
+GET : 47
+STARVE : 47
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_1000.json false false
+real 0.93s
+user 2.98s 
+sys 0.09s 
+memory:153960KB 
+cpu: 328%
+
+##### spec4.nfer applied to trace_2000.json with minimality = false #####
+
+Elapsed time: 469ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 120
+IVAL : 1000
+FOUND : 28
+GET : 95
+STARVE : 95
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_2000.json false false
+real 1.04s
+user 2.52s 
+sys 0.12s 
+memory:203468KB 
+cpu: 252%
+
+##### spec4.nfer applied to trace_4000.json with minimality = false #####
+
+Elapsed time: 1531ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 240
+IVAL : 2000
+FOUND : 52
+GET : 190
+STARVE : 190
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_4000.json false false
+real 2.07s
+user 3.41s 
+sys 0.16s 
+memory:345776KB 
+cpu: 173%
+
+##### spec4.nfer applied to trace_8000.json with minimality = false #####
+
+Elapsed time: 6182ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 480
+IVAL : 4000
+FOUND : 113
+GET : 380
+STARVE : 380
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_8000.json false false
+real 6.75s
+user 9.37s 
+sys 0.07s 
+memory:300304KB 
+cpu: 139%
+
+##### spec4.nfer applied to trace_16000.json with minimality = false #####
+
+Elapsed time: 23784ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 960
+IVAL : 8000
+FOUND : 221
+GET : 760
+STARVE : 760
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_16000.json false false
+real 24.52s
+user 28.35s 
+sys 0.25s 
+memory:596256KB 
+cpu: 116%
