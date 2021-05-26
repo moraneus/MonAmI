@@ -1,0 +1,10 @@
+
+IVAL :- BEGIN before END
+  where BEGIN.interval = END.interval
+  map {interval -> BEGIN.interval, data -> BEGIN.data}
+
+ON :- IVAL where IVAL.data = "INS_ON"
+FAIL :- IVAL where IVAL.data = "INS_FAIL"
+RECOVER :- IVAL where IVAL.data = "INS_RECOVER"
+EXEC :- ON before RECOVER
+FOUND :- FAIL during EXEC

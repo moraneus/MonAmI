@@ -1,0 +1,10 @@
+
+IVAL :- BEGIN before END
+  where BEGIN.interval = END.interval
+  map {interval -> BEGIN.interval, data -> BEGIN.data}
+
+DL :- IVAL where IVAL.data = "DL_IMAGE"
+GET :- IVAL where IVAL.data = "GET_CAMDATA"
+STARVE :- IVAL where IVAL.data = "STARVE"
+FOUND :- STARVE during (GET slice DL)
+

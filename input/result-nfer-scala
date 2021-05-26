@@ -1,0 +1,401 @@
+=== RESULT ===
+########## spec 5 ##########
+
+##### spec5.nfer applied to trace_1000.json with minimality = false #####
+
+Elapsed time: 248ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 60
+BOOT : 59
+IVAL : 500
+DBOOT : 1699
+FOUND : 1686
+---------------------------------
+time result
+cmd:nfer spec5.nfer trace_1000.json false false
+real 1.23s
+user 1.92s 
+sys  0.17s 
+memory:148088KB 
+cpu 170%
+
+##### spec5.nfer applied to trace_2000.json with minimality = false #####
+
+Elapsed time: 916ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 120
+BOOT : 119
+IVAL : 1000
+DBOOT : 6992
+FOUND : 6966
+---------------------------------
+time result
+cmd:nfer spec5.nfer trace_2000.json false false
+real 1.56s
+user 3.81s 
+sys  0.18s 
+memory:316144KB 
+cpu 254%
+
+##### spec5.nfer applied to trace_4000.json with minimality = false #####
+
+Elapsed time: 7148ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 240
+BOOT : 240
+IVAL : 2000
+DBOOT : 28617
+FOUND : 28560
+---------------------------------
+time result
+cmd:nfer spec5.nfer trace_4000.json false false
+real 8.25s
+user 30.71s 
+sys  0.64s 
+memory:940704KB 
+cpu 379%
+
+##### spec5.nfer applied to trace_8000.json with minimality = false #####
+
+Elapsed time: 71755ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 480
+BOOT : 480
+IVAL : 4000
+DBOOT : 114835
+FOUND : 114694
+---------------------------------
+time result
+cmd:nfer spec5.nfer trace_8000.json false false
+real 79.29s
+user 419.90s 
+sys  4.51s 
+memory:5086848KB 
+cpu 535%
+
+##### spec6.nfer applied to trace_1000.json with minimality = false #####
+
+Elapsed time: 185ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 500
+DL : 84
+FAIL : 48
+FOUND : 14
+---------------------------------
+time result
+cmd:nfer spec6.nfer trace_1000.json false false
+real 0.82s
+user 1.57s 
+sys  0.11s 
+memory:132392KB 
+cpu 204%
+
+##### spec6.nfer applied to trace_2000.json with minimality = false #####
+
+Elapsed time: 507ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 1000
+DL : 167
+FAIL : 95
+FOUND : 41
+---------------------------------
+time result
+cmd:nfer spec6.nfer trace_2000.json false false
+real 1.23s
+user 2.29s 
+sys  0.15s 
+memory:213800KB 
+cpu 199%
+
+##### spec6.nfer applied to trace_4000.json with minimality = false #####
+
+Elapsed time: 1714ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 2000
+DL : 330
+FAIL : 190
+FOUND : 65
+---------------------------------
+time result
+cmd:nfer spec6.nfer trace_4000.json false false
+real 2.62s
+user 3.84s 
+sys  0.21s 
+memory:288292KB 
+cpu 154%
+
+##### spec6.nfer applied to trace_8000.json with minimality = false #####
+
+Elapsed time: 5679ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 4000
+DL : 660
+FAIL : 380
+FOUND : 191
+---------------------------------
+time result
+cmd:nfer spec6.nfer trace_8000.json false false
+real 6.37s
+user 8.77s 
+sys  0.21s 
+memory:394836KB 
+cpu 140%
+
+##### spec6.nfer applied to trace_16000.json with minimality = false #####
+
+Elapsed time: 23116ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 8000
+DL : 1320
+FAIL : 760
+FOUND : 328
+---------------------------------
+time result
+cmd:nfer spec6.nfer trace_16000.json false false
+real 23.85s
+user 26.84s 
+sys  0.40s 
+memory:423600KB 
+cpu 114%
+
+##### spec7.nfer applied to trace_1000.json with minimality = true #####
+
+Elapsed time: 281ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 29
+ON : 39
+IVAL : 318
+FOUND : 14
+RECOVER : 29
+FAIL : 32
+---------------------------------
+time result
+cmd:nfer spec7.nfer trace_1000.json true false
+real 0.96s
+user 2.01s 
+sys  0.12s 
+memory:124924KB 
+cpu 221%
+
+##### spec7.nfer applied to trace_2000.json with minimality = true #####
+
+Elapsed time: 624ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 48
+ON : 69
+IVAL : 615
+FOUND : 25
+RECOVER : 53
+FAIL : 60
+---------------------------------
+time result
+cmd:nfer spec7.nfer trace_2000.json true false
+real 1.31s
+user 2.87s 
+sys  0.17s 
+memory:222156KB 
+cpu 231%
+
+##### spec7.nfer applied to trace_4000.json with minimality = true #####
+
+Elapsed time: 1657ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 110
+ON : 133
+IVAL : 1219
+FOUND : 66
+RECOVER : 124
+FAIL : 126
+---------------------------------
+time result
+cmd:nfer spec7.nfer trace_4000.json true false
+real 2.39s
+user 4.02s 
+sys  0.22s 
+memory:397316KB 
+cpu 177%
+
+##### spec7.nfer applied to trace_8000.json with minimality = true #####
+
+Elapsed time: 6113ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 221
+ON : 281
+IVAL : 2450
+FOUND : 133
+RECOVER : 224
+FAIL : 263
+---------------------------------
+time result
+cmd:nfer spec7.nfer trace_8000.json true false
+real 6.86s
+user 9.30s 
+sys  0.27s 
+memory:394368KB 
+cpu 139%
+
+##### spec7.nfer applied to trace_16000.json with minimality = true #####
+
+Elapsed time: 27600ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 430
+ON : 585
+IVAL : 4865
+FOUND : 248
+RECOVER : 477
+FAIL : 502
+---------------------------------
+time result
+cmd:nfer spec7.nfer trace_16000.json true false
+real 28.33s
+user 31.27s 
+sys  0.37s 
+memory:404660KB 
+cpu 111%
+
+##### spec8.nfer applied to trace_1000.json with minimality = false #####
+
+Elapsed time: 192ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 60
+IVAL : 500
+FOUND : 14
+GET : 47
+STARVE : 47
+---------------------------------
+time result
+cmd:nfer spec8.nfer trace_1000.json false false
+real 0.87s
+user 1.67s 
+sys  0.11s 
+memory:130220KB 
+cpu 205%
+
+##### spec8.nfer applied to trace_2000.json with minimality = false #####
+
+Elapsed time: 510ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 120
+IVAL : 1000
+FOUND : 28
+GET : 95
+STARVE : 95
+---------------------------------
+time result
+cmd:nfer spec8.nfer trace_2000.json false false
+real 1.14s
+user 2.15s 
+sys  0.14s 
+memory:213300KB 
+cpu 201%
+
+##### spec8.nfer applied to trace_4000.json with minimality = false #####
+
+Elapsed time: 1613ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 240
+IVAL : 2000
+FOUND : 52
+GET : 190
+STARVE : 190
+---------------------------------
+time result
+cmd:nfer spec8.nfer trace_4000.json false false
+real 2.24s
+user 3.35s 
+sys  0.16s 
+memory:282212KB 
+cpu 156%
+
+##### spec8.nfer applied to trace_8000.json with minimality = false #####
+
+Elapsed time: 6899ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 480
+IVAL : 4000
+FOUND : 113
+GET : 380
+STARVE : 380
+---------------------------------
+time result
+cmd:nfer spec8.nfer trace_8000.json false false
+real 7.56s
+user 9.60s 
+sys  0.22s 
+memory:292884KB 
+cpu 129%
+
+##### spec8.nfer applied to trace_16000.json with minimality = false #####
+
+Elapsed time: 26984ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 960
+IVAL : 8000
+FOUND : 221
+GET : 760
+STARVE : 760
+---------------------------------
+time result
+cmd:nfer spec8.nfer trace_16000.json false false
+real 27.66s
+user 30.69s 
+sys  0.38s 
+memory:407928KB 
+cpu 112%
