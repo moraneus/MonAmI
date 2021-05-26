@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# export PYTHONPATH=$PYTHONPATH:../`pwd`
-
 echo "=== RESULT ===" > result-monami
 
 echo "########### spec 5 ###########" >> result-monami
