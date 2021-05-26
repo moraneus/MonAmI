@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo "=== RESULT ===" > result-nfer-scala
+
+echo "########## spec 5 ##########" >> result-nfer-scala
+
+(gtime nfer spec5.nfer trace_1000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec5.nfer trace_2000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec5.nfer trace_4000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec5.nfer trace_8000.json false false) >> result-nfer-scala 2>&1 
+#(gtime nfer spec5.nfer trace_16000.json false false) >> result-nfer-scala 2>&1
+
+
+echo "########## spec 6 ##########" >> result-nfer-scala
+
+(gtime nfer spec6.nfer trace_1000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec6.nfer trace_2000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec6.nfer trace_4000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec6.nfer trace_8000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec6.nfer trace_16000.json false false) >> result-nfer-scala 2>&1
+
+echo "########## spec 7 ########## - minimality" >> result-nfer-scala
+
+(gtime nfer spec7.nfer trace_1000.json true false) >> result-nfer-scala 2>&1
+(gtime nfer spec7.nfer trace_2000.json true false) >> result-nfer-scala 2>&1
+(gtime nfer spec7.nfer trace_4000.json true false) >> result-nfer-scala 2>&1
+(gtime nfer spec7.nfer trace_8000.json true false) >> result-nfer-scala 2>&1
+(gtime nfer spec7.nfer trace_16000.json true false) >> result-nfer-scala 2>&1
+
+echo "########## spec 8 ##########" >> result-nfer-scala
+
+(gtime nfer spec8.nfer trace_1000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec8.nfer trace_2000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec8.nfer trace_4000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec8.nfer trace_8000.json false false) >> result-nfer-scala 2>&1
+(gtime nfer spec8.nfer trace_16000.json false false) >> result-nfer-scala 2>&1
+

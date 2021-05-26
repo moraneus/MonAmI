@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo "=== RESULT ===" > result-nfer-c
+
+echo "########## spec 5 ##########" >> result-nfer-c
+
+(gtime python3 run-nfer-c.py spec5.nferc trace_1000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec5.nferc trace_2000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec5.nferc trace_4000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec5.nferc trace_8000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec5.nferc trace_16000.csv false false) >> result-nfer-c 2>&1
+
+echo "########## spec 6 ##########" >> result-nfer-c
+
+(gtime python3 run-nfer-c.py spec6.nferc trace_1000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec6.nferc trace_2000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec6.nferc trace_4000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec6.nferc trace_8000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec6.nferc trace_16000.csv false false) >> result-nfer-c 2>&1
+
+echo "########## spec 7 ########## - minimality" >> result-nfer-c
+
+(gtime python3 run-nfer-c.py spec7.nferc trace_1000.csv true false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec7.nferc trace_2000.csv true false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec7.nferc trace_4000.csv true false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec7.nferc trace_8000.csv true false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec7.nferc trace_16000.csv true false) >> result-nfer-c 2>&1
+
+echo "########## spec 8 ##########" >> result-nfer-c
+
+(gtime python3 run-nfer-c.py spec8.nferc trace_1000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec8.nferc trace_2000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec8.nferc trace_4000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec8.nferc trace_8000.csv false false) >> result-nfer-c 2>&1
+(gtime python3 run-nfer-c.py spec8.nferc trace_16000.csv false false) >> result-nfer-c 2>&1

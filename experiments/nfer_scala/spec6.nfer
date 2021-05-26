@@ -1,0 +1,8 @@
+
+IVAL :- BEGIN before END
+  where BEGIN.interval = END.interval
+  map {interval -> BEGIN.interval, data -> BEGIN.data}
+
+DL :- IVAL where IVAL.data = "DL_MOBPRM" | IVAL.data = "DL_ARMPRM"
+FAIL :- IVAL where IVAL.data = "DL_FAIL"
+FOUND :- FAIL during DL
