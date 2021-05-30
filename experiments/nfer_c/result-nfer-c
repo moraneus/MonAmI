@@ -1,0 +1,165 @@
+=== RESULT ===
+########## spec 1 ##########
+505
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec1.nferc trace_1000_property_1.csv false false
+real 0.03s
+user 0.02s 
+sys 0.00s 
+memory:11036KB 
+cpu: 100%
+1005
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec1.nferc trace_2000_property_1.csv false false
+real 0.05s
+user 0.05s 
+sys 0.00s 
+memory:11488KB 
+cpu: 100%
+2005
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec1.nferc trace_4000_property_1.csv false false
+real 0.15s
+user 0.15s 
+sys 0.00s 
+memory:12704KB 
+cpu: 100%
+4005
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec1.nferc trace_8000_property_1.csv false false
+real 0.52s
+user 0.52s 
+sys 0.00s 
+memory:15152KB 
+cpu: 99%
+8005
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec1.nferc trace_16000_property_1.csv false false
+real 1.96s
+user 1.95s 
+sys 0.00s 
+memory:19852KB 
+cpu: 100%
+########## spec 2 ##########
+503
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec2.nferc trace_1000_property_2.csv false false
+real 0.02s
+user 0.01s 
+sys 0.00s 
+memory:11008KB 
+cpu: 95%
+1003
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec2.nferc trace_2000_property_2.csv false false
+real 0.04s
+user 0.04s 
+sys 0.00s 
+memory:11480KB 
+cpu: 100%
+2003
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec2.nferc trace_4000_property_2.csv false false
+real 0.14s
+user 0.14s 
+sys 0.00s 
+memory:12752KB 
+cpu: 100%
+4003
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec2.nferc trace_8000_property_2.csv false false
+real 0.52s
+user 0.52s 
+sys 0.00s 
+memory:15120KB 
+cpu: 99%
+8003
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec2.nferc trace_16000_property_2.csv false false
+real 1.98s
+user 1.97s 
+sys 0.00s 
+memory:19892KB 
+cpu: 100%
+########## spec 3 ########## - minimality
+360
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec3.nferc trace_1000_property_3.csv true false
+real 0.02s
+user 0.02s 
+sys 0.00s 
+memory:11056KB 
+cpu: 100%
+688
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec3.nferc trace_2000_property_3.csv true false
+real 0.05s
+user 0.05s 
+sys 0.00s 
+memory:11496KB 
+cpu: 100%
+1384
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec3.nferc trace_4000_property_3.csv true false
+real 0.15s
+user 0.15s 
+sys 0.00s 
+memory:12772KB 
+cpu: 99%
+2820
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec3.nferc trace_8000_property_3.csv true false
+real 0.54s
+user 0.54s 
+sys 0.00s 
+memory:15184KB 
+cpu: 99%
+5538
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec3.nferc trace_16000_property_3.csv true false
+real 2.12s
+user 2.12s 
+sys 0.00s 
+memory:19912KB 
+cpu: 100%
+########## spec 4 ##########
+504
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec4.nferc trace_1000_property_4.csv false false
+real 0.02s
+user 0.02s 
+sys 0.00s 
+memory:11108KB 
+cpu: 100%
+1004
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec4.nferc trace_2000_property_4.csv false false
+real 0.05s
+user 0.04s 
+sys 0.00s 
+memory:11632KB 
+cpu: 98%
+2004
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec4.nferc trace_4000_property_4.csv false false
+real 0.15s
+user 0.15s 
+sys 0.00s 
+memory:13016KB 
+cpu: 99%
+4004
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec4.nferc trace_8000_property_4.csv false false
+real 0.54s
+user 0.54s 
+sys 0.00s 
+memory:15672KB 
+cpu: 100%
+8004
+/usr/bin/time result
+cmd:python3.9 run-nfer-c.py spec4.nferc trace_16000_property_4.csv false false
+real 2.16s
+user 2.16s 
+sys 0.00s 
+memory:21080KB 
+cpu: 100%

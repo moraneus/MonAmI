@@ -1,0 +1,10 @@
+
+IVAL :- BEGIN before END
+  where BEGIN.interval = END.interval
+  map {interval -> BEGIN.interval, data -> BEGIN.data}
+
+BOOT :- IVAL where IVAL.data = "BOOT"
+DL:- IVAL where IVAL.data = "DL_IMAGE"
+DBOOT :- BOOT before BOOT
+FOUND :- DL during DBOOT
+

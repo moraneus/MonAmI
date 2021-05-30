@@ -1,0 +1,3 @@
+{
+    "property": "!exist D, G, S . D('DL_IMAGE') & G('GET_CAMDATA') & S('STARVE') & D i S & G i S"
+}

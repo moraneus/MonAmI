@@ -1,0 +1,7 @@
+[
+        {
+            "0": {"DATA": "BOOT", "B_PRIORITY": 0, "E_PRIORITY": 1},
+            "1": {"DATA": "DL_IMAGE", "B_PRIORITY": 2, "E_PRIORITY": 4},
+            "2": {"DATA": "BOOT", "B_PRIORITY": 3, "E_PRIORITY": 5}
+        }
+]

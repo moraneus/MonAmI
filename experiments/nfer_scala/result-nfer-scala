@@ -1,0 +1,425 @@
+=== RESULT ===
+########## spec 1 ##########
+
+##### spec1.nfer applied to trace_1000_property_1.json with minimality = false #####
+
+Elapsed time: 190ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+BOOT : 2
+IVAL : 500
+DBOOT : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_1000_property_1.json false false
+real 0.79s
+user 1.97s 
+sys 0.07s 
+memory:140416KB 
+cpu: 257%
+
+##### spec1.nfer applied to trace_2000_property_1.json with minimality = false #####
+
+Elapsed time: 357ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+BOOT : 2
+IVAL : 1000
+DBOOT : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_2000_property_1.json false false
+real 0.86s
+user 2.39s 
+sys 0.05s 
+memory:164096KB 
+cpu: 281%
+
+##### spec1.nfer applied to trace_4000_property_1.json with minimality = false #####
+
+Elapsed time: 1282ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+BOOT : 2
+IVAL : 2000
+DBOOT : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_4000_property_1.json false false
+real 1.81s
+user 3.37s 
+sys 0.14s 
+memory:395836KB 
+cpu: 194%
+
+##### spec1.nfer applied to trace_8000_property_1.json with minimality = false #####
+
+Elapsed time: 4421ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+BOOT : 2
+IVAL : 4000
+DBOOT : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_8000_property_1.json false false
+real 4.99s
+user 7.02s 
+sys 0.11s 
+memory:365736KB 
+cpu: 143%
+
+##### spec1.nfer applied to trace_16000_property_1.json with minimality = false #####
+
+Elapsed time: 17324ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+BOOT : 2
+IVAL : 8000
+DBOOT : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec1.nfer trace_16000_property_1.json false false
+real 17.92s
+user 20.30s 
+sys 0.15s 
+memory:385232KB 
+cpu: 114%
+########## spec 2 ##########
+
+##### spec2.nfer applied to trace_1000_property_2.json with minimality = false #####
+
+Elapsed time: 259ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 500
+DL : 1
+FAIL : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_1000_property_2.json false false
+real 0.85s
+user 2.38s 
+sys 0.09s 
+memory:147856KB 
+cpu: 291%
+
+##### spec2.nfer applied to trace_2000_property_2.json with minimality = false #####
+
+Elapsed time: 416ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 1000
+DL : 1
+FAIL : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_2000_property_2.json false false
+real 0.94s
+user 2.74s 
+sys 0.06s 
+memory:196264KB 
+cpu: 297%
+
+##### spec2.nfer applied to trace_4000_property_2.json with minimality = false #####
+
+Elapsed time: 1194ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 2000
+DL : 1
+FAIL : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_4000_property_2.json false false
+real 1.72s
+user 3.14s 
+sys 0.09s 
+memory:352844KB 
+cpu: 188%
+
+##### spec2.nfer applied to trace_8000_property_2.json with minimality = false #####
+
+Elapsed time: 4323ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 4000
+DL : 1
+FAIL : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_8000_property_2.json false false
+real 4.90s
+user 7.21s 
+sys 0.10s 
+memory:392456KB 
+cpu: 149%
+
+##### spec2.nfer applied to trace_16000_property_2.json with minimality = false #####
+
+Elapsed time: 18732ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+IVAL : 8000
+DL : 1
+FAIL : 1
+FOUND : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec2.nfer trace_16000_property_2.json false false
+real 19.39s
+user 22.51s 
+sys 0.17s 
+memory:662180KB 
+cpu: 117%
+########## spec 3 ########## - minimality
+
+##### spec3.nfer applied to trace_1000_property_3.json with minimality = true #####
+
+Elapsed time: 245ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 1
+ON : 2
+IVAL : 354
+FOUND : 1
+RECOVER : 1
+FAIL : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_1000_property_3.json true false
+real 0.83s
+user 2.38s 
+sys 0.06s 
+memory:142164KB 
+cpu: 294%
+
+##### spec3.nfer applied to trace_2000_property_3.json with minimality = true #####
+
+Elapsed time: 449ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 1
+ON : 2
+IVAL : 682
+FOUND : 1
+RECOVER : 1
+FAIL : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_2000_property_3.json true false
+real 1.02s
+user 2.63s 
+sys 0.07s 
+memory:191500KB 
+cpu: 264%
+
+##### spec3.nfer applied to trace_4000_property_3.json with minimality = true #####
+
+Elapsed time: 1291ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 1
+ON : 2
+IVAL : 1378
+FOUND : 1
+RECOVER : 1
+FAIL : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_4000_property_3.json true false
+real 1.81s
+user 3.34s 
+sys 0.09s 
+memory:332992KB 
+cpu: 189%
+
+##### spec3.nfer applied to trace_8000_property_3.json with minimality = true #####
+
+Elapsed time: 4786ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 1
+ON : 2
+IVAL : 2814
+FOUND : 1
+RECOVER : 1
+FAIL : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_8000_property_3.json true false
+real 5.34s
+user 7.31s 
+sys 0.11s 
+memory:391980KB 
+cpu: 138%
+
+##### spec3.nfer applied to trace_16000_property_3.json with minimality = true #####
+
+Elapsed time: 19827ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+EXEC : 1
+ON : 2
+IVAL : 5532
+FOUND : 1
+RECOVER : 1
+FAIL : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec3.nfer trace_16000_property_3.json true false
+real 20.49s
+user 24.05s 
+sys 0.26s 
+memory:562516KB 
+cpu: 118%
+########## spec 4 ##########
+
+##### spec4.nfer applied to trace_1000_property_4.json with minimality = false #####
+
+Elapsed time: 204ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+IVAL : 500
+FOUND : 1
+GET : 1
+STARVE : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_1000_property_4.json false false
+real 0.83s
+user 2.66s 
+sys 0.06s 
+memory:150568KB 
+cpu: 327%
+
+##### spec4.nfer applied to trace_2000_property_4.json with minimality = false #####
+
+Elapsed time: 390ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+IVAL : 1000
+FOUND : 1
+GET : 1
+STARVE : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_2000_property_4.json false false
+real 0.91s
+user 2.56s 
+sys 0.06s 
+memory:199016KB 
+cpu: 286%
+
+##### spec4.nfer applied to trace_4000_property_4.json with minimality = false #####
+
+Elapsed time: 1234ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+IVAL : 2000
+FOUND : 1
+GET : 1
+STARVE : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_4000_property_4.json false false
+real 1.77s
+user 3.53s 
+sys 0.10s 
+memory:402668KB 
+cpu: 205%
+
+##### spec4.nfer applied to trace_8000_property_4.json with minimality = false #####
+
+Elapsed time: 4866ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+IVAL : 4000
+FOUND : 1
+GET : 1
+STARVE : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_8000_property_4.json false false
+real 5.43s
+user 7.43s 
+sys 0.13s 
+memory:361008KB 
+cpu: 139%
+
+##### spec4.nfer applied to trace_16000_property_4.json with minimality = false #####
+
+Elapsed time: 18290ms
+
+=================================
+    Generated Intervals:
+---------------------------------
+DL : 1
+IVAL : 8000
+FOUND : 1
+GET : 1
+STARVE : 1
+---------------------------------
+/usr/bin/time result
+cmd:./nfer spec4.nfer trace_16000_property_4.json false false
+real 19.06s
+user 22.42s 
+sys 0.14s 
+memory:531948KB 
+cpu: 118%
