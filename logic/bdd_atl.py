@@ -7,13 +7,13 @@ from graphics.io import IO
 
 
 class BddAtl():
-    def __init__(self, i_variables, i_interval_size=3, i_debug=True):
+    def __init__(self, i_variables, i_interval_size, i_data_size, i_debug=True):
         self._m_bdd_manager = _bdd.BDD()
         self.__m_property_variables = i_variables
         self._m_interval_size = i_interval_size
-        self._m_data_size = i_interval_size
+        self._m_data_size = i_data_size
         self.__m_debug = i_debug
-        self.__declare_variables(i_variables, i_interval_size)
+        self.__declare_variables(i_variables)
         self._m_bdds = self.__init_bdds_state()
         self.__m_events_functions = self.__init_event_functions()
         self.__m_bitstrings = {}
@@ -68,14 +68,13 @@ class BddAtl():
     #   * Declare the updated function with the right order upon new event.
     ###################################################################################################################
 
-    def __declare_variables(self, i_variables: list, i_num_of_variables: int):
+    def __declare_variables(self, i_variables: list):
         """
         Declare the variables which are valid in the BDD manager.
         It also set the order of the variable in the BDD ('X0', 'X1', ..., 'Y0', 'Y1', ...)
 
         Parameters
         ----------
-        i_num_of_variables : The number of variable in full assignment formula.
         i_variables : The rest of property variables should be declared.
 
         Returns
@@ -85,16 +84,19 @@ class BddAtl():
         """
 
         # Creating the algorithm variables should be declare on the BDD manager
-        x_variables = [f'_X{i}' for i in range(i_num_of_variables)]
-        y_variables = [f'_Y{i}' for i in range(i_num_of_variables)]
-        d_variables = [f'_D{i}' for i in range(i_num_of_variables)]
+        x_variables = [f'_X{i}' for i in range(self._m_interval_size)]
+        y_variables = [f'_Y{i}' for i in range(self._m_interval_size)]
+        d_variables = [f'_D{i}' for i in range(self._m_data_size)]
 
         # Creating the property variables should be declare on the BDD manager
         property_variables = []
         for variable in i_variables:
-            if variable in ['_X', '_Y', '_D']:
+            if variable in ['_X', '_Y']:
                 raise BadPropertyVariables(variable)
-            property_variables += [f'{variable}{i}' for i in range(i_num_of_variables)]
+            property_variables += [f'{variable}{i}' for i in range(self._m_interval_size)]
+            if variable in ['_D']:
+                raise BadPropertyVariables(variable)
+            property_variables += [f'{variable}{i}' for i in range(self._m_data_size)]
 
         self._m_bdd_manager.declare(*(x_variables + y_variables + d_variables + property_variables))
 
