@@ -27,6 +27,9 @@ class Formula:
     def get_intervals(self):
         pass
 
+    def eval(self, **kwargs):
+        pass
+
 
 class And(Formula):
     def __init__(self, formula1, formula2):
