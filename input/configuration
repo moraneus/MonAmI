@@ -1,9 +1,9 @@
 {
-    "DEBUG": false,
-    "INTERVAL_SIZE":13,
-    "DATA_SIZE": 13,
+    "DEBUG": true,
+    "INTERVAL_SIZE": "AUTO",
+    "DATA_SIZE": "AUTO",
     "EXPANSION_LENGTH": 1,
-    "MODE": "CONTINUE",
-    "TRACE": "/home/beth/PycharmProjects/test/input/trace",
-    "PROPERTY": "/home/beth/PycharmProjects/test/input/property"
+    "MODE": "CONTINUE-SMALL",
+    "TRACE": "/Users/moraneus/PycharmProjects/MonAmI/input/trace",
+    "PROPERTY": "/Users/moraneus/PycharmProjects/MonAmI/input/property"
 }
