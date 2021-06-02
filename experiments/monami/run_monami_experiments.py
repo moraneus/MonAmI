@@ -45,7 +45,7 @@ def main():
     counter = 1
 
     # BDD constructor object
-    bdd_atl = BddAtl(property.get_intervals(), i_interval_size=bitstring_size, i_debug=False)
+    bdd_atl = BddAtl(property.get_intervals(), i_interval_size=bitstring_size, i_data_size=bitstring_size, i_debug=False)
 
     # Interval bitstring DB object
     interval_hash_table = BitstringTable(bitstring_size, 1, i_debug=False)
