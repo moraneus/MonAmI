@@ -1,4 +1,4 @@
-from tests.test_helper import *
+from tests.test_monitor import *
 import unittest
 
 
@@ -9,7 +9,7 @@ class TestDataBdds(unittest.TestCase):
             'XD': [{'_D0': False}]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -23,7 +23,7 @@ class TestDataBdds(unittest.TestCase):
                    {'_X0': False, '_X1': True, '_X2': False, '_D0': False}]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -35,7 +35,7 @@ class TestDataBdds(unittest.TestCase):
             'XD': [{'_X0': False, '_D0': False}]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -48,7 +48,7 @@ class TestDataBdds(unittest.TestCase):
                    {'_X0': True, '_D0': True}]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -62,7 +62,7 @@ class TestDataBdds(unittest.TestCase):
                    {'_X0': False, '_X1': True, '_X2': False, '_D0': False, '_D1': True, '_D2': False}]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -76,7 +76,7 @@ class TestDataBdds(unittest.TestCase):
                    {'_X0': False, '_X1': True, '_X2': False, '_D0': False, '_D1': True, '_D2': False}]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -111,7 +111,7 @@ class TestDataBdds(unittest.TestCase):
                    ]
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))

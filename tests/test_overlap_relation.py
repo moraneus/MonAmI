@@ -1,4 +1,4 @@
-from tests.test_helper import *
+from tests.test_monitor import *
 import unittest
 
 
@@ -11,7 +11,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYYX': []
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
@@ -26,7 +26,7 @@ class TestBeforeRelation(unittest.TestCase):
             'XYYX': []
         }
 
-        bdds = update_bdds_without_specification(sequence, i_num_of_variables=1, i_expansion_length=2)
+        bdds = update_bdds_only(sequence, i_num_of_variables=1, i_expansion_length=2)
 
         for key in results.keys():
             self.assertCountEqual(results[key], list(bdds[key]))
