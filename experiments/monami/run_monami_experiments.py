@@ -16,7 +16,7 @@ from execptions.execptions import IntervalDataError
 from frontend.parser import parse
 
 
-def display_top(snapshot, key_type='lineno'):
+def display_allocated_memory(snapshot, key_type='lineno'):
     snapshot = snapshot.filter_traces((
         tracemalloc.Filter(False, "<frozen importlib._bootstrap>"),
         tracemalloc.Filter(False, "<unknown>"),
@@ -30,6 +30,7 @@ def read_json(i_json_file):
     with open(i_json_file, "r") as json_file:
         data = json.load(json_file)
     return data
+
 
 def main():
     property_file = sys.argv[1]
@@ -102,7 +103,7 @@ if __name__ == '__main__':
     stop = timeit.default_timer()
     print(f"Time: {'%.2f' % (stop - start)}")
     snapshot = tracemalloc.take_snapshot()
-    display_top(snapshot)
+    display_allocated_memory(snapshot)
 
 
 
