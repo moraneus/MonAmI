@@ -609,7 +609,7 @@ In debug mode, after each event, the program will print out to console the updat
 ```
 
 
-## Some epxeriments results: ##
+## Some experiment results: ##
 As part of the testing process of MonAmI, we performed several experiments that tested the correctness of the tool and its performance - the time that it takes and the allocated memory during the execution. 
 We created trace files in different sizes of events (1000, 2000, 4000, 8000, 16000). 
 These files were created with the trace generator script.
