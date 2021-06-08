@@ -625,7 +625,8 @@ We compare MonAmI to nfer tool ([nfer in C](http://nfer.io), [nfer in Scala](htt
 }
 ```
 
-To demonstrate some of the experiment results, we took the above 4 examples properties.
+To demonstrate some of the experiment results, we took the above 4 examples properties. \
+We used gnu-time to measure the memory.
 
 
 ![Property_1_Memory](https://user-images.githubusercontent.com/48603901/121250344-4c9aa500-c8ae-11eb-8ce6-fa0ff660033f.png)
