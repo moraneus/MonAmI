@@ -628,5 +628,12 @@ We compare MonAmI to nfer tool ([nfer in C](http://nfer.io), [nfer in Scala](htt
 To demonstrate some of the experiment results, we took the above 4 examples properties.
 
 
-![image](https://user-images.githubusercontent.com/48603901/117803681-949ebb80-b25f-11eb-804b-3551995cf072.png)
+![Property_1_Memory](https://user-images.githubusercontent.com/48603901/121250344-4c9aa500-c8ae-11eb-8ce6-fa0ff660033f.png)
+![Property_1_Time](https://user-images.githubusercontent.com/48603901/121250352-502e2c00-c8ae-11eb-9a5d-a2cd7d29637b.png)
+![Property_2_Memory](https://user-images.githubusercontent.com/48603901/121250365-53291c80-c8ae-11eb-82b1-554bba8b78c7.png)
+![Property_2_Time](https://user-images.githubusercontent.com/48603901/121250369-545a4980-c8ae-11eb-9e3e-e333a1b3252a.png)
+![Property_3_Memory](https://user-images.githubusercontent.com/48603901/121250456-6805b000-c8ae-11eb-9ed8-204aaf5ef831.png)
+![Property_3_Time](https://user-images.githubusercontent.com/48603901/121251014-13af0000-c8af-11eb-94e9-96fbde751bf1.png)
+![Property_4_Memory](https://user-images.githubusercontent.com/48603901/121250462-6936dd00-c8ae-11eb-93a1-e72a8933b3ec.png)
+![Property_4_Time](https://user-images.githubusercontent.com/48603901/121250464-69cf7380-c8ae-11eb-9b91-faf514df043b.png)
 
