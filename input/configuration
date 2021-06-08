@@ -1,9 +1,9 @@
 {
     "DEBUG": true,
     "INTERVAL_SIZE": "AUTO",
-    "DATA_SIZE": "AUTO",
-    "EXPANSION_LENGTH": 1,
-    "MODE": "CONTINUE-SMALL",
+    "DATA_SIZE": 1,
+    "EXPANSION_LENGTH": 2,
+    "MODE": "VIOLATION",
     "TRACE": "/Users/moraneus/PycharmProjects/MonAmI/input/trace",
     "PROPERTY": "/Users/moraneus/PycharmProjects/MonAmI/input/property"
 }
