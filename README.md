@@ -1,23 +1,25 @@
-# MonAmI - Monitoring Allen logic
+# MonAmI - Monitoring First-Order Allen Temporal logic
 
-## General Introduction: ##
-* MonAmI is a Python library for monitoring the foATL (First Order Allen Temporal Logic). FoATL is an extension of Allen's temporal logic.
-* MonAmI formed by events, by checking them against a FoATL property. 
+## General Introduction: 
 
-## Types of Allen's interval algebra: ##
+* MonAmI is a Python library for monitoring FoATL (First-Order Allen Temporal Logic). FoATL is an extension of Allen's temporal logic.
+* MonAmI processes events defining the beginning and end of intervals, and verifies the observed intervals against a FoATL property. 
+
+## Types of Allen's interval algebra: 
 
 ![Image of Inervals](https://www.researchgate.net/profile/Ioannis_Tsamardinos/publication/230561978/figure/fig2/AS:646067146223617@1531045819115/1-The-13-relations-between-intervals-in-Allens-algebra-Interval-A-is-always-either-at.png)
 * Allen's Temporal Intervals (James F. Allen, Maintaining Knowledge About Temporal Intervals, Communications of the ACM, 26 (11), 832–843).
 * __NOTE: The only relations used by the FoATL algorithm, for now, are: `before`, `overlaps`, and `includes`.__
 
 
-## Implementation ##
+## Implementation 
 * The tool works with Python > 3.6, and it uses the 'dd' package, which can generate and manipulate BDDs (https://github.com/tulip-control/dd).
 * To achieve more efficiency, 'dd' uses Cython to bindings the C CUDD library (`dd.cudd`), used by MonAmI.
 * The BDDs are used to represent Boolean functions. BDDs can be considered a compressed representation of sets of relations (https://en.wikipedia.org/wiki/Binary_decision_diagram).
 
 
-### General characterization of MonAmI: ### 
+### General characterization of MonAmI: 
+
 1. A trace is a sequence of `begin(i, d)` or `end(i)` events where `i` is denoted for an interval ID and `d` denotes data.
 2. For each event:
     1. Interval id and data, if relevant, enumerate into 2^k size bit-string.
@@ -25,7 +27,8 @@
     3. The specification is evaluated due to this event and the BDDs current state.
     4. MonAmI output created according to the mode defined by the user.
     
-### The CODE Structure: ###
+### The CODE Structure: 
+
 The main tree of the code which contains several parts and classes which any one of them has a specific goal.
 
 |-- `exceptions` folder (contains the interval and specification exceptions). \
