@@ -1,3 +1,3 @@
 {
-    "property": "exist A, B, C, D, E . (A < B & B < C) & A('Data1') & B('Data2') & C('Data3') & D i E"
+    "property": "!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))"
 }
