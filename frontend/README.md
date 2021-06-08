@@ -6,16 +6,17 @@ grammar.
 
 ```
 <formula> ::=
+    | <name> '(' <data> ')'
+    | 'same' '(' <name> ',' <name> ')'
+    | <name> '<' <name>
+    | <name> 'o' <name>
+    | <name> 'i' <name>
     | <formula> '|' <formula>
     | <formula> '->' <formula>
     | <formula> '&' <formula>
     | '!' <formula>
-    | <name> '<' <name>
-    | <name> 'o' <name>
-    | <name> 'i' <name>
-    | <name> '(' <data> ')'
-    | 'same' '(' <name> ',' <name> ')'
     | 'exist' <names> '.' <formula>
+    | 'forall' <names> '.' <formula>
     | '(' <formula> ')'
     
  <name> ::= r'[a-zA-Z_][a-zA-Z0-9_\.]*'
