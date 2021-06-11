@@ -212,6 +212,6 @@ class TraceGenerator:
 
 
 
-# trace_generator = TraceGenerator("rules", "data", 500, 'trace_1000.json', 30, 3)
-# trace_generator.start()
+trace_generator = TraceGenerator("rules", "data", 500, 'trace_1000.json', 30, 3)
+trace_generator.start()
 
