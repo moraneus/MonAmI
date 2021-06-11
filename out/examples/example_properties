@@ -1,0 +1,11 @@
+{
+    "property1": "!exist A . exist B . A < B & same(A, B)",
+    "property2": "!exist A . exist B, C . A i B & B i C",
+    "property3": "forall A, B . ((A < B) & (!exist C . (A < C & C < B))) -> !(A('2') & B('2'))",
+    "property4": "forall A, B, C . (A o B & B o C) -> !(A o C)",
+    "property5": "exist A, B, C, D, E . A('Data1') & B('Data2') & C('Data3') & A < B & B < C & D i E",
+    "property6": "!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))",
+    "property7": "!exist D, F . (D('DL_MOBPRM') | D('DL_ARMPRM')) & F('DL_FAIL') & D i F",
+    "property8": "!exist O, F, R . O('INS_ON') & F('INS_FAIL') & R('INS_RECOVER') & O < F & F < R & !exist X . (X('INS_ON') | X('INS_RECOVER')) & O < X & X < R",
+    "property9": "!exist D, G, S . D('DL_IMAGE') & G('GET_CAMDATA') & S('STARVE') & D i S & G i S"
+}
