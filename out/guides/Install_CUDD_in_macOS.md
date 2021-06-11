@@ -1,4 +1,4 @@
-# INSTALLATION CUDD IN MACOS #
+# Install CUDD in macOS #
 ## General ##
 When we try to install the `dd.cudd` module in macOS laptops, we had some errors.
 That probably caused due to an `SSL: CERTIFICATE_VERIFY_FAILED` error while the installation process tried to download the cudd package at first.
