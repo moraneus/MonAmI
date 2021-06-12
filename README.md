@@ -13,7 +13,7 @@
 # Overview
 MonAmI is a Python library for monitoring the foATL (First-Order Allen Temporal Logic), which is an extension of [Allen's temporal logic](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra). \
 MonAmI formed by events, by checking them against a FoATL property. \
-An example of a FoATL property is the following:
+An example of a FoATL property is the following (Benign Telemetry Transmission Error):
 ```json
 {
     "property": "!exist D, F . (D('DL_MOBPRM') | D('DL_ARMPRM')) & F('DL_FAIL') & D i F"
@@ -141,9 +141,20 @@ Operator                            | Meaning
 `(<formula>)`                       | `<formula>`
 
 ### Example Properties ###
-* ```!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D) | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))"```
-* ```"!exist O, F, R . O('INS_ON') & F('INS_FAIL') & R('INS_RECOVER') & O < F & F < R & !exist X . (X('INS_ON') | X('INS_RECOVER')) & O < X & X < R"```
-* ```"!exist D, G, S . D('DL_IMAGE') & G('GET_CAMDATA') & S('STARVE') & D i S & G i S"```
+* #### Double Boot ####
+    * ```!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D) | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))"```
+    * One particular concern in this case is whether there is a downlink operation during an interval where the flight 
+      computer reboots twice. This scenario could cause a potential loss of downlink information.
+
+* #### Benign Instrument Power-on Failure
+    * ```"!exist O, F, R . O('INS_ON') & F('INS_FAIL') & R('INS_RECOVER') & O < F & F < R & !exist X . (X('INS_ON') | X('INS_RECOVER')) & O < X & X < R"```
+    * In this case, an instrument power-on command (`INS_ON`) fails (`INS_FAIL`) and then recovers (`INS_RECOVER`). 
+      Since the behavior is predictable, and benign, the warning is labeled as being expected.
+* #### Benign Task Starvation during Overlap of Commands
+    * ```"!exist D, G, S . D('DL_IMAGE') & G('GET_CAMDATA') & S('STARVE') & D i S & G i S"```
+    * This property labels a situation in which a warning about task starvation (`STARVE`) is expected whenever an 
+      activity (`GET_CAMDATA`) which fetches data products from the cameras overlaps with an Earth image communication activity (`DL_IMAGE`).
+
 
 
 # The MonAmI Trace Language
@@ -151,7 +162,7 @@ In order to execute MonAmI, it needs to get the trace in a valid language format
 * A trace in a sequence of events.
 * An interval is a pair of events - `begin` and `end` events. 
   
-Each event is from the type `[Event type, Interval ID, Data]` for `begin` event and `[Event type, Interval ID`]` for an `end` event.
+Each event is from the type `[Event type, Interval ID, Data]` for `begin` event and `[Event type, Interval ID]` for an `end` event.
 
 Parameter     | Details
 ------------- | -------------
@@ -167,6 +178,7 @@ Data          | `null`, `int`, or `str`
 ```
 
 # MonAmI Execution Output Example (in debug mode): 
+Debug mode is good for short traces.
 * Assume the property:
 ```json
 {
