@@ -196,26 +196,28 @@ an activity reading data from the camera
 The format of traces are as follows.
 
 * A trace in a sequence of events.
-* An interval is a pair of events: a `begin` event followed by an `end` event. 
+* An interval is created internally in MonaAmi from a `begin` event followed by a corresponding `end` event with the same interval ID.
   
-Each event is from the type `[Event type, Interval ID, Data]` for a `begin` event and `[Event type, Interval ID]` for an `end` event.
+Each event is from the type `["begin", Interval ID, Data]` for a `begin` event, and `["end", Interval ID]` for an `end` event.
 
 Parameter     | Details
 ------------- | -------------
 Event Type    | `"begin"` or `"end"` only
 Interval ID   | `int`, `str`
-Data          | `null`, `int`, or `str`
+Data          | `null`, `int`, or `str` for begin events only
 
-# MonAmI Execution Output Example (in debug mode): 
+# MonAmI Execution Example (in debug mode): 
 
 Assume the property:
 
 ```json
 {
-    "property": "!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))"
+    "property": 
+      "!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))"
 }
 ```
-Assume the trace:
+
+Assume furthermore the trace:
 
 ```json
 {
@@ -231,7 +233,8 @@ Assume the trace:
 }
 ```
 
-      * And assume the configuration file:
+and assume the configuration file:
+
 ```json
 {
     "DEBUG": true,
@@ -243,14 +246,17 @@ Assume the trace:
     "PROPERTY": "/home/john/project/MonAmI/input/property"
 }
 ```
-We chose `"MODE": "VIOLATION"` since we want to check whether a violation occurred.
-In the example, the property will violate only at the last event. \
-`"INTERVAL_SIZE": "AUTO"` will set the interval bitstring size into 2, since with 2 bits, we can represent four different intervals (00, 01, 10, 11). \
+
+We chose `"MODE": "VIOLATION"` since we want to check whether a violation occurs as soon as it is encountered.
+In the example, the property will violate only at the last event. 
+
+`"INTERVAL_SIZE": "AUTO"` will set the interval bitstring size into 2, since with 2 bits, we can represent four different intervals (00, 01, 10, 11). 
+        
 `"DATA_SIZE": 1` is good enough since that 1 bit can define two distinct data values, and in our example, we have only two.
 
 In debug mode, after each event, the program will print out to console the updated BDDs.
-* It also prints out other information like bitstring expansion if it happened and the mapping between intervals and data to bitstrings.
-* The final state will be print at the end of the execution.
+It also prints out other information like bitstring expansion if it happened and the mapping between intervals and data to bitstrings.
+The final state will be print at the end of the execution.
 
 ```python
 
