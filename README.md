@@ -25,10 +25,10 @@ The implementation uses [BDDs (Binary Decision Diagrams)](https://en.wikipedia.o
 
 # Installing MonAmI
 The directly out contains files and directories useful for installing and running MonAmI:
-* ast: A directory containing python script which helps to understand the AST structure.
-* examples: An example directory containing properties, traces and other files.
-* guides: A directory containing other guides such as using the trace_generator.py.
-* papers: A directory containing papers published about MonAmI.
+* __ast__: A directory containing python script which helps to understand the AST structure.
+* __examples__: An example directory containing properties, traces and other files.
+* __guides__: A directory containing other guides such as using the trace_generator.py.
+* __papers__: A directory containing papers published about MonAmI.
   
 MonAmI is implemented in Python.
 1. Install Python 3.7 and above (We used Python 3.9).
@@ -39,7 +39,7 @@ MonAmI is implemented in Python.
    
 # Running MonAmI
 1. CD to MonAmI root directory.
-2. Type ``` export PYTHONPATH=$PYTHONPATH:`pwd` ``` and press enter (Only in the first execution).   
+2. Type ``` export PYTHONPATH=$PYTHONPATH:`pwd` ``` and press enter (Only for the first execution).   
 3. Running MonAmI is made by executes the command `python3 monami.py`. Make sure that `python3` points to your Python > 3.7 version.
 4. Before running, you must change the `configuration` file according to your environment and needs.
 
@@ -131,9 +131,9 @@ Operator                            | Meaning
 `p & q`                             | `p AND q`
 `p -> q`                            | `p IMPLIES q`
 `!p`                                | `NOT p`
-`A < B`                             | `A Before B` 
-`A o B`                             | `A Overlaps B`
-`A i B`                             | `A Includes B`
+`A < B`                             | `A Before B` (same meaning as `B After A`)
+`A o B`                             | `A Overlaps B` (same meaning as `B Overlapped by A`)
+`A i B`                             | `A Includes B` (same meaning as `B During A`)
 `A(d)`                              | Denote that the data of the interval assigned to the variable `A` has the constant value `d`
 `same(A, B)`                        | Verify whether two intervals `A` and `B` carry the `same` value
 `exist A . p(A)`                    | There exists an `A` such that `p(A)`
