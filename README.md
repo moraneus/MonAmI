@@ -193,11 +193,12 @@ an activity reading data from the camera
 
 # The MonAmI Trace Language
 
-In order to execute MonAmI, it needs to get the trace in a valid language format.
+The format of traces are as follows.
+
 * A trace in a sequence of events.
-* An interval is a pair of events - `begin` and `end` events. 
+* An interval is a pair of events: a `begin` event followed by an `end` event. 
   
-Each event is from the type `[Event type, Interval ID, Data]` for `begin` event and `[Event type, Interval ID]` for an `end` event.
+Each event is from the type `[Event type, Interval ID, Data]` for a `begin` event and `[Event type, Interval ID]` for an `end` event.
 
 Parameter     | Details
 ------------- | -------------
@@ -205,28 +206,32 @@ Event Type    | `"begin"` or `"end"` only
 Interval ID   | `int`, `str`
 Data          | `null`, `int`, or `str`
 
-4. Example of short `trace` file:
-```json
-{
-    "execution": [["begin", 1, "BOOT"], ["begin", 2, "DL_IMAGE"], ["end", 1], ["end", 2], ["begin", 3, "BOOT"], ["end", 3]]
-}
-```
-
 # MonAmI Execution Output Example (in debug mode): 
-Debug mode is good for short traces.
-* Assume the property:
+
+Assume the property:
+
 ```json
 {
     "property": "!exist B1, B2, D . B1('BOOT') & B2('BOOT') & D('DL_IMAGE') & B1 < B2 & (B1 i D | B2 i D | (B1 < D & D < B2) | (B1 o D & !D i B2) | (D o B2 & !D i B1))"
 }
 ```
-* Assume the trace:
+Assume the trace:
+
 ```json
 {
-    "execution": [["begin", 1, "BOOT"], ["begin", 2, "DL_IMAGE"], ["end", 1], ["end", 2], ["begin", 3, "BOOT"], ["end", 3]]
+    "execution": 
+       [
+         ["begin", 1, "BOOT"], 
+         ["begin", 2, "DL_IMAGE"], 
+         ["end", 1], 
+         ["end", 2], 
+         ["begin", 3, "BOOT"], 
+         ["end", 3]
+       ]
 }
 ```
-* And assume the configuration file:
+
+      * And assume the configuration file:
 ```json
 {
     "DEBUG": true,
