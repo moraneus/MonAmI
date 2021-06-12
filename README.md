@@ -208,6 +208,9 @@ Data          | `null`, `int`, or `str` for begin events only
 
 # MonAmI Execution Example (in debug mode): 
 
+Both property and trace are assumed stored in JSON files, with particular
+  formats, as illustrated below.
+  
 Assume the property:
 
 ```json
