@@ -21,7 +21,7 @@ An example of a FoATL property is the following (Benign Telemetry Transmission E
 ```
 The property states that there is not exist D and F intervals (`!exist D, F`) such that (`.`) D with data DL_MOBPRM (`D('DL_MOBPRM'`) or (`|`) D with DL_ARMPRM data includes (`i`) F interval with DL_FAIL data. \
 Another way of seeing this is that there is no DL_FAIL interval during a DL_MOBPRM or DL_ARMPRM interval. \
-The implementation uses [BDDs (Binary Decision Diagrams](https://en.wikipedia.org/wiki/Binary_decision_diagram) for representing assignments to quantified variables with their data (such as D('DL_MOBPRM')) and for the Allen's intervals (such as D i F).
+The implementation uses [BDDs (Binary Decision Diagrams)](https://en.wikipedia.org/wiki/Binary_decision_diagram) for representing assignments to quantified variables with their data (such as D('DL_MOBPRM')) and for the Allen's intervals (such as D i F).
 
 # Installing MonAmI
 The directly out contains files and directories useful for installing and running MonAmI:
