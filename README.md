@@ -251,7 +251,7 @@ and assume the configuration file:
 ```
 
 We choose `"MODE": "VIOLATION"` since we want to check whether a violation occurs as soon as it is encountered.
-In the example, the property will violate only at the last event. 
+In the example, the property will, however, only be violated at the last event. 
 
 `"INTERVAL_SIZE": "AUTO"` will set the interval bitstring size into 2, since with 2 bits, we can represent four different intervals (00, 01, 10, 11). 
         
