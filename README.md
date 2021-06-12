@@ -261,16 +261,18 @@ In debug mode, after each event, the program will print to console the updated B
 It also prints other information, like bitstring expansion if it happens, and the mapping between intervals and data to bitstrings.
 The final state will be printed at the end of the execution.
 
+The output generated from running MonAmi on the above trace, property, and configuration file is as follows.
+          
           
 ```python
           
 
-                                                       ███╗   ███╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ███╗██╗
-                                                       ████╗ ████║██╔═══██╗████╗  ██║██╔══██╗████╗ ████║██║
-                                                       ██╔████╔██║██║   ██║██╔██╗ ██║███████║██╔████╔██║██║
-                                                       ██║╚██╔╝██║██║   ██║██║╚██╗██║██╔══██║██║╚██╔╝██║██║
-                                                       ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║  ██║██║ ╚═╝ ██║██║
-                                                       ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
+                         ███╗   ███╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ███╗██╗
+                         ████╗ ████║██╔═══██╗████╗  ██║██╔══██╗████╗ ████║██║
+                         ██╔████╔██║██║   ██║██╔██╗ ██║███████║██╔████╔██║██║
+                         ██║╚██╔╝██║██║   ██║██║╚██╗██║██╔══██║██║╚██╔╝██║██║
+                         ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║  ██║██║ ╚═╝ ██║██║
+                         ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
                                                     
 
 ############################################################################## (START) ##############################################################################
