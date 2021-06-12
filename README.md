@@ -50,7 +50,8 @@ MonAmI is implemented in Python.
 
 ### Configuration File: 
 
-1. The `configuration` file contains the arguments that are needed for MonAmI:
+The `configuration` file contains the arguments that are needed for MonAmI:
+
     1. `DEBUG` - If true, the program will print to the console messages that describe the BDDs for each event.
     2. `INTERVAL_SIZE` - Initial length of the enumeration of intervals.
        1. `int` - Set the initial size to be as the specified value.
