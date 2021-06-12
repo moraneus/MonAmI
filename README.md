@@ -260,7 +260,7 @@ In the example, the property will be violated at the last event.
 In debug mode, after each event, the program will print to console the updated BDDs.
 It also prints other information, like bitstring expansion if it happens, and the mapping between intervals and data to bitstrings.
 The final state will be printed at the end of the execution.
-c
+
           
 ```python
           
