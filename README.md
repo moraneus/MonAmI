@@ -52,7 +52,7 @@ MonAmI is implemented in Python.
 
 The `configuration` file defines parameters that control the execution of MonAmI. Two parameters (`INTERVAL_SIZE` and `DATA_SIZE`)
 require a brief upfront explanation. MonAmi stores interval identifiers and data as BDDs (as mentioned above). The BDDs are essentially encodings
-of binary numbers used to represent the intervals and data. The `SIZE` refers to the number of bits used for this representation. E.g. if we know we will only observe 6 different data, we only need 3 bits to represent these, hence `DATA_SIZE` can be 3. Note, however, the the sizes can be made bigger to be safe.
+of binary numbers used to represent the intervals and data. The `SIZE` refers to the number of bits used for this representation. E.g. if we know we will only observe 6 different data, we only need 3 bits to represent these, hence `DATA_SIZE` can be 3. Note, however, that the sizes can be made bigger to be safe.
 
     1. `DEBUG` - If true, the program will print to the console messages that describe the BDDs for each event.
     2. `INTERVAL_SIZE` - Initial length of the enumeration of intervals.
