@@ -594,5 +594,6 @@ The output generated from running MonAmi on the above trace, property, and confi
 
 # Contributors:
 * [Klaus Havelund](http://www.havelund.com/), Jet Propulsion Laboratory/NASA, USA
-* [Doron Peled](https://u.cs.biu.ac.il/~doronp/), Bar Ilan University, Israel
 * Moran Omer, Bar Ilan University, Israel
+* [Doron Peled](https://u.cs.biu.ac.il/~doronp/), Bar Ilan University, Israel
+
