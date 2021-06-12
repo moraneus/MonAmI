@@ -255,11 +255,11 @@ In the example, the property will, however, only be violated at the last event.
 
 `"INTERVAL_SIZE": "AUTO"` will set the interval bitstring size into 2, since with 2 bits, we can represent four different intervals (00, 01, 10, 11). 
         
-`"DATA_SIZE": 1` is good enough since that 1 bit can define two distinct data values, and in our example, we have only two.
+`"DATA_SIZE": 1` is good enough since 1 bit can represent two distinct data values, and in our example, we have only two.
 
-In debug mode, after each event, the program will print out to console the updated BDDs.
-It also prints out other information like bitstring expansion if it happened and the mapping between intervals and data to bitstrings.
-The final state will be print at the end of the execution.
+In debug mode, after each event, the program will print to console the updated BDDs.
+It also prints other information, like bitstring expansion if it happens, and the mapping between intervals and data to bitstrings.
+The final state will be printed at the end of the execution.
 
 ```python
 
