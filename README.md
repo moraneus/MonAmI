@@ -19,7 +19,7 @@ fail of a downlink of data from a spacecraft (a `DL_FAIL` interval) during a dow
 
 
 ```
-!exist D, F . (D('DL_MOBPRM') | D('DL_ARMPRM')) & F('DL_FAIL') & D i F"
+!exist D, F . (D('DL_MOBPRM') | D('DL_ARMPRM')) & F('DL_FAIL') & D i F
 ```
 
 The property states that there do not exist intervals `D` and `F` (`!exist D, F`) such that (`.`) D with data `DL_MOBPRM` (`D('DL_MOBPRM'`) or (`|`) D with data `DL_ARMPRM` includes (`i`) interval F with `DL_FAIL` data. 
