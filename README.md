@@ -251,8 +251,7 @@ and assume the configuration file:
 ```
 
 We choose `"MODE": "VIOLATION"` since we want to check whether a violation occurs as soon as it is encountered.
-In the example, the property 
-          +6+be violated at the last event. 
+In the example, the property will be violated at the last event. 
 
 `"INTERVAL_SIZE": "AUTO"` will set the interval bitstring size into 2, since with 2 bits, we can represent four different intervals (00, 01, 10, 11). 
         
@@ -261,8 +260,10 @@ In the example, the property
 In debug mode, after each event, the program will print to console the updated BDDs.
 It also prints other information, like bitstring expansion if it happens, and the mapping between intervals and data to bitstrings.
 The final state will be printed at the end of the execution.
-
+c
+          
 ```python
+          
 
                                                        ███╗   ███╗ ██████╗ ███╗   ██╗ █████╗ ███╗   ███╗██╗
                                                        ████╗ ████║██╔═══██╗████╗  ██║██╔══██╗████╗ ████║██║
