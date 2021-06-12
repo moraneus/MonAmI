@@ -193,7 +193,7 @@ an activity reading data from the camera
 
 # The MonAmI Trace Language
 
-The format of traces are as follows.
+The format of traces is as follows.
 
 * A trace in a sequence of events.
 * An interval is created internally in MonaAmi from a `begin` event followed by a corresponding `end` event with the same interval ID.
