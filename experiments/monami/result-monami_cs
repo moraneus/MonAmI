@@ -1,205 +1,65 @@
 === RESULT ===
 ########### spec 1 ###########
 --------- 1000 ----------
-Time: 1.89
-Allocated Memory: 112.52KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec1.monami trace_1000_property_1.json
-real 2.16s
-user 2.28s
-sys 0.93s
-memory:51868KB
-cpu: 149%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 2000 ----------
-Time: 9.46
-Allocated Memory: 114.46KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec1.monami trace_2000_property_1.json
-real 9.63s
-user 9.82s
-sys 0.86s
-memory:52436KB
-cpu: 110%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 4000 ----------
-Time: 22.00
-Allocated Memory: 119.92KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec1.monami trace_4000_property_1.json
-real 22.19s
-user 22.36s
-sys 0.97s
-memory:54192KB
-cpu: 105%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 8000 ----------
-Time: 72.93
-Allocated Memory: 120.70KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec1.monami trace_8000_property_1.json
-real 73.13s
-user 73.26s
-sys 0.99s
-memory:78028KB
-cpu: 101%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 16000 ----------
-Time: 250.55
-Allocated Memory: 127.81KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec1.monami trace_16000_property_1.json
-real 250.75s
-user 250.75s
-sys 1.12s
-memory:90504KB
-cpu: 100%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 ########### spec 2 ###########
 --------- 1000 ----------
-Time: 0.37
-Allocated Memory: 103.15KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec2.monami trace_1000_property_2.json
-real 0.55s
-user 0.74s 
-sys 0.95s 
-memory:51716KB 
-cpu: 303%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 2000 ----------
-Time: 0.83
-Allocated Memory: 105.73KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec2.monami trace_2000_property_2.json
-real 1.02s
-user 1.21s 
-sys 0.95s 
-memory:52652KB 
-cpu: 210%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 4000 ----------
-Time: 2.88
-Allocated Memory: 110.56KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec2.monami trace_4000_property_2.json
-real 3.07s
-user 3.24s 
-sys 0.96s 
-memory:54356KB 
-cpu: 137%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 8000 ----------
-Time: 7.98
-Allocated Memory: 111.46KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec2.monami trace_8000_property_2.json
-real 8.17s
-user 8.30s 
-sys 1.00s 
-memory:57304KB 
-cpu: 113%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 16000 ----------
-Time: 10.65
-Allocated Memory: 111.65KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec2.monami trace_16000_property_2.json
-real 10.84s
-user 11.02s 
-sys 0.95s 
-memory:63396KB 
-cpu: 110%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 ########### spec 3 ###########
 --------- 1000 ----------
-Time: 1.20
-Allocated Memory: 107.92KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec3.monami trace_1000_property_3.json
-real 1.39s
-user 1.58s 
-sys 0.95s 
-memory:51696KB 
-cpu: 181%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 2000 ----------
-Time: 3.89
-Allocated Memory: 110.40KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec3.monami trace_2000_property_3.json
-real 4.08s
-user 4.26s 
-sys 0.95s 
-memory:52620KB 
-cpu: 127%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 4000 ----------
-Time: 13.06
-Allocated Memory: 121.81KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec3.monami trace_4000_property_3.json
-real 13.25s
-user 13.43s 
-sys 0.95s 
-memory:54308KB 
-cpu: 108%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 8000 ----------
-Time: 61.25
-Allocated Memory: 122.85KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec3.monami trace_8000_property_3.json
-real 61.45s
-user 61.53s 
-sys 1.03s 
-memory:59084KB 
-cpu: 101%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 16000 ----------
-Time: 385.18
-Allocated Memory: 128.47KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec3.monami trace_16000_property_3.json
-real 385.37s
-user 385.09s 
-sys 1.21s 
-memory:86248KB 
-cpu: 100%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 ########### spec 4 ###########
 --------- 1000 ----------
-Time: 0.51
-Allocated Memory: 101.31KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec4.monami trace_1000_property_4.json
-real 0.70s
-user 0.94s 
-sys 0.89s 
-memory:51856KB 
-cpu: 262%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 2000 ----------
-Time: 1.49
-Allocated Memory: 103.46KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec4.monami trace_2000_property_4.json
-real 1.69s
-user 1.87s 
-sys 0.96s 
-memory:52556KB 
-cpu: 167%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 4000 ----------
-Time: 4.74
-Allocated Memory: 108.49KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec4.monami trace_4000_property_4.json
-real 4.89s
-user 5.07s 
-sys 0.95s 
-memory:53916KB 
-cpu: 123%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 8000 ----------
-Time: 17.31
-Allocated Memory: 109.65KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec4.monami trace_8000_property_4.json
-real 17.50s
-user 17.70s 
-sys 0.93s 
-memory:57212KB 
-cpu: 106%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
 --------- 16000 ----------
-Time: 54.80
-Allocated Memory: 116.48KB
-/usr/bin/time result
-cmd:python3.9 run_monami_experiments.py spec4.monami trace_16000_property_4.json
-real 54.99s
-user 55.12s 
-sys 0.97s 
-memory:64792KB 
-cpu: 102%
+python3.9: No such file or directory
+        0.00 real         0.00 user         0.00 sys
