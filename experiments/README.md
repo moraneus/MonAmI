@@ -17,7 +17,7 @@ The paper was written by the following contributors:
 
 ## Preparations
 ### gnu-time
-1. [gnu-time](https://www.gnu.org/software/time/) have the power to runs another program, then display information about the resources used by that program.
+1. [gnu-time](https://www.gnu.org/software/time/) runs another program, then display information about the resources used by that program.
 2. We used it to measure the tools' memory and measure the time only for the nfer C version (MonAmI and nfer Scala version returned inner time measure).
 3. By default, the `time` command in unix\linux systems only gives a time, but that `gnu-time` gives memory as well.
 4. In Ubuntu, `gnu-time` can be found at `/usr/bin/time`, while in macOS, it needs to be installed at first (`brew install gnu-time`).  
