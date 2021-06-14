@@ -4,32 +4,32 @@ echo "=== RESULT ===" > result-nfer-c
 
 echo "########## spec 1 ##########" >> result-nfer-c
 
-(/usr/bin/time python3.9 run-nfer-c.py spec1.nferc trace_1000_property_1.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec1.nferc trace_2000_property_1.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec1.nferc trace_4000_property_1.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec1.nferc trace_8000_property_1.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec1.nferc trace_16000_property_1.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec1.nferc trace_1000_property_1.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec1.nferc trace_2000_property_1.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec1.nferc trace_4000_property_1.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec1.nferc trace_8000_property_1.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec1.nferc trace_16000_property_1.csv false false) >> result-nfer-c 2>&1
 
 echo "########## spec 2 ##########" >> result-nfer-c
 
-(/usr/bin/time python3.9 run-nfer-c.py spec2.nferc trace_1000_property_2.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec2.nferc trace_2000_property_2.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec2.nferc trace_4000_property_2.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec2.nferc trace_8000_property_2.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec2.nferc trace_16000_property_2.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec2.nferc trace_1000_property_2.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec2.nferc trace_2000_property_2.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec2.nferc trace_4000_property_2.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec2.nferc trace_8000_property_2.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec2.nferc trace_16000_property_2.csv false false) >> result-nfer-c 2>&1
 
 echo "########## spec 3 ########## - minimality" >> result-nfer-c
 
-(/usr/bin/time python3.9 run-nfer-c.py spec3.nferc trace_1000_property_3.csv true false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec3.nferc trace_2000_property_3.csv true false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec3.nferc trace_4000_property_3.csv true false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec3.nferc trace_8000_property_3.csv true false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec3.nferc trace_16000_property_3.csv true false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec3.nferc trace_1000_property_3.csv true false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec3.nferc trace_2000_property_3.csv true false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec3.nferc trace_4000_property_3.csv true false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec3.nferc trace_8000_property_3.csv true false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec3.nferc trace_16000_property_3.csv true false) >> result-nfer-c 2>&1
 
 echo "########## spec 4 ##########" >> result-nfer-c
 
-(/usr/bin/time python3.9 run-nfer-c.py spec4.nferc trace_1000_property_4.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec4.nferc trace_2000_property_4.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec4.nferc trace_4000_property_4.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec4.nferc trace_8000_property_4.csv false false) >> result-nfer-c 2>&1
-(/usr/bin/time python3.9 run-nfer-c.py spec4.nferc trace_16000_property_4.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec4.nferc trace_1000_property_4.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec4.nferc trace_2000_property_4.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec4.nferc trace_4000_property_4.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec4.nferc trace_8000_property_4.csv false false) >> result-nfer-c 2>&1
+(/usr/bin/time python3 run-nfer-c.py spec4.nferc trace_16000_property_4.csv false false) >> result-nfer-c 2>&1
