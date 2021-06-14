@@ -591,12 +591,12 @@ The output generated from running MonAmi on the above trace, property, and confi
 [INFO]: Specification result is False
 
 ```
-# Experiments:
+# Experiments
 To evaluate MonAmi, we performed a comparison with the interval-based [nfer Scala](https://github.com/rv-tools/nfer) and [nfer C version](https://bitbucket.org/seanmk/nfer/src/master/) tools. \
 For more details and results, you can follow the [experiment](https://github.com/moraneus/MonAmI/tree/main/experiments) part.
 
 
-# Contributors:
+# Contributors
 * [Klaus Havelund](http://www.havelund.com/), Jet Propulsion Laboratory/NASA, USA
 * Moran Omer, Bar Ilan University, Israel
 * [Doron Peled](https://u.cs.biu.ac.il/~doronp/), Bar Ilan University, Israel
