@@ -61,7 +61,7 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     
 ## Running nfer Scala version experiments
 1. To run nfer scala experiment, install latest version of [Scala 2](https://www.scala-lang.org/download/scala2.html) first. nfer Scala is implemented in Scala 2.13.5.
-2. After installing Scala, you can run nfer Scala version experiment.
+2. After installing Scala, you can run the nfer Scala experiment.
 3. Relevant files:   
     1. `spec*.nfer` are the specification files.
     2. `trace_*000_property_*.json` are the trace files.
