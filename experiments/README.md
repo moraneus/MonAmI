@@ -48,10 +48,10 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
 2. MonAmI runs in 2 modes `cs` (`CONTINUE-SMALL` : the formula is evaluated for every new event) and `cb` (`CONTINUE-BIG` : the formula is evaluated at the end only)
 3. We explain mode `cs`, but it works the same with mode `cb`.
 4. Relevant files:   
-    1. `spec*.monami` are the specifications file.
-    2. `trace_*000_property_*.json` are the traces files.
-    3. `run-monami_cs` is the bash script that runs MonAmi in different modes.
-    4. `result-monami_cs` is the output file that stores the results.
+    1. `spec*.monami` are the specification files.
+    2. `trace_*000_property_*.json` are the trace files.
+    3. `run-monami_cs` is the bash script that runs MonAmi on different specs and traces.
+    4. `result-monami_cs` is the output file that contains the results.
 5. Running `run-monami_cs`:
     1. From the root directory of MonAmI you installed, CD to the `experiments/monami` folder.
     2. chmod +x `run-monami_cs`
@@ -63,12 +63,12 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
 1. To run nfer scala experiment, install latest version of [Scala 2](https://www.scala-lang.org/download/scala2.html) first. nfer Scala is implemented in Scala 2.13.5.
 2. After installing Scala, you can run nfer Scala version experiment.
 3. Relevant files:   
-    1. `spec*.nfer` are the specifications file.
-    2. `trace_*000_property_*.json` are the traces files.
+    1. `spec*.nfer` are the specification files.
+    2. `trace_*000_property_*.json` are the trace files.
     3. `nfer` bash script that runs Scala and nfer with the right arguments.
     4. `nfer.jar` is the compiled jar file of nfer.    
-    5. `run-nfer-scala` is the bash script that runs nfer Scala in different modes.
-    6. `result-nfer-scala` is the output file that stores the results.
+    5. `run-nfer-scala` is the bash script that runs nfer Scala on different specs and traces.
+    6. `result-nfer-scala` is the output file that contains the results.
 4. Running `run-nfer-scala`:
     1. From the root directory of MonAmI you installed, CD to the `experiments/nfer_scala` folder.
     2. chmod +x `run-nfer-scala`
@@ -79,8 +79,8 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
 ## Running nfer C version experiments
 1. To run nfer C version, we used the python [nferModule](https://pypi.org/project/NferModule/) (`pip install NferModule`).
 2. Relevant files:   
-    1. `spec*.nferc` are the specifications file.
-    2. `trace_*000_property_*.csv` are the traces files.
+    1. `spec*.nferc` are the specification files.
+    2. `trace_*000_property_*.csv` are the trace files.
     4. `run-nfer-c` is the bash script that runs nfer C in different modes.
     5. `result-nfer-c` is the output file that stores the results.
 4. Running `run-nfer-c`:
