@@ -44,8 +44,8 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
 
 
 ## Running MonAmI experiments
-1. To run MonAmI experiments, it needs to be installed first. For MonAmI installation please follow the [install instructions](https://github.com/moraneus/MonAmI#installing-monami).
-2. MonAmI runs in 2 modes `cs` (`CONTINUE-SMALL`) and `cb` (`CONTINUE-BIG`)
+1. To run MonAmI experiments, it needs to be installed first. For MonAmI installation please follow the [installation instructions](https://github.com/moraneus/MonAmI#installing-monami).
+2. MonAmI runs in 2 modes `cs` (`CONTINUE-SMALL` : the formula is evaluated for every new event) and `cb` (`CONTINUE-BIG` : the formula is evaluated at the end only)
 3. We explain mode `cs`, but it works the same with mode `cb`.
 4. Relevant files:   
     1. `spec*.monami` are the specifications file.
@@ -58,10 +58,10 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     2. chmod +x `run-monami_cs`
     3. Make sure that `python3` in the `run-monami_cs` script points to the Python >= 3.7 version.  
     4. `./run-monami_cs`
-6. Result file will create in the same directory (`experiments\monami`) in a file called `result-monami_cs`.
+6. Results are written to the file `result-monami_cs`.
     
 ## Running nfer Scala version experiments
-1. To run nfer scala experiment, install [Scala 2.13.5 version](https://www.scala-lang.org/download/2.13.5.html) at first.
+1. To run nfer scala experiment, install latest version of [Scala 2](https://www.scala-lang.org/download/scala2.html) first. nfer Scala is implemented in Scala 2.13.5.
 2. After installing Scala, you can run nfer Scala version experiment.
 3. Relevant files:   
     1. `spec*.nfer` are the specifications file.
@@ -71,11 +71,11 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     5. `result-nfer-scala` is the output file that stores the results.
     6. `run-nfer-scala` is the bash script that runs nfer Scala in different modes.
 4. Running `run-nfer-scala`:
-    1. From the root directory of MonAmI you installed, CD to the `experiments\nfer_scala` folder.
+    1. From the root directory of MonAmI you installed, CD to the `experiments/nfer_scala` folder.
     2. chmod +x `run-nfer-scala`
     3. chmod +x `nfer`
     4. `./run-nfer-scala`
-5. Result file will create in the same directory (`experiments\nfer_scala`) in a file called `result-nfer-scala`.
+5. Results are written to the file `result-nfer-scala`.
     
 ## Running nfer C version experiments
 1. To run nfer C version, we used the python [nferModule](https://pypi.org/project/NferModule/) (`pip install NferModule`).
@@ -90,4 +90,4 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     2. chmod +x `run-nfer-c`
     3. 3. Make sure that `python3` in the `run-monami-c` script points to the Python >= 3.7 version.  
     3. `./run-nfer-c`
-5. Result file will create in the same directory (`experiments\nfer_c`) in a file called `result-nfer-c`.
+5. Results are written to the file `result-nfer-c`.
