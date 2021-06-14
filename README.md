@@ -592,7 +592,7 @@ The output generated from running MonAmi on the above trace, property, and confi
 
 ```
 # Experiments
-To evaluate MonAmi, we performed a comparison with the interval-based [nfer Scala](https://github.com/rv-tools/nfer) and [nfer C version](https://bitbucket.org/seanmk/nfer/src/master/) tools. \
+To evaluate MonAmi, we performed a comparison with the interval-based [nfer Scala](https://github.com/rv-tools/nfer) and [nfer C](https://bitbucket.org/seanmk/nfer/src/master/) tools. \
 For more details and results, you can follow the [experiment](https://github.com/moraneus/MonAmI/tree/main/experiments) part.
 
 
