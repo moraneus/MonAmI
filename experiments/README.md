@@ -82,7 +82,7 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     1. `spec*.nferc` are the specification files.
     2. `trace_*000_property_*.csv` are the trace files.
     4. `run-nfer-c` is the bash script that runs nfer C on different specs and traces.
-    5. `result-nfer-c` is the output file that stores the results.
+    5. `result-nfer-c` is the output file that contains the results.
 4. Running `run-nfer-c`:
     1. From the root directory of MonAmI you installed, CD to the `experiments/nfer_c` folder.
     2. chmod +x `run-nfer-c`
