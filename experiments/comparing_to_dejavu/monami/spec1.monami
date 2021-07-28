@@ -1,0 +1,3 @@
+{
+    "property": "!exist A . exist B . (A < B & same(A,B))"
+}

@@ -1,8 +1,0 @@
-[
-        {
-            "0": {"DATA": "INS_ON", "B_PRIORITY": 0, "E_PRIORITY": 1},
-            "1": {"DATA": "INS_FAIL", "B_PRIORITY": 2, "E_PRIORITY": 3},
-            "2": {"DATA": "INS_ON", "B_PRIORITY": 6, "E_PRIORITY": 7},
-            "3": {"DATA": "INS_RECOVER", "B_PRIORITY": 4, "E_PRIORITY": 5}
-        }
-]

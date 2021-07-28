@@ -1,0 +1,3 @@
+{
+    "property": "forall A, B, C . (A o B & B o C) -> !(A o C)"
+}

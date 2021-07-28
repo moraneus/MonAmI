@@ -1,0 +1,205 @@
+=== RESULT ===
+########### spec 1 ###########
+--------- 1000 ----------
+Time: 0.81
+Allocated Memory: 92.19KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec1.monami trace_1000_property_1.json 0
+real: 1.04s
+user: 1.17s 
+sys: 1.27s 
+memory: 211216KB 
+cpu: 234%
+--------- 2000 ----------
+Time: 2.14
+Allocated Memory: 94.63KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec1.monami trace_2000_property_1.json 0
+real: 2.33s
+user: 2.47s 
+sys: 1.27s 
+memory: 216320KB 
+cpu: 160%
+--------- 4000 ----------
+Time: 4.72
+Allocated Memory: 100.04KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec1.monami trace_4000_property_1.json 0
+real: 4.91s
+user: 5.13s 
+sys: 1.18s 
+memory: 226112KB 
+cpu: 128%
+--------- 8000 ----------
+Time: 13.94
+Allocated Memory: 100.77KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec1.monami trace_8000_property_1.json 0
+real: 14.14s
+user: 14.29s 
+sys: 1.24s 
+memory: 248016KB 
+cpu: 109%
+--------- 16000 ----------
+Time: 25.14
+Allocated Memory: 101.82KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec1.monami trace_16000_property_1.json 0
+real: 25.33s
+user: 25.40s 
+sys: 1.34s 
+memory: 268816KB 
+cpu: 105%
+########### spec 2 ###########
+--------- 1000 ----------
+Time: 0.69
+Allocated Memory: 89.30KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec2.monami trace_1000_property_2.json 0
+real: 0.88s
+user: 1.11s 
+sys: 1.18s 
+memory: 214192KB 
+cpu: 260%
+--------- 2000 ----------
+Time: 1.68
+Allocated Memory: 91.55KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec2.monami trace_2000_property_2.json 0
+real: 1.87s
+user: 2.09s 
+sys: 1.18s 
+memory: 217728KB 
+cpu: 175%
+--------- 4000 ----------
+Time: 3.52
+Allocated Memory: 96.42KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec2.monami trace_4000_property_2.json 0
+real: 3.71s
+user: 3.86s 
+sys: 1.27s 
+memory: 224880KB 
+cpu: 138%
+--------- 8000 ----------
+Time: 9.22
+Allocated Memory: 97.36KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec2.monami trace_8000_property_2.json 0
+real: 9.42s
+user: 9.54s 
+sys: 1.27s 
+memory: 244992KB 
+cpu: 114%
+--------- 16000 ----------
+Time: 26.14
+Allocated Memory: 103.62KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec2.monami trace_16000_property_2.json 0
+real: 26.34s
+user: 26.45s 
+sys: 1.41s 
+memory: 272224KB 
+cpu: 105%
+########### spec 3 ###########
+--------- 1000 ----------
+Time: 1.33
+Allocated Memory: 104.30KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec3.monami trace_1000_property_3.json 0
+real: 1.53s
+user: 1.67s 
+sys: 0.89s 
+memory: 212672KB 
+cpu: 167%
+--------- 2000 ----------
+Time: 4.28
+Allocated Memory: 106.98KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec3.monami trace_2000_property_3.json 0
+real: 4.48s
+user: 4.62s 
+sys: 1.29s 
+memory: 219072KB 
+cpu: 132%
+--------- 4000 ----------
+Time: 12.71
+Allocated Memory: 112.19KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec3.monami trace_4000_property_3.json 0
+real: 12.90s
+user: 13.12s 
+sys: 1.21s 
+memory: 231488KB 
+cpu: 111%
+--------- 8000 ----------
+Time: 46.47
+Allocated Memory: 113.19KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec3.monami trace_8000_property_3.json 0
+real: 67.89s
+user: 46.46s 
+sys: 1.36s 
+memory: 261216KB 
+cpu: 70%
+--------- 16000 ----------
+Time: 82.86
+Allocated Memory: 120.17KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec3.monami trace_16000_property_3.json 0
+real: 83.16s
+user: 83.12s 
+sys: 1.19s 
+memory: 304592KB 
+cpu: 101%
+########### spec 4 ###########
+--------- 1000 ----------
+Time: 0.95
+Allocated Memory: 95.05KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec4.monami trace_1000_property_4.json 0
+real: 1.19s
+user: 1.47s 
+sys: 1.26s 
+memory: 210784KB 
+cpu: 228%
+--------- 2000 ----------
+Time: 2.36
+Allocated Memory: 97.62KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec4.monami trace_2000_property_4.json 0
+real: 2.56s
+user: 2.67s 
+sys: 0.84s 
+memory: 216768KB 
+cpu: 137%
+--------- 4000 ----------
+Time: 6.61
+Allocated Memory: 102.66KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec4.monami trace_4000_property_4.json 0
+real: 6.81s
+user: 6.94s 
+sys: 0.66s 
+memory: 225456KB 
+cpu: 111%
+--------- 8000 ----------
+Time: 23.26
+Allocated Memory: 103.82KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec4.monami trace_8000_property_4.json 0
+real: 23.45s
+user: 23.61s 
+sys: 1.26s 
+memory: 240864KB 
+cpu: 106%
+--------- 16000 ----------
+Time: 79.95
+Allocated Memory: 110.64KB
+/usr/bin/time results
+cmd:python3 run_monami_experiments.py spec4.monami trace_16000_property_4.json 0
+real: 80.21s
+user: 80.13s 
+sys: 1.29s 
+memory: 287968KB 
+cpu: 101%

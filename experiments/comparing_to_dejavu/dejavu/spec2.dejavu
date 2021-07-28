@@ -1,0 +1,1 @@
+prop p2 : ! Exists  A . Exists B . Exists C . ( end(A) & @ P ( end(B) & @ P ( end (C) & @ P ( begin (C) & @ P ( begin(B) & @ P begin(A) ) ) )

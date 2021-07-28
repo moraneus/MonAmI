@@ -1,7 +1,0 @@
-[
-        {
-            "0": {"DATA": "DL_IMAGE", "B_PRIORITY": 0, "E_PRIORITY": 5},
-            "1": {"DATA": "GET_CAMDATA", "B_PRIORITY": 1, "E_PRIORITY": 4},
-            "2": {"DATA": "STARVE", "B_PRIORITY": 2, "E_PRIORITY": 3}
-        }
-]

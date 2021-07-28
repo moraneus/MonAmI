@@ -1,0 +1,3 @@
+{
+    "property": "!exist A . exist B, C . A i B & B i C"
+}

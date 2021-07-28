@@ -1,0 +1,3 @@
+{
+    "property": "forall A, B . ((A < B) & (!exist C . (A < C & C < B))) -> !(A('2') & B('2'))"
+}

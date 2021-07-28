@@ -1,0 +1,37 @@
+digraph G {
+  0 [shape=octagon, color=red, label="0 : !(Exists A . Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))))"]
+  1 [shape=box, label="1 : Exists A . Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))"]
+  2 [shape=box, label="2 : Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))"]
+  3 [shape=box, label="3 : Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))"]
+  4 [shape=box, label="4 : P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))"]
+  5 [shape=box, label="5 : end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))"]
+  6 [shape=box, label="6 : end(B)"]
+  7 [shape=box, label="7 : @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))"]
+  8 [shape=box, label="8 : P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))"]
+  9 [shape=box, label="9 : begin(B,d) & @ P (end(A) & @ P begin(A,d))"]
+  10 [shape=box, label="10 : begin(B,d)"]
+  11 [shape=box, label="11 : @ P (end(A) & @ P begin(A,d))"]
+  12 [shape=box, label="12 : P (end(A) & @ P begin(A,d))"]
+  13 [shape=box, label="13 : end(A) & @ P begin(A,d)"]
+  14 [shape=box, label="14 : end(A)"]
+  15 [shape=box, label="15 : @ P begin(A,d)"]
+  16 [shape=box, label="16 : P begin(A,d)"]
+  17 [shape=box, label="17 : begin(A,d)"]
+  16 -> 17
+  15 -> 16
+  13 -> 14
+  13 -> 15
+  12 -> 13
+  11 -> 12
+  9 -> 10
+  9 -> 11
+  8 -> 9
+  7 -> 8
+  5 -> 6
+  5 -> 7
+  4 -> 5
+  3 -> 4
+  2 -> 3
+  1 -> 2
+  0 -> 1
+}

@@ -1,3 +1,0 @@
-{
-    "property": "!exist O, F, R . O('INS_ON') & F('INS_FAIL') & R('INS_RECOVER') & O < F & F < R & !exist X . (X('INS_ON') | X('INS_RECOVER')) & O < X & X < R"
-}
