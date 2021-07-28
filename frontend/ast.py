@@ -16,6 +16,13 @@ def next_var():
     return f'd{var_counter}'
 
 
+def quote_if_string(value):
+    if isinstance(value,str):
+        return f'"{str}"'
+    else:
+        return value
+
+
 def error(msg : str):
     print(f'*** Error - {msg}')
 
@@ -303,7 +310,7 @@ class Data(Formula):
 
     def translate(self):
         a = self.interval
-        d = self.data
+        d = quote_if_string(self.data)
         return f'P (end({a}) & @ (P (begin({a}, {d}))))'
 
 
@@ -373,7 +380,8 @@ class Exist(Formula):
         quantifiers = ""
         for interval in self.intervals:
             quantifiers += f'Exists {interval} . '
-        return f'{quantifiers} ({self.formula})'
+        f = self.formula.translate()
+        return f'{quantifiers} ({f})'
 
 
 class Forall(Formula):
@@ -406,7 +414,8 @@ class Forall(Formula):
         quantifiers = ""
         for interval in self.intervals:
             quantifiers += f'Forall {interval} . '
-        return f'{quantifiers} ({self.formula})'
+        f = self.formula.translate()
+        return f'{quantifiers} ({f})'
 
 
 class Paren(Formula):
