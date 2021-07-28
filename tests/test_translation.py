@@ -52,5 +52,18 @@ test.test2()
 test.test3()
 test.test4()
 
+'''
+{"execution": [
+  ["begin", "wbtkwkurjtns", "DL_IMAGE_X"], 
+  ["begin", "apyqmvbasoag", "DL_MOBPRM_X"], 
+  ...
+  ]
+}
 
+->
+
+begin,wbtkwkurjtns,DL_IMAGE_X
+begin,apyqmvbasoag,DL_MOBPRM_X
+...
+'''
 
