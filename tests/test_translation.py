@@ -19,16 +19,16 @@ class TestTranslation:
         print(dejavu)
 
     def test4(self):
-        specification = parse("""!exist D, G, S . D("DL_IMAGE") & G("GET_CAMDATA") & S("STARVE") & D i S & G i S""")
+        specification = parse("""!exist D, G, T . D("DL_IMAGE") & G("GET_CAMDATA") & T("STARVE") & D i T & G i T""")
         dejavu = "prop P4 : " + specification.translate()
         print(dejavu)
 
 
 test = TestTranslation()
 
-test.test1()
-test.test2()
-test.test3()
+#test.test1()
+#test.test2()
+#test.test3()
 test.test4()
 
 
