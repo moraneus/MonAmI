@@ -18,7 +18,7 @@ def next_var():
 
 def quote_if_string(value):
     if isinstance(value,str):
-        return f'"{str}"'
+        return f'"{value}"'
     else:
         return value
 
