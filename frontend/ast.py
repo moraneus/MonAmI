@@ -7,6 +7,14 @@
 from typing import Set
 from graphics.io import IO
 
+var_counter = 0
+
+
+def next_var():
+    global var_counter
+    var_counter += 1
+    return f'd{var_counter}'
+
 
 def error(msg : str):
     print(f'*** Error - {msg}')
@@ -28,6 +36,9 @@ class Formula:
         pass
 
     def eval(self, **kwargs):
+        pass
+
+    def translate(self):
         pass
 
 
@@ -58,6 +69,11 @@ class And(Formula):
 
         return result
 
+    def translate(self):
+        f1 = self.formula1.translate()
+        f2 = self.formula2.translate()
+        return f'({f1}) & ({f2})'
+
 
 class Or(Formula):
     def __init__(self, formula1, formula2):
@@ -85,6 +101,11 @@ class Or(Formula):
                           list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
+
+    def translate(self):
+        f1 = self.formula1.translate()
+        f2 = self.formula2.translate()
+        return f'({f1}) | ({f2})'
 
 
 class Implies(Formula):
@@ -114,6 +135,11 @@ class Implies(Formula):
 
         return result
 
+    def translate(self):
+        f1 = self.formula1.translate()
+        f2 = self.formula2.translate()
+        return f'({f1}) -> ({f2})'
+
 
 class Not(Formula):
     def __init__(self, formula):
@@ -138,6 +164,10 @@ class Not(Formula):
             IO.subformula(f"~({self.formula}))", list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
+
+    def translate(self):
+        f = self.formula.translate()
+        return f'!({f})'
 
 
 class Before(Formula):
@@ -166,6 +196,13 @@ class Before(Formula):
 
         return result
 
+    def translate(self):
+        a = self.interval1
+        b = self.interval2
+        da = next_var()
+        db = next_var()
+        return f'Exists {da}. Exists {db}. P (end({b}) & @ (P (begin({b},{db}) & @ (P (end({a}) & @ (P (begin({a}, {da}))))))))'
+
 
 class Overlaps(Formula):
     def __init__(self, interval1, interval2):
@@ -193,6 +230,13 @@ class Overlaps(Formula):
 
         return result
 
+    def translate(self):
+        a = self.interval1
+        b = self.interval2
+        da = next_var()
+        db = next_var()
+        return f'Exists {da}. Exists {db}. P (end({b}) & @ (P (end({a}) & @ (P (begin({b}, {db}) & @ (P (begin({a}, {da}))))))))'
+
 
 class Includes(Formula):
     def __init__(self, interval1, interval2):
@@ -219,6 +263,13 @@ class Includes(Formula):
                           list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
+
+    def translate(self):
+        a = self.interval1
+        b = self.interval2
+        da = next_var()
+        db = next_var()
+        return f'Exists {da}. Exists {db}. P (end({a}) & @( P (end({b}) & @(P (begin({b}, {db}) & @(P (begin({a}, {da}))))))))'
 
 
 class Data(Formula):
@@ -250,6 +301,11 @@ class Data(Formula):
 
         return result
 
+    def translate(self):
+        a = self.interval
+        d = self.data
+        return f'P (end({a}) & @ (P (begin({a}, {d}))))'
+
 
 class Same(Formula):
     def __init__(self, interval1, interval2):
@@ -280,6 +336,12 @@ class Same(Formula):
 
         return result
 
+    def translate(self):
+        a = self.interval1
+        b = self.interval2
+        d = next_var()
+        return f'Exists {d} . ((P (end({a}) & @ (P (begin({a}, {d}))))) & (P (end({b}) & @ (P (begin({b}, {d}))))))'
+
 
 class Exist(Formula):
     def __init__(self, intervals, formula):
@@ -306,6 +368,12 @@ class Exist(Formula):
                           list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
+
+    def translate(self):
+        quantifiers = ""
+        for interval in self.intervals:
+            quantifiers += f'Exists {interval} . '
+        return f'{quantifiers} ({self.formula})'
 
 
 class Forall(Formula):
@@ -334,6 +402,12 @@ class Forall(Formula):
 
         return result
 
+    def translate(self):
+        quantifiers = ""
+        for interval in self.intervals:
+            quantifiers += f'Forall {interval} . '
+        return f'{quantifiers} ({self.formula})'
+
 
 class Paren(Formula):
     def __init__(self, formula):
@@ -358,3 +432,8 @@ class Paren(Formula):
             IO.subformula(f"({self.formula})", list(kwargs["bdd_manager"].bdd_manager.pick_iter(result)))
 
         return result
+
+    def translate(self):
+        f = self.formula.translate()
+        return f'({f})'
+
