@@ -1155,21 +1155,32 @@ abstract class Formula(val monitor: Monitor) {
 
 
 /*
-  prop p1 : !(Exists A . Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))) 
+  prop P4 : Forall A . Forall B . Forall C . Forall da . Forall db . Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da))))) 
 */
 
-class Formula_p1(monitor: Monitor) extends Formula(monitor) {
+class Formula_P4(monitor: Monitor) extends Formula(monitor) {
           
   override def evaluate(): Boolean = {
     // assignments1 (leaf nodes that are not rule calls):
-      now(6) = build("end")(V("B"))
-      now(10) = build("begin")(V("B"),V("d"))
+      now(10) = build("end")(V("B"))
       now(14) = build("end")(V("A"))
-      now(17) = build("begin")(V("A"),V("d"))
+      now(18) = build("begin")(V("B"),V("db"))
+      now(21) = build("begin")(V("A"),V("da"))
+      now(24) = build("end")(V("C"))
+      now(28) = build("end")(V("B"))
+      now(32) = build("begin")(V("C"),V("dc"))
+      now(35) = build("begin")(V("B"),V("db"))
+      now(39) = build("end")(V("C"))
+      now(43) = build("end")(V("A"))
+      now(47) = build("begin")(V("C"),V("dc"))
+      now(50) = build("begin")(V("A"),V("da"))
     // assignments2 (rule nodes excluding what is below @ and excluding leaf nodes):
     // assignments3 (rule calls):
     // assignments4 (the rest of rules that are below @ and excluding leaf nodes):
     // assignments5 (main formula excluding leaf nodes):
+      now(20) = now(21).or(pre(20))
+      now(19) = pre(20)
+      now(17) = now(18).and(now(19))
       now(16) = now(17).or(pre(16))
       now(15) = pre(16)
       now(13) = now(14).and(now(15))
@@ -1177,13 +1188,35 @@ class Formula_p1(monitor: Monitor) extends Formula(monitor) {
       now(11) = pre(12)
       now(9) = now(10).and(now(11))
       now(8) = now(9).or(pre(8))
-      now(7) = pre(8)
-      now(5) = now(6).and(now(7))
-      now(4) = now(5).or(pre(4))
-      now(3) = now(4).exist(var_d.quantvar)
-      now(2) = now(3).exist(var_B.quantvar)
-      now(1) = now(2).exist(var_A.quantvar)
-      now(0) = now(1).not()
+      now(34) = now(35).or(pre(34))
+      now(33) = pre(34)
+      now(31) = now(32).and(now(33))
+      now(30) = now(31).or(pre(30))
+      now(29) = pre(30)
+      now(27) = now(28).and(now(29))
+      now(26) = now(27).or(pre(26))
+      now(25) = pre(26)
+      now(23) = now(24).and(now(25))
+      now(22) = now(23).or(pre(22))
+      now(7) = now(8).and(now(22))
+      now(49) = now(50).or(pre(49))
+      now(48) = pre(49)
+      now(46) = now(47).and(now(48))
+      now(45) = now(46).or(pre(45))
+      now(44) = pre(45)
+      now(42) = now(43).and(now(44))
+      now(41) = now(42).or(pre(41))
+      now(40) = pre(41)
+      now(38) = now(39).and(now(40))
+      now(37) = now(38).or(pre(37))
+      now(36) = now(37).not()
+      now(6) = now(7).not().or(now(36))
+      now(5) = now(6).forAll(var_dc.quantvar)
+      now(4) = now(5).forAll(var_db.quantvar)
+      now(3) = now(4).forAll(var_da.quantvar)
+      now(2) = now(3).forAll(var_C.quantvar)
+      now(1) = now(2).forAll(var_B.quantvar)
+      now(0) = now(1).forAll(var_A.quantvar)
 
     debugMonitorState()
 
@@ -1196,33 +1229,66 @@ class Formula_p1(monitor: Monitor) extends Formula(monitor) {
     !error
   }
 
-  val var_A :: var_B :: var_d :: Nil = declareVariables(("A",false), ("B",false), ("d",false))(0)
+  val var_A :: var_B :: var_C :: var_da :: var_db :: var_dc :: Nil = declareVariables(("A",false), ("B",false), ("C",false), ("da",false), ("db",false), ("dc",false))(0)
 
   varsInRelations = Set()
-  val indices: List[Int] = List(4,7,8,11,12,15,16)
+  val indices: List[Int] = List(37,40,41,44,45,48,49,22,25,26,29,30,33,34,8,11,12,15,16,19,20)
 
-  pre = Array.fill(18)(bddGenerator.False)
-  now = Array.fill(18)(bddGenerator.False)
+  pre = Array.fill(51)(bddGenerator.False)
+  now = Array.fill(51)(bddGenerator.False)
 
   txt = Array(
-    "!(Exists A . Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))))",
-      "Exists A . Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))",
-      "Exists B . Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))",
-      "Exists d . P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))",
-      "P (end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d))))",
-      "end(B) & @ P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))",
+    "Forall A . Forall B . Forall C . Forall da . Forall db . Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))))",
+      "Forall B . Forall C . Forall da . Forall db . Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))))",
+      "Forall C . Forall da . Forall db . Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))))",
+      "Forall da . Forall db . Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))))",
+      "Forall db . Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))))",
+      "Forall dc . ((P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))))",
+      "(P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))) -> !P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da))))",
+      "P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))) & P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))",
+      "P (end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da))))",
+      "end(B) & @ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))",
       "end(B)",
-      "@ P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))",
-      "P (begin(B,d) & @ P (end(A) & @ P begin(A,d)))",
-      "begin(B,d) & @ P (end(A) & @ P begin(A,d))",
-      "begin(B,d)",
-      "@ P (end(A) & @ P begin(A,d))",
-      "P (end(A) & @ P begin(A,d))",
-      "end(A) & @ P begin(A,d)",
+      "@ P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))",
+      "P (end(A) & @ P (begin(B,db) & @ P begin(A,da)))",
+      "end(A) & @ P (begin(B,db) & @ P begin(A,da))",
       "end(A)",
-      "@ P begin(A,d)",
-      "P begin(A,d)",
-      "begin(A,d)"
+      "@ P (begin(B,db) & @ P begin(A,da))",
+      "P (begin(B,db) & @ P begin(A,da))",
+      "begin(B,db) & @ P begin(A,da)",
+      "begin(B,db)",
+      "@ P begin(A,da)",
+      "P begin(A,da)",
+      "begin(A,da)",
+      "P (end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db))))",
+      "end(C) & @ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db)))",
+      "end(C)",
+      "@ P (end(B) & @ P (begin(C,dc) & @ P begin(B,db)))",
+      "P (end(B) & @ P (begin(C,dc) & @ P begin(B,db)))",
+      "end(B) & @ P (begin(C,dc) & @ P begin(B,db))",
+      "end(B)",
+      "@ P (begin(C,dc) & @ P begin(B,db))",
+      "P (begin(C,dc) & @ P begin(B,db))",
+      "begin(C,dc) & @ P begin(B,db)",
+      "begin(C,dc)",
+      "@ P begin(B,db)",
+      "P begin(B,db)",
+      "begin(B,db)",
+      "!P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da))))",
+      "P (end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da))))",
+      "end(C) & @ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))",
+      "end(C)",
+      "@ P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))",
+      "P (end(A) & @ P (begin(C,dc) & @ P begin(A,da)))",
+      "end(A) & @ P (begin(C,dc) & @ P begin(A,da))",
+      "end(A)",
+      "@ P (begin(C,dc) & @ P begin(A,da))",
+      "P (begin(C,dc) & @ P begin(A,da))",
+      "begin(C,dc) & @ P begin(A,da)",
+      "begin(C,dc)",
+      "@ P begin(A,da)",
+      "P begin(A,da)",
+      "begin(A,da)"
   )
 
   debugMonitorState()
@@ -1233,7 +1299,7 @@ class Formula_p1(monitor: Monitor) extends Formula(monitor) {
 class PropertyMonitor extends Monitor {
   def eventsInSpec: Set[String] = Set("end","begin")
 
-  formulae ++= List(new Formula_p1(this))
+  formulae ++= List(new Formula_P4(this))
 }
       
 object TraceMonitor {

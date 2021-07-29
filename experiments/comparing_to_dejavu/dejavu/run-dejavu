@@ -1,30 +1,30 @@
 #!/bin/bash
 
-echo "=== RESULT ===" > result-dejavu
+echo "=== RESULT ===" >> result-dejavu
 
-echo "########## spec 1 ##########" >> result-dejavu
+#echo "########## spec 1 ##########" >> result-dejavu
+#
+#(gtime ./dejavu spec1.dejavu trace_1000_property_1.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec1.dejavu trace_2000_property_1.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec1.dejavu trace_4000_property_1.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec1.dejavu trace_8000_property_1.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec1.dejavu trace_16000_property_1.csv) >> result-dejavu 2>&1
+#
+#echo "########## spec 2 ##########" >> result-dejavu
 
-(gtime ./dejavu spec1.dejavu trace_1000_property_1.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec1.dejavu trace_2000_property_1.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec1.dejavu trace_4000_property_1.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec1.dejavu trace_8000_property_1.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec1.dejavu trace_16000_property_1.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec2.dejavu trace_1000_property_2.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec2.dejavu trace_2000_property_2.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec2.dejavu trace_4000_property_2.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec2.dejavu trace_8000_property_2.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec2.dejavu trace_16000_property_2.csv) >> result-dejavu 2>&1
 
-echo "########## spec 2 ##########" >> result-dejavu
-
-(gtime ./dejavu spec2.dejavu trace_1000_property_2.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec2.dejavu trace_2000_property_2.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec2.dejavu trace_4000_property_2.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec2.dejavu trace_8000_property_2.csv) >> result-dejavu 2>&1
-(gtime ./dejavu spec2.dejavu trace_16000_property_2.csv) >> result-dejavu 2>&1
-
-echo "########## spec 3 ##########" >> result-dejavu
-
-(gtime ./dejavu spec3.dejavu trace_1000_property_3.csv true false) >> result-dejavu 2>&1
-(gtime ./dejavu spec3.dejavu trace_2000_property_3.csv true false) >> result-dejavu 2>&1
-(gtime ./dejavu spec3.dejavu trace_4000_property_3.csv true false) >> result-dejavu 2>&1
-(gtime ./dejavu spec3.dejavu trace_8000_property_3.csv true false) >> result-dejavu 2>&1
-(gtime ./dejavu spec3.dejavu trace_16000_property_3.csv true false) >> result-dejavu 2>&1
+#echo "########## spec 3 ##########" >> result-dejavu
+#
+#(gtime ./dejavu spec3.dejavu trace_1000_property_3.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec3.dejavu trace_2000_property_3.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec3.dejavu trace_4000_property_3.csv) >> result-dejavu 2>&1
+#(gtime ./dejavu spec3.dejavu trace_8000_property_3.csv) >> result-dejavu 2>&1
+(gtime ./dejavu spec3.dejavu trace_16000_property_3.csv) >> result-dejavu 2>&1
 
 echo "########## spec 4 ##########" >> result-dejavu
 

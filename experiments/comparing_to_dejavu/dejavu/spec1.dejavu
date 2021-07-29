@@ -1,2 +1,1 @@
-prop p1 : !(Exists A . Exists B . Exists d .  P ( end(B)  & @ P ( begin(B, d) & @ P ( end(A) & @ P begin(A, d) ) ) ) )
-
+prop P1 : !(Exists A . Exists B . Exists d .  P ( end(B)  & @ P ( begin(B, d) & @ P ( end(A) & @ P begin(A, d) ) ) ) )
