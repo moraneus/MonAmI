@@ -23,6 +23,10 @@ def quote_if_string(value):
         return value
 
 
+def data_of_interval(interval):
+    return f'{interval}d'
+
+
 def error(msg : str):
     print(f'*** Error - {msg}')
 
@@ -206,9 +210,12 @@ class Before(Formula):
     def translate(self):
         a = self.interval1
         b = self.interval2
-        da = next_var()
-        db = next_var()
-        return f'Exists {da}. Exists {db}. P (end({b}) & @ (P (begin({b},{db}) & @ (P (end({a}) & @ (P (begin({a}, {da}))))))))'
+        # da = next_var()
+        # db = next_var()
+        # return f'Exists {da}. Exists {db}. P (end({b}) & @ (P (begin({b},{db}) & @ (P (end({a}) & @ (P (begin({a}, {da}))))))))'
+        da = data_of_interval(a)
+        db = data_of_interval(b)
+        return f'P (end({b}) & @ (P (begin({b},{db}) & @ (P (end({a}) & @ (P (begin({a}, {da}))))))))'
 
 
 class Overlaps(Formula):
@@ -240,9 +247,12 @@ class Overlaps(Formula):
     def translate(self):
         a = self.interval1
         b = self.interval2
-        da = next_var()
-        db = next_var()
-        return f'Exists {da}. Exists {db}. P (end({b}) & @ (P (end({a}) & @ (P (begin({b}, {db}) & @ (P (begin({a}, {da}))))))))'
+        # da = next_var()
+        # db = next_var()
+        # return f'Exists {da}. Exists {db}. P (end({b}) & @ (P (end({a}) & @ (P (begin({b}, {db}) & @ (P (begin({a}, {da}))))))))'
+        da = data_of_interval(a)
+        db = data_of_interval(b)
+        return f'P (end({b}) & @ (P (end({a}) & @ (P (begin({b}, {db}) & @ (P (begin({a}, {da}))))))))'
 
 
 class Includes(Formula):
@@ -274,9 +284,12 @@ class Includes(Formula):
     def translate(self):
         a = self.interval1
         b = self.interval2
-        da = next_var()
-        db = next_var()
-        return f'Exists {da}. Exists {db}. P (end({a}) & @( P (end({b}) & @(P (begin({b}, {db}) & @(P (begin({a}, {da}))))))))'
+        # da = next_var()
+        # db = next_var()
+        # return f'Exists {da}. Exists {db}. P (end({a}) & @( P (end({b}) & @(P (begin({b}, {db}) & @(P (begin({a}, {da}))))))))'
+        da = data_of_interval(a)
+        db = data_of_interval(b)
+        return f'P (end({a}) & @( P (end({b}) & @(P (begin({b}, {db}) & @(P (begin({a}, {da}))))))))'
 
 
 class Data(Formula):
@@ -379,7 +392,8 @@ class Exist(Formula):
     def translate(self):
         quantifiers = ""
         for interval in self.intervals:
-            quantifiers += f'Exists {interval} . '
+            data = data_of_interval(interval)
+            quantifiers += f'Exists {interval} . Exists {data} . '
         f = self.formula.translate()
         return f'{quantifiers} ({f})'
 
@@ -413,7 +427,8 @@ class Forall(Formula):
     def translate(self):
         quantifiers = ""
         for interval in self.intervals:
-            quantifiers += f'Forall {interval} . '
+            data = data_of_interval(interval)
+            quantifiers += f'Forall {interval} . Forall {data} . '
         f = self.formula.translate()
         return f'{quantifiers} ({f})'
 
