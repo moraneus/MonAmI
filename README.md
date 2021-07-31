@@ -593,9 +593,9 @@ The output generated from running MonAmi on the above trace, property, and confi
 ```
 # Experiments
 To evaluate MonAmi, we performed a comparison with the interval-based [nfer Scala](https://github.com/rv-tools/nfer) and [nfer C](https://bitbucket.org/seanmk/nfer/src/master/) tools. \
-For more details and results, you can follow the [experiment](https://github.com/moraneus/MonAmI/tree/main/experiments) part.
-
-
+For more details and results, you can follow the [experiment](https://github.com/moraneus/MonAmI/tree/main/experiments/comparing_to_nfer) part.
+Furthermore, we describe an alternative method for monitoring properties in this logic, by translating them into first-order past-time temporal logic, monitored with the tool [DejaVu](https://github.com/havelund/dejavu).
+or more details and results, you can follow the [experiment](https://github.com/moraneus/MonAmI/tree/main/experiments/comparing_to_dejavu) part.
 # Contributors
 * [Klaus Havelund](http://www.havelund.com/), Jet Propulsion Laboratory/NASA, USA
 * Moran Omer, Bar Ilan University, Israel
