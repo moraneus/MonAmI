@@ -53,7 +53,7 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     3. `run-monami_cs` is the bash script that runs MonAmi on different specs and traces.
     4. `result-monami_cs` is the output file that contains the results.
 5. Running `run-monami_cs`:
-    1. From the root directory of MonAmI you installed, CD to the `experiments/monami` folder.
+    1. From the root directory of MonAmI you installed, CD to the `experiments/comparing_to_nfer/monami` folder.
     2. chmod +x `run-monami_cs`
     3. Make sure that `python3` in the `run-monami_cs` script points to the Python >= 3.7 version.  
     4. `./run-monami_cs`
@@ -70,7 +70,7 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     5. `run-nfer-scala` is the bash script that runs nfer Scala on different specs and traces.
     6. `result-nfer-scala` is the output file that contains the results.
 4. Running `run-nfer-scala`:
-    1. From the root directory of MonAmI you installed, CD to the `experiments/nfer_scala` folder.
+    1. From the root directory of MonAmI you installed, CD to the `experiments/comparing_to_nfer/nfer_scala` folder.
     2. chmod +x `run-nfer-scala`
     3. chmod +x `nfer`
     4. `./run-nfer-scala`
@@ -84,7 +84,7 @@ export TIME="/usr/bin/time results\ncmd:%C\nreal: %es\nuser: %Us \nsys: %Ss \nme
     4. `run-nfer-c` is the bash script that runs nfer C on different specs and traces.
     5. `result-nfer-c` is the output file that contains the results.
 4. Running `run-nfer-c`:
-    1. From the root directory of MonAmI you installed, CD to the `experiments/nfer_c` folder.
+    1. From the root directory of MonAmI you installed, CD to the `experiments/comparing_to_nfer/nfer_c` folder.
     2. chmod +x `run-nfer-c`
     3. Make sure that `python3` in the `run-monami-c` script points to the Python >= 3.7 version.  
     3. `./run-nfer-c`
