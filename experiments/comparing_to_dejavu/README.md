@@ -20,7 +20,7 @@ We formulated four properties using the formalisms of the two tools and evaluate
 ```
 
 These experiments were made specifically for the ["Monitoring Interval Logic"](https://github.com/moraneus/MonAmI/blob/main/out/papers/Monitoring_Interval_Logic.pdf) paper, 
-which is submitted to RV 2021 conference for review.
+which is submitted to SEFM 2021 conference for review.
 
 The paper was written by the following contributors:
 * [Klaus Havelund](http://www.havelund.com/), Jet Propulsion Laboratory/NASA, USA
